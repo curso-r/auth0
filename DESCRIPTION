@@ -9,6 +9,7 @@ Authors@R: c(
 Description: This package implements Auth0 API to use a simple and secure 
     authentication system. It provides tools to log in and out a shiny 
     application using an OAuth authentication scheme.
+BugReports: https://github.com/curso-r/auth0/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

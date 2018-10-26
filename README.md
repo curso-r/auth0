@@ -19,9 +19,9 @@ devtools::install_github("curso-r/auth0")
 
 Auth0 is an external service so you should create an account there. To create your authenticated shiny app, you should follow the five steps below.
 
-### Step 1: Create an account
+### Step 1: Create an Auth0 account
 
-- Access auth0.com
+- Go to [auth0.com](https://auth0.com)
 - Click "Sign Up"
 - You can create an account placing user name and password or simply signing with your github account.
 
@@ -114,9 +114,17 @@ You can also use many OAuth providers like Google, Facebook, Github etc. To conf
 
 In the near future, our plan is to implement Auth0's API in R so that you can manage your app using R.
 
-## Other
+## Environment variables
 
+You can use environment variables to populate the `_auth0.yml` file automatically. To do so, you can create a `.Renviron` file in your project root or your user home directory. For example, my `.Renviron` file looks like this:
 
+```
+AUTH0_USER=jtrecenti
+AUTH0_KEY=5wugt0W...
+AUTH0_SECRET=rcaJ0p8...
+```
+
+More about environment variables [here](https://csgillespie.github.io/efficientR/set-up.html#renviron).
 
 ## Logout
 
@@ -150,6 +158,10 @@ auth0::shinyAuth0App(ui, server, config_file)
 ## Costs
 
 Auth0 is a freemium service. The free account lets you have up to 1000 connections in one month and two types of social connections. You can check all the plans [here](https://auth0.com/pricing).
+
+## Disclaimer
+
+This package is not provided nor endorsed by Auth0 Inc. Use it on your own risk.
 
 ## Licence
 

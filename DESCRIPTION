@@ -1,0 +1,22 @@
+Package: auth0
+Type: Package
+Title: Secure Authentication In Shiny With Auth0
+Version: 0.1.0
+Authors@R: c(
+    person("Julio", "Trecenti", email = "julio.trecenti@gmail.com", role = "cre"),
+    person("Daniel", "Falbel", email = "dfalbel@gmail.com", role = "aut"),
+    person("José", "Jesus", email = "jjesusfilho@gmail.com", role = "ctb"))
+Description: This package implements Auth0 API to use a simple and secure 
+    authentication system. It provides tools to log in and out a shiny 
+    application using an OAuth authentication scheme.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
+Imports: httr,
+    shiny,
+    htmltools,
+    yaml,
+    utils
+Suggests: shinyjs

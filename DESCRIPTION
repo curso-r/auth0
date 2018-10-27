@@ -1,7 +1,7 @@
 Package: auth0
 Type: Package
 Title: Secure Authentication In Shiny With Auth0
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: c(
     person("Julio", "Trecenti", email = "julio.trecenti@gmail.com", role = "cre"),
     person("Daniel", "Falbel", email = "dfalbel@gmail.com", role = "aut"),

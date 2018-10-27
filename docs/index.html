@@ -170,14 +170,14 @@
 <h3 class="hasAnchor">
 <a href="#step-5-run" class="anchor"></a>Step 5: Run!</h3>
 <p>You can try your app running</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">shiny<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/runApp">runApp</a></span>(<span class="st">"app/directory/"</span>)</a></code></pre></div>
-<p>If the everythink OK, you should be forwarded to a login page and, after logging in or signing up, you’ll be redirected to your app. Yay!</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">shiny<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/runApp">runApp</a></span>(<span class="st">"app/directory/"</span>, <span class="dt">port =</span> <span class="dv">8100</span>)</a></code></pre></div>
+<p>If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you’ll be redirected to your app. Yay!</p>
 </div>
 </div>
 <div id="managing-users" class="section level2">
 <h2 class="hasAnchor">
 <a href="#managing-users" class="anchor"></a>Managing users</h2>
-<p>You can manage user access from the Users panel in Auth0. To create a user, simply click on “+ Create users”.</p>
+<p>You can manage user access from the Users panel in Auth0. To create an user, simply click on “+ Create users”.</p>
 <p>You can also use many OAuth providers like Google, Facebook, Github etc. To configure them, just go to Connections tab.</p>
 <p>In the near future, our plan is to implement Auth0’s API in R so that you can manage your app using R.</p>
 </div>

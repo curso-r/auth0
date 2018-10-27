@@ -101,14 +101,14 @@ auth0::shinyAuth0App(ui, server)
 You can try your app running
 
 ```r
-shiny::runApp("app/directory/")
+shiny::runApp("app/directory/", port = 8100)
 ```
 
-If the everythink OK, you should be forwarded to a login page and, after logging in or signing up, you'll be redirected to your app. Yay!
+If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you'll be redirected to your app. Yay!
 
 ## Managing users
 
-You can manage user access from the Users panel in Auth0. To create a user, simply click on "+ Create users".
+You can manage user access from the Users panel in Auth0. To create an user, simply click on "+ Create users".
 
 You can also use many OAuth providers like Google, Facebook, Github etc. To configure them, just go to Connections tab. 
 

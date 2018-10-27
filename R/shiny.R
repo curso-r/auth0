@@ -38,9 +38,11 @@ shinyAuth0App <- function(ui, server, config_file = "./_auth0.yml") {
     p <- config$shiny_config$local_url
     re <- regexpr("(?<=:)([0-9]+)", p, perl = TRUE)
     port <- as.numeric(regmatches(p, re))
-    options(shiny.port = port)
+    shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info),
+                    options = list(port = port))
+  } else {
+    shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info))
   }
-  shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info))
 }
 
 #' Generate logout URL

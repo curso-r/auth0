@@ -17,7 +17,7 @@ auth0_ui <- function(ui, info) {
 auth0_server <- function(server, info) {
   function(input, output, session) {
     shiny::isolate(auth0_server_verify(session, info$app, info$api, info$state))
-    eval(body(server))
+    server(input, output, session)
   }
 }
 

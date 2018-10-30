@@ -29,7 +29,7 @@ Auth0 is an external service so you should create an account there. To create yo
 
 After logging in Auth0, you will see a page like this:
 
-![](README-dash.png)
+![](/man/README-dash.png)
 
 - Click on "+ New Application"
 - Give a name to your app
@@ -39,7 +39,7 @@ After logging in Auth0, you will see a page like this:
 
 - Go to the Settings in your selected application. You should see a page like this:
 
-![](README-myapp.png)
+![](/man/README-myapp.png)
 
 - Add `http://localhost:8100` to the "Allowed Callback URLs", "Allowed Web Origins" and "Allowed Logout URLs".
     - You can change `http://localhost:8100` to another port or the remote server you are going to deploy your shiny app. Just make sure that these addresses are correct. If you are placing your app inside a folder (e.g. https://johndoe.shinyapps.io/fooBar), don't include the folder (`fooBar`) in "Allowed Web Origins".

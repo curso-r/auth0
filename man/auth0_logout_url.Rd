@@ -4,9 +4,11 @@
 \alias{auth0_logout_url}
 \title{Generate logout URL}
 \usage{
-auth0_logout_url(redirect_js = TRUE)
+auth0_logout_url(config_file = NULL, redirect_js = TRUE)
 }
 \arguments{
+\item{config_file}{Path to YAML configuration file.}
+
 \item{redirect_js}{include javascript code to redirect page? Defaults to \code{TRUE}.}
 }
 \value{

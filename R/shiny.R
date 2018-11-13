@@ -38,14 +38,20 @@ find_config_file <- function() {
 #'
 #' @param ui an ordinary UI object to create shiny apps.
 #' @param server an ordinary server object to create shiny apps.
+#' @param config_file Path to YAML configuration file.
 #'
 #' @details
-#' If you want to use a diferent configuration file you can set the `auth0_config_file`
+#' If you want to use a diferent configuration file you can also set the `auth0_config_file`
 #' option with: `options(auth0_config_file = "path/to-file")`.
 #'
 #' @export
-shinyAuth0App <- function(ui, server) {
-  config <- auth0_config(find_config_file())
+shinyAuth0App <- function(ui, server, config_file = NULL) {
+
+  if (is.null(config_file))
+    config_file <- find_config_file()
+
+  config <- auth0_config(config_file)
+
   info <- auth0_info(config)
   if (interactive()) {
     p <- config$shiny_config$local_url
@@ -63,6 +69,7 @@ shinyAuth0App <- function(ui, server) {
 #' Generates logout URL from configuration file. This can be used inside a
 #' shiny app button to logout from the app.
 #'
+#' @param config_file Path to YAML configuration file.
 #' @param redirect_js include javascript code to redirect page? Defaults to `TRUE`.
 #'
 #' @return url string to logout, collapsed or not by javascript code.
@@ -96,9 +103,13 @@ shinyAuth0App <- function(ui, server) {
 #' }
 #'
 #' @export
-auth0_logout_url <- function(redirect_js = TRUE) {
+auth0_logout_url <- function(config_file = NULL, redirect_js = TRUE) {
 
-  config <- auth0_config(find_config_file())
+  if (is.null(config_file))
+    config_file <- find_config_file()
+
+  config <- auth0_config(config_file)
+
   app_url <- auth0_app_url(config)
   app_url_enc <- utils::URLencode(app_url, reserved = TRUE)
   logout_url <- sprintf("%s/v2/logout?client_id=%s&returnTo=%s",

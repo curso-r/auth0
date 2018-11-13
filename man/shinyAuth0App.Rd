@@ -4,7 +4,7 @@
 \alias{shinyAuth0App}
 \title{Create a Shiny app object with Auth0 Authentication}
 \usage{
-shinyAuth0App(ui, server, config_file = "./_auth0.yml")
+shinyAuth0App(ui, server, config_file = NULL)
 }
 \arguments{
 \item{ui}{an ordinary UI object to create shiny apps.}
@@ -16,4 +16,8 @@ shinyAuth0App(ui, server, config_file = "./_auth0.yml")
 \description{
 This function modifies ui and server objects to run using Auth0
 authentication.
+}
+\details{
+If you want to use a diferent configuration file you can also set the \code{auth0_config_file}
+option with: \code{options(auth0_config_file = "path/to-file")}.
 }

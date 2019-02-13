@@ -130,13 +130,14 @@ use_auth0 <- function(path = ".", file = "_auth0.yml", overwrite = FALSE) {
   if (file.exists(f) && !overwrite) {
     stop("File exists and overwrite is FALSE.")
   }
-  ks <- list(key = 'Sys.getenv("AUTH0_KEY")',
-             secret = 'Sys.getenv("AUTH0_SECRET")')
+  ks <- list(key = 'Sys.getenv("AUTH0_KEY")', secret = 'Sys.getenv("AUTH0_SECRET")')
+  api_url <- "paste0('https://', Sys.getenv('AUTH0_USER'), '.auth0.com')"
   attr(ks[[1]], "tag") <- "!expr"
   attr(ks[[2]], "tag") <- "!expr"
+  attr(api_url, "tag") <- "!expr"
   yaml_list <- list(
     name = "myApp",
     shiny_config = "http://localhost:8100",
-    auth0_config = list(api_url = "", credentials = ks))
+    auth0_config = list(api_url = api_url, credentials = ks))
   yaml::write_yaml(yaml_list, f)
 }

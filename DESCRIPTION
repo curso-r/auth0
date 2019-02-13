@@ -1,7 +1,7 @@
 Package: auth0
 Type: Package
 Title: Secure Authentication in Shiny with Auth0
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Julio", "Trecenti", email = "julio.trecenti@gmail.com", role = "cre"),
     person("Daniel", "Falbel", email = "dfalbel@gmail.com", role = "aut"),
@@ -15,7 +15,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Imports: httr,
     shiny,
     htmltools,

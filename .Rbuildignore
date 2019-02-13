@@ -1,7 +1,10 @@
+^CRAN-RELEASE$
+^revdep$
 ^_pkgdown\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.md$
+^NEWS\.md$
 ^README-.*\.png$
 ^\.travis\.yml$
 ^appveyor\.yml$

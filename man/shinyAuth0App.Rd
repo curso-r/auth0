@@ -19,5 +19,5 @@ authentication.
 }
 \details{
 If you want to use a diferent configuration file you can also set the \code{auth0_config_file}
-option with: \code{options(auth0_config_file = "path/to-file")}.
+option with: \code{options(auth0_config_file = "path/to/file.yaml")}.
 }

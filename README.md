@@ -47,7 +47,7 @@ After logging in Auth0, you will see a page like this:
 
 Now let's go to R!
 
-### Step 4: Create your shiny app and populate `_auth0.yml` file
+### Step 4: Create your shiny app and fill the `_auth0.yml` file
 
 - Create a configuration file for your shiny app, using `auth0::use_auth0()`:
 
@@ -71,12 +71,17 @@ auth0_config:
     secret: !expr Sys.getenv("AUTH0_SECRET")
 ```
 
-- Include these information (with quotes): 
-  - `api_url`: Your account at Auth0 (e.g. https://jonhdoe.auth0.com). It is the "Domain" in Auth0 application settings. 
-  - `credentials`: Your credentials to access Auth0 API, including
-    - `key`: the Client ID in Auth0 application settings.
-    - `secret`: the Client Secret in Auth0 application settings.
-- Save the `_auth0.yml` file
+- Run `usethis::edit_r_environ()` and add these three environment variables:
+
+```
+AUTH0_USER=jtrecenti
+AUTH0_KEY=5wugt0W...
+AUTH0_SECRET=rcaJ0p8...
+```
+
+More about environment variables [here](https://csgillespie.github.io/efficientR/set-up.html#renviron). You can also fill these information directly in the `_auth0.yml` file, although it is not recommended. If you do so, don't forget to save the `_auth0.yml` file after editing it.
+
+- Save and **restart your session**.
 - Write a simple shiny app in a `app.R` file, like this:
 
 ```r
@@ -107,31 +112,64 @@ You can try your app running
 shiny::runApp("app/directory/", port = 8100)
 ```
 
-If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you'll be redirected to your app. Yay!
+If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you'll be redirected to your app.
 
 ## Managing users
 
 You can manage user access from the Users panel in Auth0. To create an user, simply click on "+ Create users".
 
-You can also use many OAuth providers like Google, Facebook, Github etc. To configure them, just go to Connections tab. 
+You can also use many OAuth providers like Google, Facebook, Github etc. To configure them, go to Connections tab. 
 
 In the near future, our plan is to implement Auth0's API in R so that you can manage your app using R.
 
-## Environment variables
+## User information
 
-You can use environment variables to populate the `_auth0.yml` file automatically. To do so, you can create a `.Renviron` file in your project root or your user home directory. For example, my `.Renviron` file looks like this:
+When you are connected, it is possible to access user information inside the `session$userData$login_info` object. This object must be acessed in a reactive environment. There is a small example here:
+
+```r
+library(shiny)
+library(auth0)
+
+# simple UI with user info
+ui <- fluidPage(
+  verbatimTextOutput("user_info")
+)
+
+# server with one observer that logouts
+server <- function(input, output, session) {
+
+  # print user info
+  output$user_info <- renderPrint({
+    session$userData$login_info
+  })
+
+}
+
+shinyAuth0App(ui, server)
+```
+
+You should see an object like this:
 
 ```
-AUTH0_USER=jtrecenti
-AUTH0_KEY=5wugt0W...
-AUTH0_SECRET=rcaJ0p8...
-```
+$sub
+[1] "auth0|5c06a3aa119c392e85234f"
 
-More about environment variables [here](https://csgillespie.github.io/efficientR/set-up.html#renviron).
+$nickname
+[1] "jtrecenti"
+
+$name
+[1] "jtrecenti@email.com"
+
+$picture
+[1] "https://s.gravatar.com/avatar/1f344274fc21315479d2f2147b9d8614?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fjt.png"
+
+$updated_at
+[1] "2019-02-13T10:33:06.141Z"
+```
 
 ## Logout
 
-There is a way to add a logout button to your app using [`shinyjs`](https://github.com/daattali/shinyjs) package. There is a small example here:
+You can also add a logout button to your app using [`shinyjs`](https://github.com/daattali/shinyjs) package. There is a small example here:
 
 ```r
 library(shiny)
@@ -151,7 +189,7 @@ server <- function(input, output, session) {
   })
 }
 
-auth0::shinyAuth0App(ui, server, config_file)
+shinyAuth0App(ui, server)
 ```
 
 ## Costs
@@ -165,4 +203,3 @@ This package is not provided nor endorsed by Auth0 Inc. Use it on your own risk.
 ## Licence
 
 MIT
-

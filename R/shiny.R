@@ -42,7 +42,7 @@ find_config_file <- function() {
 #'
 #' @details
 #' If you want to use a diferent configuration file you can also set the `auth0_config_file`
-#' option with: `options(auth0_config_file = "path/to-file")`.
+#' option with: `options(auth0_config_file = "path/to/file.yaml")`.
 #'
 #' @export
 shinyAuth0App <- function(ui, server, config_file = NULL) {

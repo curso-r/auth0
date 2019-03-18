@@ -31,7 +31,7 @@ auth0_server_verify <- function(session, app, api, state) {
 
     userinfo_url <- sub("authorize", "userinfo", api$authorize)
     resp <- httr::GET(userinfo_url, httr::config(token = token))
-    session$userData$login_info <- httr::content(resp, "parsed")
+    assign("login_info", httr::content(resp, "parsed"), envir = session$userData)
   }
 }
 

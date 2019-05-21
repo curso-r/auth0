@@ -28,9 +28,9 @@ auth0_server_verify <- function(session, app, api, state) {
     token <- httr::oauth2.0_token(
       app = app, endpoint = api, cache = FALSE, credentials = cred,
       user_params = list(grant_type = "authorization_code"))
-
     userinfo_url <- sub("authorize", "userinfo", api$authorize)
     resp <- httr::GET(userinfo_url, httr::config(token = token))
+    includeScript(system.file("js/remove_url_parms.js", package = "auth0"))
     assign("login_info", httr::content(resp, "parsed"), envir = session$userData)
   }
 }

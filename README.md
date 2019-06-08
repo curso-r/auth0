@@ -135,7 +135,6 @@ ui <- fluidPage(
   verbatimTextOutput("user_info")
 )
 
-# server with one observer that logouts
 server <- function(input, output, session) {
 
   # print user info
@@ -169,26 +168,15 @@ $updated_at
 
 ## Logout
 
-You can also add a logout button to your app using [`shinyjs`](https://github.com/daattali/shinyjs) package. There is a small example here:
+You can add a logout button to your app using `logoutButton()`.
 
 ```r
 library(shiny)
 library(auth0)
-library(shinyjs)
 
-# simple UI with action button
-# note that you must include shinyjs::useShinyjs() for this to work
-ui <- fluidPage(shinyjs::useShinyjs(), actionButton("logout_auth0", "Logout"))
-
-# server with one observer that logouts
-server <- function(input, output, session) {
-  observeEvent(input$logout_auth0, {
-    # javascript code redirecting to correct url
-    js <- auth0::auth0_logout_url()
-    shinyjs::runjs(js)
-  })
-}
-
+# simple UI with logout button
+ui <- fluidPage(logoutButton())
+server <- function(input, output, session) {}
 shinyAuth0App(ui, server)
 ```
 

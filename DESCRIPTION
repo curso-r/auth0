@@ -5,7 +5,8 @@ Version: 0.1.1
 Authors@R: c(
     person("Julio", "Trecenti", email = "julio.trecenti@gmail.com", role = "cre"),
     person("Daniel", "Falbel", email = "dfalbel@gmail.com", role = "aut"),
-    person("José", "Jesus", email = "jjesusfilho@gmail.com", role = "ctb"))
+    person("José", "Jesus", email = "jjesusfilho@gmail.com", role = "ctb"),
+    person("Dean", "Attali", email = "daattali@gmail.com", role = "ctb"))
 Description: Uses Auth0 API (see <https://auth0.com> for more 
     information) to use a simple and secure authentication system. It provides 
     tools to log in and out a shiny application using social networks or a list
@@ -18,7 +19,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports: httr,
     shiny,
+    shinyjs,
     htmltools,
     yaml,
     utils
-Suggests: shinyjs

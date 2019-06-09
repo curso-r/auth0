@@ -194,10 +194,10 @@ This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
 
 - Auth0 0.1.2: Changes thanks to @daattali's review
     - [x] (breaking change) change `login_info` to `auth0_info` in the user session data (Issue #19).
-    - [ ] Option to ignore auth0 and work as a normal shiny app, to save developing time (Issue #26).
+    - [x] Option to ignore auth0 and work as a normal shiny app, to save developing time (Issue #26).
     - [ ] Examples for different login types (google/facebook, database etc, Issue #23).
     - [ ] Solve bookmarking and URL parameters issue (Issue #22).
-    - [ ] Improved logout button (Issue #24)
+    - [x] Improved logout button (Issue #24)
     - [ ] Improve handling and documentation of the `config_file` option (Issue #25).
     - [ ] `auth0AppDir()` function to work as `shiny::shinyAppDir()` (Issue #22).
     - [x] Use `auth0App()` instead of `shinyAuth0App()` and soft-deprecate `shinyAuth0App()` (Issue #18).

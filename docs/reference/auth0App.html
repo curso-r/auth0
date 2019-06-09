@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Authors • auth0</title>
+<title>Create a Shiny app object with Auth0 Authentication — auth0App • auth0</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -27,12 +27,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Authors" />
+<meta property="og:title" content="Create a Shiny app object with Auth0 Authentication — auth0App" />
+
+<meta property="og:description" content="This function modifies ui and server objects to run using Auth0
+authentication." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -49,7 +53,7 @@
   </head>
 
   <body>
-    <div class="container template-authors">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -61,7 +65,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">auth0</a>
+        <a class="navbar-link" href="../index.html">auth0</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
@@ -69,16 +73,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -94,30 +98,56 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Authors</h1>
+    <h1>Create a Shiny app object with Auth0 Authentication</h1>
+    
+    <div class="hidden name"><code>auth0App.Rd</code></div>
     </div>
 
-    <ul class="list-unstyled">
-      <li>
-        <p><strong>Julio Trecenti</strong>. Maintainer. 
-        </p>
-      </li>
-      <li>
-        <p><strong>Daniel Falbel</strong>. Author. 
-        </p>
-      </li>
-      <li>
-        <p><strong>José Jesus</strong>. Contributor. 
-        </p>
-      </li>
-    </ul>
+    <div class="ref-description">
+    
+    <p>This function modifies ui and server objects to run using Auth0
+authentication.</p>
+    
+    </div>
+
+    <pre class="usage"><span class='fu'>auth0App</span>(<span class='no'>ui</span>, <span class='no'>server</span>, <span class='kw'>config_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>ui</th>
+      <td><p>an ordinary UI object to create shiny apps.</p></td>
+    </tr>
+    <tr>
+      <th>server</th>
+      <td><p>an ordinary server object to create shiny apps.</p></td>
+    </tr>
+    <tr>
+      <th>config_file</th>
+      <td><p>path to YAML configuration file.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If you want to use a diferent configuration file you can also set the <code>auth0_config_file</code>
+option with: <code><a href='https://rdrr.io/r/base/options.html'>options(auth0_config_file = "path/to/file.yaml")</a></code>.</p>
+    
 
   </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#details">Details</a></li>
+          </ul>
 
+  </div>
 </div>
-
 
       <footer>
       <div class="copyright">

@@ -213,11 +213,11 @@ This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
     - [ ] Improve handling and documentation of the `config_file` option (Issue #25).
     - [ ] `auth0AppDir()` function to work as `shiny::shinyAppDir()` (Issue #22).
     - [ ] Use `auth0App()` as an alias to `shinyAuth0App()`. Maybe in the future `shinyAuth0App()` is going to be deprecated (Issue #18).
-    - Better documentation
-          - [ ] Handle multiple shiny apps and multiple auth0 apps (Issue #17).
-          - [ ] Explain some RStudio details(Issues #15 and #16).
-          - [ ] Explain environment variables (Issue #14).
-          - [ ] Explain yml file config (Issue #13).
+    - [ ] Better documentation
+          - Handle multiple shiny apps and multiple auth0 apps (Issue #17).
+          - Explain some RStudio details(Issues #15 and #16).
+          - Explain environment variables (Issue #14).
+          - Explain yml file config (Issue #13).
     - [ ] test whitelisting with auth0 (Issue #10).
 - Auth0 0.2.0
     - [ ] Implement auth0 API functions to manage users and login options through R.

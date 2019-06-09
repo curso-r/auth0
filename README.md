@@ -17,23 +17,23 @@ devtools::install_github("curso-r/auth0")
 
 ## Auth0 Configuration
 
-Auth0 is an external service so you should create an account there. To create your authenticated shiny app, you should follow the five steps below.
+To create your authenticated shiny app, you need to follow the five steps below.
 
 ### Step 1: Create an Auth0 account
 
 - Go to [auth0.com](https://auth0.com)
 - Click "Sign Up"
-- You can create an account placing user name and password or simply signing with your github account.
+- You can create an account with a user name and password combination, or by signing up with your GitHub or Google accounts.
 
 ### Step 2: Create an Auth0 application
 
-After logging in Auth0, you will see a page like this:
+After logging into Auth0, you will see a page like this:
 
 <img src="man/figures/README-dash.png">
 
-- Click on "+ New Application"
+- Click on "+ Create Application"
 - Give a name to your app
-- Select "Regular Web Applications" and click "Choose"
+- Select "Regular Web Applications" and click "Create"
 
 ### Step 3: Configure your application
 
@@ -49,60 +49,62 @@ Now let's go to R!
 
 ### Step 4: Create your shiny app and fill the `_auth0.yml` file
 
-- Create a configuration file for your shiny app, using `auth0::use_auth0()`:
+- Create a configuration file for your shiny app by calling `auth0::use_auth0()`:
 
-```r
-auth0::use_auth0()
-```
+    ```r
+    auth0::use_auth0()
+    ```
 
-- You can set the directory where this file will be created using the `path=` parameter. See `?use_auth0` for details.
+- You can set the directory where this file will be created using the `path=` parameter. See `?auth0::use_auth0` for details.
 - Your `_auth0.yml` file should be like this:
 
 
-```yml
-name: myApp
-shiny_config:
-  local_url: http://localhost:8100
-  remote_url: ''
-auth0_config:
-  api_url: !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')
-  credentials:
-    key: !expr Sys.getenv("AUTH0_KEY")
-    secret: !expr Sys.getenv("AUTH0_SECRET")
-```
+    ```yml
+    name: myApp
+    shiny_config:
+      local_url: http://localhost:8100
+      remote_url: ''
+    auth0_config:
+      api_url: !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')
+      credentials:
+        key: !expr Sys.getenv("AUTH0_KEY")
+        secret: !expr Sys.getenv("AUTH0_SECRET")
+    ```
 
 - Run `usethis::edit_r_environ()` and add these three environment variables:
 
-```
-AUTH0_USER=jtrecenti
-AUTH0_KEY=5wugt0W...
-AUTH0_SECRET=rcaJ0p8...
-```
+    ```
+    AUTH0_USER=jtrecenti
+    AUTH0_KEY=5wugt0W...
+    AUTH0_SECRET=rcaJ0p8...
+    ```
 
 More about environment variables [here](https://csgillespie.github.io/efficientR/set-up.html#renviron). You can also fill these information directly in the `_auth0.yml` file, although it is not recommended. If you do so, don't forget to save the `_auth0.yml` file after editing it.
 
 - Save and **restart your session**.
 - Write a simple shiny app in a `app.R` file, like this:
 
-```r
-library(shiny)
+    ```r
+    library(shiny)
 
-ui <- bootstrapPage(
-  fluidRow(plotOutput("plot"))
-)
+    ui <- fluidPage(
+      fluidRow(plotOutput("plot"))
+    )
 
-server <- function(input, output, session) {
-  output$plot <- renderPlot({
-    plot(1:10)
-  })
-}
+    server <- function(input, output, session) {
+      output$plot <- renderPlot({
+        plot(1:10)
+      })
+    }
 
-# note that here we're using a different version of shinyApp!
-auth0::shinyAuth0App(ui, server)
-```
+    # note that here we're using a different version of shinyApp!
+    auth0::shinyAuth0App(ui, server)
+    ```
 
 **Note**: If you want to use a different path to the `auth0` configuration file, you may
 set the `auth0_config_file` option by running `options(auth0_config_file = "path/to/file")`.
+
+Also note that currently Shiny apps that use the 2-file approach (`ui.R` and `server.R`) are not supported. Your app must be inside a single `app.R` file.
 
 ### Step 5: Run!
 
@@ -116,15 +118,15 @@ If everything is OK, you should be forwarded to a login page and, after logging 
 
 ## Managing users
 
-You can manage user access from the Users panel in Auth0. To create an user, simply click on "+ Create users".
+You can manage user access from the Users panel in Auth0. To create a user, click on "+ Create users".
 
-You can also use many OAuth providers like Google, Facebook, Github etc. To configure them, go to Connections tab. 
+You can also use many different OAuth providers like Google, Facebook, Github etc. To configure them, go to the *Connections* tab. 
 
 In the near future, our plan is to implement Auth0's API in R so that you can manage your app using R.
 
 ## User information
 
-When you are connected, it is possible to access user information inside the `session$userData$login_info` object. This object must be acessed in a reactive environment. There is a small example here:
+After a user logs in, it's possible to access the current user's information using the `session$userData$login_info` reactive object. Here is a small example:
 
 ```r
 library(shiny)
@@ -186,7 +188,7 @@ Auth0 is a freemium service. The free account lets you have up to 1000 connectio
 
 ## Disclaimer
 
-This package is not provided nor endorsed by Auth0 Inc. Use it on your own risk.
+This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
 
 ## Licence
 

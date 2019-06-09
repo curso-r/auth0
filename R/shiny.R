@@ -45,6 +45,13 @@ find_config_file <- function() {
 #' If you want to use a diferent configuration file you can also set the `auth0_config_file`
 #' option with: `options(auth0_config_file = "path/to/file.yaml")`.
 #'
+#' @section Disable auth0 while developing apps:
+#'
+#' Sometimes, using auth0 to develop and test apps can be frustrating,
+#'   because every time the app is started, auth0 requires the user to log-in.
+#'   To avoid this problem, one can run `options(auth0_disable = TRUE)` to disable
+#'   auth0 temporarily.
+#'
 #' @export
 auth0App <- function(ui, server, config_file = NULL) {
 

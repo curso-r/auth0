@@ -98,7 +98,7 @@ More about environment variables [here](https://csgillespie.github.io/efficientR
     }
 
     # note that here we're using a different version of shinyApp!
-    auth0::shinyAuth0App(ui, server)
+    auth0::auth0App(ui, server)
     ```
 
 **Note**: If you want to use a different path to the `auth0` configuration file, you may
@@ -126,7 +126,7 @@ In the near future, our plan is to implement Auth0's API in R so that you can ma
 
 ## User information
 
-After a user logs in, it's possible to access the current user's information using the `session$userData$login_info` reactive object. Here is a small example:
+After a user logs in, it's possible to access the current user's information using the `session$userData$auth0_info` reactive object. Here is a small example:
 
 ```r
 library(shiny)
@@ -141,12 +141,12 @@ server <- function(input, output, session) {
 
   # print user info
   output$user_info <- renderPrint({
-    session$userData$login_info
+    session$userData$auth0_info
   })
 
 }
 
-shinyAuth0App(ui, server)
+auth0App(ui, server)
 ```
 
 You should see an object like this:
@@ -179,7 +179,7 @@ library(auth0)
 # simple UI with logout button
 ui <- fluidPage(logoutButton())
 server <- function(input, output, session) {}
-shinyAuth0App(ui, server)
+auth0App(ui, server)
 ```
 
 ## Costs
@@ -193,19 +193,19 @@ This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
 ## Roadmap
 
 - Auth0 0.1.2: Changes thanks to @daattali's review
-    - [ ] (breaking change) change `login_info` to `auth0_info` in the user session data (Issue #19).
+    - [x] (breaking change) change `login_info` to `auth0_info` in the user session data (Issue #19).
     - [ ] Option to ignore auth0 and work as a normal shiny app, to save developing time (Issue #26).
     - [ ] Examples for different login types (google/facebook, database etc, Issue #23).
     - [ ] Solve bookmarking and URL parameters issue (Issue #22).
     - [ ] Improved logout button (Issue #24)
     - [ ] Improve handling and documentation of the `config_file` option (Issue #25).
     - [ ] `auth0AppDir()` function to work as `shiny::shinyAppDir()` (Issue #22).
-    - [ ] Use `auth0App()` as an alias to `shinyAuth0App()`. Maybe in the future `shinyAuth0App()` is going to be deprecated (Issue #18).
-    - [ ] Better documentation
-        - Handle multiple shiny apps and multiple auth0 apps (Issue #17).
-        - Explain some RStudio details(Issues #15 and #16).
-        - Explain environment variables (Issue #14).
-        - Explain yml file config (Issue #13).
+    - [x] Use `auth0App()` instead of `shinyAuth0App()` and soft-deprecate `shinyAuth0App()` (Issue #18).
+    - Better documentation
+          - [ ] Handle multiple shiny apps and multiple auth0 apps (Issue #17).
+          - [ ] Explain some RStudio details(Issues #15 and #16).
+          - [ ] Explain environment variables (Issue #14).
+          - [ ] Explain yml file config (Issue #13).
     - [ ] test whitelisting with auth0 (Issue #10).
 - Auth0 0.2.0
     - [ ] Implement auth0 API functions to manage users and login options through R.

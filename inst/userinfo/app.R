@@ -11,9 +11,9 @@ server <- function(input, output, session) {
 
   # print user info
   output$user_info <- renderPrint({
-    session$userData$login_info
+    session$userData$auth0_info
   })
 
 }
 
-shinyAuth0App(ui, server)
+auth0App(ui, server)

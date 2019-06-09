@@ -39,28 +39,101 @@ find_config_file <- function() {
 #'
 #' @param ui an ordinary UI object to create shiny apps.
 #' @param server an ordinary server object to create shiny apps.
-#' @param config_file Path to YAML configuration file.
+#' @param config_file path to YAML configuration file.
 #'
 #' @details
 #' If you want to use a diferent configuration file you can also set the `auth0_config_file`
 #' option with: `options(auth0_config_file = "path/to/file.yaml")`.
 #'
 #' @export
-shinyAuth0App <- function(ui, server, config_file = NULL) {
+auth0App <- function(ui, server, config_file = NULL) {
 
-  if (is.null(config_file))
-    config_file <- find_config_file()
-
-  config <- auth0_config(config_file)
-
-  info <- auth0_info(config)
-  if (interactive()) {
-    p <- config$shiny_config$local_url
-    re <- regexpr("(?<=:)([0-9]+)", p, perl = TRUE)
-    port <- as.numeric(regmatches(p, re))
-    shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info, config_file),
-                    options = list(port = port))
+  disable <- getOption("auth0_disable")
+  if (!is.null(disable) && disable) {
+    shiny::shinyApp(ui, server)
   } else {
-    shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info, config_file))
+    if (is.null(config_file))
+      config_file <- find_config_file()
+
+    config <- auth0_config(config_file)
+    info <- auth0_info(config)
+    if (interactive()) {
+      p <- config$shiny_config$local_url
+      re <- regexpr("(?<=:)([0-9]+)", p, perl = TRUE)
+      port <- as.numeric(regmatches(p, re))
+      shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info, config_file),
+                      options = list(port = port))
+    } else {
+      shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info, config_file))
+    }
   }
 }
+
+#' Create a Shiny app object with Auth0 Authentication
+#'
+#' @description
+#'
+#' As of auth0 0.1.2, `shinAuth0App()` has
+#' been renamed to [auth0App()] for consistency.
+#'
+#' @inheritParams auth0App
+#'
+#' @export
+shinyAuth0App <- function(ui, server, config_file = NULL) {
+  warning("`shinyAuth0App()` is soft-deprecated as of auth0 0.1.2.",
+          "Please use `auth0App()` instead.")
+  auth0App(ui, server, config_file, disable)
+}
+
+#' Generate logout URL
+#'
+#' `auth0_logout_url()` is defunct as of auth0 0.1.2 in order to simplifly the
+#'   user experience with the [logoutButton()] function.
+#'
+#' @param config_file Path to YAML configuration file.
+#' @param redirect_js include javascript code to redirect page? Defaults to `TRUE`.
+#'
+#' @examples
+#' \donttest{
+#'
+#' # simple UI with action button
+#' # AFTER auth0 0.1.2
+#'
+#' library(shiny)
+#' library(auth0)
+#'
+#' ui <- fluidPage(logoutButton())
+#' server <- function(input, output, session) {}
+#' auth0App(ui, server, config_file)
+#'
+#' # simple UI with action button
+#' # BEFORE auth0 0.1.2
+#'
+#' library(shiny)
+#' library(auth0)
+#' library(shinyjs)
+#'
+#' # note that you must include shinyjs::useShinyjs() for this to work
+#' ui <- fluidPage(shinyjs::useShinyjs(), actionButton("logout_auth0", "Logout"))
+#'
+#' # server with one observer that logouts
+#' server <- function(input, output, session) {
+#'   observeEvent(input$logout_auth0, {
+#'     # javascript code redirecting to correct url
+#'     js <- auth0_logout_url()
+#'     shinyjs::runjs(js)
+#'   })
+#' }
+#'
+#' shinyAuth0App(ui, server, config_file = config_file)
+#' }
+#'
+#'
+#' @export
+auth0_logout_url <- function(config_file = NULL, redirect_js = TRUE) {
+
+  stop("`auth0_logout_url()` is deprecated.",
+       "See `logoutButton()` to add a logout button to auth0 apps.")
+
+}
+

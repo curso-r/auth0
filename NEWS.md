@@ -11,6 +11,7 @@
       - Explain environment variables (Issue #14).
       - Explain yml file config (Issue #13).
 - Add Dean Attali as contributor to the package.
+- test whitelisting with auth0 (Issue #10)
 
 # auth0 0.1.1
 

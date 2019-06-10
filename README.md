@@ -316,7 +316,7 @@ This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
           - [x] Explain some RStudio details(Issues #15 and #16).
           - [x] Explain environment variables (Issue #14).
           - [x] Explain yml file config (Issue #13).
-    - [ ] test whitelisting with auth0 (Issue #10).
+    - [x] test whitelisting with auth0 (Issue #10).
     - [ ] Improve handling and documentation of the `config_file` option (Issue #25).
     - [ ] `auth0AppDir()` function to work as `shiny::shinyAppDir()` (Issue #22).
     - [ ] Solve bookmarking and URL parameters issue (Issue #22).

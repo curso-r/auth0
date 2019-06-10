@@ -146,6 +146,16 @@
 <pre><code>AUTH0_USER=johndoe
 AUTH0_KEY=5wugt0W...
 AUTH0_SECRET=rcaJ0p8...</code></pre>
+<p>There’s how you identify each of them (see the image below):</p>
+<ul>
+<li>
+<code>AUTH0_USER</code> is your username, which can be found on the top corner of the site.</li>
+<li>
+<code>AUTH0_KEY</code> is your Client ID, which can be copied from inside the app page.</li>
+<li>
+<code>AUTH0_KEY</code> is your Client Secret, which can be copied from the app page.</li>
+</ul>
+<p><img src="reference/figures/README-myapp-vars.png"></p>
 <p>More about environment variables <a href="https://csgillespie.github.io/efficientR/set-up.html#renviron">here</a>. You can also fill these information directly in the <code>_auth0.yml</code> file (see below). If you do so, don’t forget to save the <code>_auth0.yml</code> file after editing it.</p>
 <ul>
 <li>Save and <strong>restart your session</strong>.</li>
@@ -325,7 +335,7 @@ $updated_at
 <li>[x] Improved logout button (Issue #24)</li>
 <li>[x] Use <code><a href="reference/auth0App.html">auth0App()</a></code> instead of <code><a href="reference/shinyAuth0App.html">shinyAuth0App()</a></code> and soft-deprecate <code><a href="reference/shinyAuth0App.html">shinyAuth0App()</a></code> (Issue #18).</li>
 <li>Better documentation - [x] Handle multiple shiny apps and multiple auth0 apps (Issue #17). - [x] Explain some RStudio details(Issues #15 and #16). - [x] Explain environment variables (Issue #14). - [x] Explain yml file config (Issue #13).</li>
-<li>[ ] test whitelisting with auth0 (Issue #10).</li>
+<li>[x] test whitelisting with auth0 (Issue #10).</li>
 <li>[ ] Improve handling and documentation of the <code>config_file</code> option (Issue #25).</li>
 <li>[ ] <code>auth0AppDir()</code> function to work as <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shiny::shinyAppDir()</a></code> (Issue #22).</li>
 <li>[ ] Solve bookmarking and URL parameters issue (Issue #22).</li>

@@ -1,17 +1,12 @@
-auth0_ui <- function(ui, info, config_file) {
+auth0_ui <- function(ui, info) {
   function(req) {
     verify <- has_auth_code(shiny::parseQueryString(req$QUERY_STRING), info$state)
     if (!verify) {
-      if (grepl("error=unauthorized", req$QUERY_STRING)) {
-        redirect <- sprintf("location.replace(\"%s\");", logout_url(config_file))
-        htmltools::tags$script(htmltools::HTML(redirect))
-      } else {
-        url <- httr::oauth2.0_authorize_url(
-          info$api, info$app, scope = info$scope, state = info$state
-        )
-        redirect <- sprintf("location.replace(\"%s\");", url)
-        htmltools::tags$script(htmltools::HTML(redirect))
-      }
+      url <- httr::oauth2.0_authorize_url(
+        info$api, info$app, scope = info$scope, state = info$state
+      )
+      redirect <- sprintf("location.replace(\"%s\");", url)
+      htmltools::tags$script(htmltools::HTML(redirect))
     } else {
       ui
     }
@@ -73,12 +68,10 @@ auth0App <- function(ui, server, config_file = NULL) {
       p <- config$shiny_config$local_url
       re <- regexpr("(?<=:)([0-9]+)", p, perl = TRUE)
       port <- as.numeric(regmatches(p, re))
-      shiny::shinyApp(auth0_ui(ui, info, config_file),
-                      auth0_server(server, info, config_file),
+      shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info, config_file),
                       options = list(port = port))
     } else {
-      shiny::shinyApp(auth0_ui(ui, info, config_file),
-                      auth0_server(server, info, config_file),
+      shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info, config_file),
                       enableBookmarking = "server")
     }
   }

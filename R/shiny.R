@@ -1,7 +1,6 @@
 auth0_ui <- function(ui, info) {
   function(req) {
-    verify <- has_auth_code(shiny::parseQueryString(req$QUERY_STRING),
-                            info$state)
+    verify <- has_auth_code(shiny::parseQueryString(req$QUERY_STRING), info$state)
     if (!verify) {
       url <- httr::oauth2.0_authorize_url(
         info$api, info$app, scope = info$scope, state = info$state
@@ -42,15 +41,16 @@ find_config_file <- function() {
 #' @param config_file path to YAML configuration file.
 #'
 #' @details
-#' If you want to use a diferent configuration file you can also set the `auth0_config_file`
-#' option with: `options(auth0_config_file = "path/to/file.yaml")`.
+#' If you want to use a diferent configuration file you can also set the
+#' `auth0_config_file` option with:
+#' `options(auth0_config_file = "path/to/file.yaml")`.
 #'
 #' @section Disable auth0 while developing apps:
 #'
 #' Sometimes, using auth0 to develop and test apps can be frustrating,
 #'   because every time the app is started, auth0 requires the user to log-in.
-#'   To avoid this problem, one can run `options(auth0_disable = TRUE)` to disable
-#'   auth0 temporarily.
+#'   To avoid this problem, one can run `options(auth0_disable = TRUE)` to
+#'   disable auth0 temporarily.
 #'
 #' @export
 auth0App <- function(ui, server, config_file = NULL) {
@@ -71,7 +71,8 @@ auth0App <- function(ui, server, config_file = NULL) {
       shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info, config_file),
                       options = list(port = port))
     } else {
-      shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info, config_file))
+      shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info, config_file),
+                      enableBookmarking = "server")
     }
   }
 }
@@ -139,8 +140,7 @@ shinyAuth0App <- function(ui, server, config_file = NULL) {
 #' @export
 auth0_logout_url <- function(config_file = NULL, redirect_js = TRUE) {
 
-  stop("`auth0_logout_url()` is deprecated.",
-       "See `logoutButton()` to add a logout button to auth0 apps.")
+  stop("`auth0_logout_url()` is deprecated. ",
+       "See `?logoutButton()` to add a logout button in auth0 apps.")
 
 }
-

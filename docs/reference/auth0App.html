@@ -66,7 +66,7 @@ authentication." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auth0</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -133,8 +133,17 @@ authentication.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If you want to use a diferent configuration file you can also set the <code>auth0_config_file</code>
-option with: <code><a href='https://rdrr.io/r/base/options.html'>options(auth0_config_file = "path/to/file.yaml")</a></code>.</p>
+    <p>If you want to use a diferent configuration file you can also set the
+<code>auth0_config_file</code> option with:
+<code><a href='https://rdrr.io/r/base/options.html'>options(auth0_config_file = "path/to/file.yaml")</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="disable-auth-while-developing-apps"><a class="anchor" href="#disable-auth-while-developing-apps"></a>Disable auth0 while developing apps</h2>
+
+    
+    <p>Sometimes, using auth0 to develop and test apps can be frustrating,
+because every time the app is started, auth0 requires the user to log-in.
+To avoid this problem, one can run <code><a href='https://rdrr.io/r/base/options.html'>options(auth0_disable = TRUE)</a></code> to
+disable auth0 temporarily.</p>
     
 
   </div>
@@ -144,6 +153,8 @@ option with: <code><a href='https://rdrr.io/r/base/options.html'>options(auth0_c
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#disable-auth-while-developing-apps">Disable auth0 while developing apps</a></li>
           </ul>
 
   </div>

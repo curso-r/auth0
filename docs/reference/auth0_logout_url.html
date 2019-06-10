@@ -34,8 +34,8 @@
 
 <meta property="og:title" content="Generate logout URL — auth0_logout_url" />
 
-<meta property="og:description" content="Generates logout URL from configuration file. This can be used inside a
-shiny app button to logout from the app." />
+<meta property="og:description" content="auth0_logout_url() is defunct as of auth0 0.1.2 in order to simplifly the
+user experience with the logoutButton() function." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +66,7 @@ shiny app button to logout from the app." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auth0</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -107,8 +107,8 @@ shiny app button to logout from the app." />
 
     <div class="ref-description">
     
-    <p>Generates logout URL from configuration file. This can be used inside a
-shiny app button to logout from the app.</p>
+    <p><code>auth0_logout_url()</code> is defunct as of auth0 0.1.2 in order to simplifly the
+user experience with the <code><a href='logoutButton.html'>logoutButton()</a></code> function.</p>
     
     </div>
 
@@ -127,27 +127,29 @@ shiny app button to logout from the app.</p>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>url string to logout, collapsed or not by javascript code.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>To use this function successfully inside a shiny app, you may
-want to install <code>shinyjs</code> package. See example</p>
-<p>If you want to use a diferent configuration file you can set the <code>auth0_config_file</code>
-option with: <code><a href='https://rdrr.io/r/base/options.html'>options(auth0_config_file = "path/to-file")</a></code>.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>shiny</span>)
+    <pre class="examples"><div class='input'>
+<span class='co'># simple UI with action button</span>
+<span class='co'># AFTER auth0 0.1.2</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>shiny</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>auth0</span>)
+
+<span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span>(<span class='fu'><a href='logoutButton.html'>logoutButton</a></span>())
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {}
+<span class='fu'><a href='auth0App.html'>auth0App</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>, <span class='no'>config_file</span>)</div><div class='output co'>#&gt; <span class='error'>Error in auth0App(ui, server, config_file): object 'config_file' not found</span></div><div class='input'>
+<span class='co'># simple UI with action button</span>
+<span class='co'># BEFORE auth0 0.1.2</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>shiny</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>auth0</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>shinyjs</span>)</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘shinyjs’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:shiny’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    runExample</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:methods’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    removeClass, show</span></div><div class='input'><span class='co'># simple UI with action button</span>
+#&gt; <span class='message'>    removeClass, show</span></div><div class='input'>
 <span class='co'># note that you must include shinyjs::useShinyjs() for this to work</span>
 <span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span>(<span class='kw pkg'>shinyjs</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/shinyjs/man/useShinyjs.html'>useShinyjs</a></span>(), <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span>(<span class='st'>"logout_auth0"</span>, <span class='st'>"Logout"</span>))
 
@@ -161,17 +163,14 @@ option with: <code><a href='https://rdrr.io/r/base/options.html'>options(auth0_c
 }
 
 <span class='fu'><a href='shinyAuth0App.html'>shinyAuth0App</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>, <span class='kw'>config_file</span> <span class='kw'>=</span> <span class='no'>config_file</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `shinyAuth0App()` is soft-deprecated as of auth0 0.1.2.Please use `auth0App()` instead.</span></div><div class='output co'>#&gt; <span class='error'>Error in auth0App(ui, server, config_file, disable): unused argument (disable)</span></div><div class='input'>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -17,7 +17,7 @@ auth0_api <- function(auth0_url, request, access) {
 }
 
 has_auth_code <- function(params, state) {
-  !is.null(params$code) && params$state == state
+  is.null(params$error) && !is.null(params$code) && params$state == state
 }
 
 auth0_server_verify <- function(session, app, api, state) {
@@ -136,3 +136,4 @@ use_auth0 <- function(path = ".", file = "_auth0.yml", overwrite = FALSE) {
     auth0_config = list(api_url = api_url, credentials = ks))
   yaml::write_yaml(yaml_list, f)
 }
+

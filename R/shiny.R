@@ -90,7 +90,7 @@ auth0App <- function(ui, server, config_file = NULL) {
 shinyAuth0App <- function(ui, server, config_file = NULL) {
   warning("`shinyAuth0App()` is soft-deprecated as of auth0 0.1.2.",
           "Please use `auth0App()` instead.")
-  auth0App(ui, server, config_file, disable)
+  auth0App(ui, server, config_file)
 }
 
 #' Generate logout URL

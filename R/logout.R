@@ -29,7 +29,7 @@
 #'
 #' @export
 logoutButton <- function(label = "Log out", ..., id = "._auth0logout_") {
-  actionButton(id, label, ...)
+  shiny::actionButton(id, label, ...)
 }
 
 #' Generate a logout URL

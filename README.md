@@ -123,9 +123,9 @@ Also note that currently Shiny apps that use the 2-file approach (`ui.R` and `se
 
 You can try your app running
 
-    ```r
-    shiny::runApp("app/directory/", port = 8100)
-    ```
+```r
+shiny::runApp("app/directory/", port = 8100)
+```
 
 If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you'll be redirected to your app.
 
@@ -197,7 +197,7 @@ options(shiny.port = 8100)
 
 The steps above show how to configure the `_auth0.yml` file setting `local_url` and `remote_url` fields under `shiny_config`. Actually, it is also possible to replace
 
-```
+```yml
 shiny_config:
   local_url: http://localhost:8100
   remote_url: http://example.com
@@ -205,13 +205,13 @@ shiny_config:
 
 by just
 
-```
+```yml
 shiny_config: http://localhost:8100
 ```
 
 or
 
-```
+```yml
 shiny_config: http://example.com
 ```
 
@@ -317,9 +317,9 @@ This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
           - [x] Explain environment variables (Issue #14).
           - [x] Explain yml file config (Issue #13).
     - [x] test whitelisting with auth0 (Issue #10).
-    - [ ] Improve handling and documentation of the `config_file` option (Issue #25).
-    - [ ] `auth0AppDir()` function to work as `shiny::shinyAppDir()` (Issue #22).
+    - [ ] `auth0AppDir()` function to work as `shiny::shinyAppDir()` (Issue #21).
     - [ ] Solve bookmarking and URL parameters issue (Issue #22).
+    - [ ] Improve handling and documentation of the `config_file` option (Issue #25).
 - Auth0 0.2.0
     - [ ] Implement auth0 API functions to manage users and login options through R.
     - [ ] Support to `ui.R`/`server.R` apps.

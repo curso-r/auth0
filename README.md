@@ -114,7 +114,8 @@ server <- function(input, output, session) {
 auth0::auth0App(ui, server)
 ```
 
-**Note**: If you want to use a different path to the `auth0` configuration file, you may
+**Note**: If you want to use a different path to the `auth0` configuration file, you can
+either pass it to `auth0App()` or
 set the `auth0_config_file` option by running `options(auth0_config_file = "path/to/file")`.
 
 Also note that currently Shiny apps that use the 2-file approach (`ui.R` and `server.R`) are not supported. Your app must be inside a single `app.R` file.

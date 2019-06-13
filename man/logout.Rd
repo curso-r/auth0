@@ -4,17 +4,15 @@
 \alias{logout}
 \title{Log out of an auth0 app}
 \usage{
-logout(config_file = NULL)
-}
-\arguments{
-\item{config_file}{Path to YAML configuration file.}
+logout()
 }
 \description{
 Log the current user out of an auth0 shiny app.
 }
 \details{
-If you want to use a different configuration file you can set the \code{auth0_config_file}
-option with: \code{options(auth0_config_file = "path/to-file")}.
+You can also use a diferent configuration file by setting the
+\code{auth0_config_file} option with:
+\code{options(auth0_config_file = "path/to/file.yaml")}.
 }
 \seealso{
 \code{\link[auth0]{logoutButton}},

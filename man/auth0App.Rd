@@ -18,7 +18,7 @@ This function modifies ui and server objects to run using Auth0
 authentication.
 }
 \details{
-If you want to use a diferent configuration file you can also set the
+You can also use a diferent configuration file by setting the
 \code{auth0_config_file} option with:
 \code{options(auth0_config_file = "path/to/file.yaml")}.
 }

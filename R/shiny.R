@@ -1,9 +1,9 @@
-auth0_ui <- function(ui, info, config_file) {
+auth0_ui <- function(ui, info) {
   function(req) {
     verify <- has_auth_code(shiny::parseQueryString(req$QUERY_STRING), info$state)
     if (!verify) {
       if (grepl("error=unauthorized", req$QUERY_STRING)) {
-        redirect <- sprintf("location.replace(\"%s\");", logout_url(config_file))
+        redirect <- sprintf("location.replace(\"%s\");", logout_url())
         htmltools::tags$script(htmltools::HTML(redirect))
       } else {
         url <- httr::oauth2.0_authorize_url(
@@ -18,10 +18,10 @@ auth0_ui <- function(ui, info, config_file) {
   }
 }
 
-auth0_server <- function(server, info, config_file = NULL) {
+auth0_server <- function(server, info) {
   function(input, output, session) {
     shiny::isolate(auth0_server_verify(session, info$app, info$api, info$state))
-    shiny::observeEvent(input[["._auth0logout_"]], logout(config_file = config_file))
+    shiny::observeEvent(input[["._auth0logout_"]], logout())
     server(input, output, session)
   }
 }
@@ -46,7 +46,7 @@ find_config_file <- function() {
 #' @param config_file path to YAML configuration file.
 #'
 #' @details
-#' If you want to use a diferent configuration file you can also set the
+#' You can also use a diferent configuration file by setting the
 #' `auth0_config_file` option with:
 #' `options(auth0_config_file = "path/to/file.yaml")`.
 #'
@@ -64,21 +64,25 @@ auth0App <- function(ui, server, config_file = NULL) {
   if (!is.null(disable) && disable) {
     shiny::shinyApp(ui, server)
   } else {
-    if (is.null(config_file))
+    if (is.null(config_file)) {
       config_file <- find_config_file()
+    }
+    else {
+      options(auth0_config_file = config_file)
+    }
 
-    config <- auth0_config(config_file)
+    config <- auth0_config()
     info <- auth0_info(config)
     if (interactive()) {
       p <- config$shiny_config$local_url
       re <- regexpr("(?<=:)([0-9]+)", p, perl = TRUE)
       port <- as.numeric(regmatches(p, re))
-      shiny::shinyApp(auth0_ui(ui, info, config_file),
-                      auth0_server(server, info, config_file),
+      shiny::shinyApp(auth0_ui(ui, info),
+                      auth0_server(server, info),
                       options = list(port = port))
     } else {
-      shiny::shinyApp(auth0_ui(ui, info, config_file),
-                      auth0_server(server, info, config_file))
+      shiny::shinyApp(auth0_ui(ui, info),
+                      auth0_server(server, info))
     }
   }
 }

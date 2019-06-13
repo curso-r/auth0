@@ -49,7 +49,8 @@ auth0_info <- function(config) {
   list(scope = scope, state = state, app = app, api = api)
 }
 
-auth0_config <- function(config_file) {
+auth0_config <- function() {
+  config_file <- find_config_file()
   config <- yaml::read_yaml(config_file, eval.expr = TRUE)
 
   # standardise and validate shiny_config

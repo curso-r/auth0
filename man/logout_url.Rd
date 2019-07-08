@@ -4,10 +4,7 @@
 \alias{logout_url}
 \title{Generate a logout URL}
 \usage{
-logout_url(config_file = NULL)
-}
-\arguments{
-\item{config_file}{Path to YAML configuration file.}
+logout_url()
 }
 \value{
 URL string to log out.
@@ -16,8 +13,9 @@ URL string to log out.
 Generate a URL that will log the user out of the app if visited.
 }
 \details{
-If you want to use a different configuration file you can set the \code{auth0_config_file}
-option with: \code{options(auth0_config_file = "path/to-file")}.
+You can also use a diferent configuration file by setting the
+\code{auth0_config_file} option with:
+\code{options(auth0_config_file = "path/to/file.yaml")}.
 }
 \seealso{
 \code{\link[auth0]{logoutButton}},

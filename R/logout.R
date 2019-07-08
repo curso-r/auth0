@@ -29,30 +29,26 @@
 #'
 #' @export
 logoutButton <- function(label = "Log out", ..., id = "._auth0logout_") {
-  actionButton(id, label, ...)
+  shiny::actionButton(id, label, ...)
 }
 
 #' Generate a logout URL
 #'
 #' Generate a URL that will log the user out of the app if visited.
 #'
-#' @param config_file Path to YAML configuration file.
-#'
 #' @return URL string to log out.
 #'
 #' @seealso \code{\link[auth0]{logoutButton}},
 #' \code{\link[auth0]{logout}}
 #'
-#' @details If you want to use a different configuration file you can set the `auth0_config_file`
-#' option with: `options(auth0_config_file = "path/to-file")`.
+#' @details You can also use a diferent configuration file by setting the
+#' `auth0_config_file` option with:
+#' `options(auth0_config_file = "path/to/file.yaml")`.
+#'
 #' @export
-logout_url <- function(config_file = NULL) {
+logout_url <- function() {
 
-  if (is.null(config_file)) {
-    config_file <- find_config_file()
-  }
-
-  config <- auth0_config(config_file)
+  config <- auth0_config()
 
   app_url <- auth0_app_url(config)
   app_url_enc <- utils::URLencode(app_url, reserved = TRUE)
@@ -67,21 +63,20 @@ logout_url <- function(config_file = NULL) {
 #'
 #' Log the current user out of an auth0 shiny app.
 #'
-#' @param config_file Path to YAML configuration file.
-#'
 #' @seealso \code{\link[auth0]{logoutButton}},
 #' \code{\link[auth0]{logout_url}}
 #'
-#' @details If you want to use a different configuration file you can set the `auth0_config_file`
-#' option with: `options(auth0_config_file = "path/to-file")`.
+#' @details You can also use a diferent configuration file by setting the
+#' `auth0_config_file` option with:
+#' `options(auth0_config_file = "path/to/file.yaml")`.
 #'
 #' @export
-logout <- function(config_file = NULL) {
+logout <- function() {
   shiny::insertUI(
     selector = "head", where = "beforeEnd", immediate = TRUE,
     ui = shinyjs::useShinyjs()
   )
-  url <- logout_url(config_file = config_file)
+  url <- logout_url()
   js <- sprintf('location.replace("%s")', url)
   shinyjs::runjs(js)
 }

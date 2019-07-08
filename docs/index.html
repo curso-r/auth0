@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">auth0</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -71,14 +71,16 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install auth0 from github with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"curso-r/auth0"</span>)</a></code></pre></div>
+<p>You can install auth0 from CRAN with:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"auth0"</span>)</a></code></pre></div>
+<p>You can also install the development version from github with:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb2-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"curso-r/auth0"</span>)</a></code></pre></div>
 </div>
 <div id="auth0-configuration" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auth0-configuration" class="anchor"></a>Auth0 Configuration</h2>
-<p>Auth0 is an external service so you should create an account there. To create your authenticated shiny app, you should follow the five steps below.</p>
+<p>To create your authenticated shiny app, you need to follow the five steps below.</p>
 <div id="step-1-create-an-auth0-account" class="section level3">
 <h3 class="hasAnchor">
 <a href="#step-1-create-an-auth0-account" class="anchor"></a>Step 1: Create an Auth0 account</h3>
@@ -86,18 +88,18 @@
 <li>Go to <a href="https://auth0.com">auth0.com</a>
 </li>
 <li>Click “Sign Up”</li>
-<li>You can create an account placing user name and password or simply signing with your github account.</li>
+<li>You can create an account with a user name and password combination, or by signing up with your GitHub or Google accounts.</li>
 </ul>
 </div>
 <div id="step-2-create-an-auth0-application" class="section level3">
 <h3 class="hasAnchor">
 <a href="#step-2-create-an-auth0-application" class="anchor"></a>Step 2: Create an Auth0 application</h3>
-<p>After logging in Auth0, you will see a page like this:</p>
+<p>After logging into Auth0, you will see a page like this:</p>
 <p><img src="reference/figures/README-dash.png"></p>
 <ul>
-<li>Click on “+ New Application”</li>
+<li>Click on “+ Create Application”</li>
 <li>Give a name to your app</li>
-<li>Select “Regular Web Applications” and click “Choose”</li>
+<li>Select “Regular Web Applications” and click “Create”</li>
 </ul>
 </div>
 <div id="step-3-configure-your-application" class="section level3">
@@ -117,91 +119,165 @@
 </ul>
 <p>Now let’s go to R!</p>
 </div>
-<div id="step-4-create-your-shiny-app-and-populate-_auth0-yml-file" class="section level3">
+<div id="step-4-create-your-shiny-app-and-fill-the-_auth0yml-file" class="section level3">
 <h3 class="hasAnchor">
-<a href="#step-4-create-your-shiny-app-and-populate-_auth0-yml-file" class="anchor"></a>Step 4: Create your shiny app and populate <code>_auth0.yml</code> file</h3>
+<a href="#step-4-create-your-shiny-app-and-fill-the-_auth0yml-file" class="anchor"></a>Step 4: Create your shiny app and fill the <code>_auth0.yml</code> file</h3>
 <ul>
-<li>Create a configuration file for your shiny app, using <code><a href="reference/use_auth0.html">auth0::use_auth0()</a></code>:</li>
+<li>Create a configuration file for your shiny app by calling <code><a href="reference/use_auth0.html">auth0::use_auth0()</a></code>:</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">auth0<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/auth0/topics/use_auth0">use_auth0</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">auth0<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/auth0/topics/use_auth0">use_auth0</a></span>()</a></code></pre></div>
 <ul>
-<li>You can set the directory where this file will be created using the <code>path=</code> parameter. See <code><a href="reference/use_auth0.html">?use_auth0</a></code> for details.</li>
+<li>You can set the directory where this file will be created using the <code>path=</code> parameter. See <code><a href="reference/use_auth0.html">?auth0::use_auth0</a></code> for details.</li>
 <li>Your <code>_auth0.yml</code> file should be like this:</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">name:</span><span class="at"> myApp</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="fu">shiny_config:</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="fu">local_url:</span><span class="at"> http://localhost:8100</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="fu">remote_url:</span><span class="at"> </span><span class="st">''</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="fu">auth0_config:</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="fu">api_url:</span><span class="at"> !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="fu">credentials:</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">    <span class="fu">key:</span><span class="at"> !expr Sys.getenv("AUTH0_KEY")</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">    <span class="fu">secret:</span><span class="at"> !expr Sys.getenv("AUTH0_SECRET")</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">name:</span><span class="at"> myApp</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="fu">shiny_config:</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="fu">local_url:</span><span class="at"> http://localhost:8100</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="fu">remote_url:</span><span class="at"> </span><span class="st">''</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="fu">auth0_config:</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="fu">api_url:</span><span class="at"> !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="fu">credentials:</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="fu">key:</span><span class="at"> !expr Sys.getenv("AUTH0_KEY")</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="fu">secret:</span><span class="at"> !expr Sys.getenv("AUTH0_SECRET")</span></a></code></pre></div>
 <ul>
-<li>Run <code><a href="https://www.rdocumentation.org/packages/usethis/topics/edit">usethis::edit_r_environ()</a></code> and add these three environment variables:</li>
+<li>Run <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code> and add these three environment variables:</li>
 </ul>
-<pre><code>AUTH0_USER=jtrecenti
+<pre><code>AUTH0_USER=johndoe
 AUTH0_KEY=5wugt0W...
 AUTH0_SECRET=rcaJ0p8...</code></pre>
-<p>(More about environment variables <a href="https://csgillespie.github.io/efficientR/set-up.html#renviron">here</a>). You can also write these information directly on the <code>_auth0.yml</code> file. If you do so, don’t forget to save the <code>_auth0.yml</code> file after editing it.</p>
+<p>There’s how you identify each of them (see the image below):</p>
+<ul>
+<li>
+<code>AUTH0_USER</code> is your username, which can be found on the top corner of the site.</li>
+<li>
+<code>AUTH0_KEY</code> is your Client ID, which can be copied from inside the app page.</li>
+<li>
+<code>AUTH0_KEY</code> is your Client Secret, which can be copied from the app page.</li>
+</ul>
+<p><img src="reference/figures/README-myapp-vars.png"></p>
+<p>More about environment variables <a href="https://csgillespie.github.io/efficientR/set-up.html#renviron">here</a>. You can also fill these information directly in the <code>_auth0.yml</code> file (see below). If you do so, don’t forget to save the <code>_auth0.yml</code> file after editing it.</p>
 <ul>
 <li>Save and <strong>restart your session</strong>.</li>
 <li>Write a simple shiny app in a <code>app.R</code> file, like this:</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/bootstrapPage">bootstrapPage</a></span>(</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidRow</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/plotOutput">plotOutput</a></span>(<span class="st">"plot"</span>))</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">  output<span class="op">$</span>plot &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/renderPlot">renderPlot</a></span>({</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">    <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">  })</a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">}</a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co"># note that here we're using a different version of shinyApp!</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">auth0<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/auth0/topics/shinyAuth0App">shinyAuth0App</a></span>(ui, server)</a></code></pre></div>
-<p><strong>Note</strong>: If you want to use a different path to the <code>auth0</code> configuration file, you may set the <code>auth0_config_file</code> option by running <code><a href="https://www.rdocumentation.org/packages/base/topics/options">options(auth0_config_file = "path/to/file")</a></code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidRow</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/plotOutput">plotOutput</a></span>(<span class="st">"plot"</span>))</a>
+<a class="sourceLine" id="cb6-5" title="5">)</a>
+<a class="sourceLine" id="cb6-6" title="6">  </a>
+<a class="sourceLine" id="cb6-7" title="7">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb6-8" title="8">  output<span class="op">$</span>plot &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/renderPlot">renderPlot</a></span>({</a>
+<a class="sourceLine" id="cb6-9" title="9">    <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb6-10" title="10">  })</a>
+<a class="sourceLine" id="cb6-11" title="11">}</a>
+<a class="sourceLine" id="cb6-12" title="12"></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co"># note that here we're using a different version of shinyApp!</span></a>
+<a class="sourceLine" id="cb6-14" title="14">auth0<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/auth0/topics/auth0App">auth0App</a></span>(ui, server)</a></code></pre></div>
+<p><strong>Note</strong>: If you want to use a different path to the <code>auth0</code> configuration file, you can either pass it to <code><a href="reference/auth0App.html">auth0App()</a></code> or set the <code>auth0_config_file</code> option by running <code><a href="https://www.rdocumentation.org/packages/base/topics/options">options(auth0_config_file = "path/to/file")</a></code>.</p>
+<p>Also note that currently Shiny apps that use the 2-file approach (<code>ui.R</code> and <code>server.R</code>) are not supported. Your app must be inside a single <code>app.R</code> file.</p>
 </div>
 <div id="step-5-run" class="section level3">
 <h3 class="hasAnchor">
 <a href="#step-5-run" class="anchor"></a>Step 5: Run!</h3>
 <p>You can try your app running</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">shiny<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/runApp">runApp</a></span>(<span class="st">"app/directory/"</span>, <span class="dt">port =</span> <span class="dv">8100</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">shiny<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/runApp">runApp</a></span>(<span class="st">"app/directory/"</span>, <span class="dt">port =</span> <span class="dv">8100</span>)</a></code></pre></div>
 <p>If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you’ll be redirected to your app.</p>
+<hr>
 </div>
+</div>
+<div id="environment-variables-and-multiple-auth0-apps" class="section level2">
+<h2 class="hasAnchor">
+<a href="#environment-variables-and-multiple-auth0-apps" class="anchor"></a>Environment variables and multiple auth0 apps</h2>
+<p>If you are using <code>auth0</code> for just one shiny app or you are running many apps for the same user database, the recommended workflow is using the environment variables <code>AUTH0_KEY</code> and <code>AUTH0_SECRET</code>.</p>
+<p>However, if you are running many shiny apps and want to use different login settings, you must create many Auth0 apps. Hence, you’ll have many Cliend IDs and Client Secrets to use. In this case, environment variables will be unproductive because you’ll need to change them every time you change the app you are developing.</p>
+<p>The best option in this case is to simply add the Client ID and Secret directly in the <code>_auth0.yml</code> file:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">name:</span><span class="at"> myApp</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="fu">shiny_config:</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="fu">local_url:</span><span class="at"> http://localhost:8100</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="fu">remote_url:</span><span class="at"> </span><span class="st">''</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="fu">auth0_config:</span></a>
+<a class="sourceLine" id="cb8-6" title="6">  <span class="fu">api_url:</span><span class="at"> https://&lt;USERNAME&gt;.auth0.com</span></a>
+<a class="sourceLine" id="cb8-7" title="7">  <span class="fu">credentials:</span></a>
+<a class="sourceLine" id="cb8-8" title="8">    <span class="fu">key:</span><span class="at"> &lt;CLIENT_ID&gt;</span></a>
+<a class="sourceLine" id="cb8-9" title="9">    <span class="fu">secret:</span><span class="at"> &lt;CLIENT_SECRET&gt;</span></a></code></pre></div>
+<p>Example:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">name:</span><span class="at"> myApp</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="fu">shiny_config:</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="fu">local_url:</span><span class="at"> http://localhost:8100</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="fu">remote_url:</span><span class="at"> </span><span class="st">''</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="fu">auth0_config:</span></a>
+<a class="sourceLine" id="cb9-6" title="6">  <span class="fu">api_url:</span><span class="at"> https://johndoe.auth0.com</span></a>
+<a class="sourceLine" id="cb9-7" title="7">  <span class="fu">credentials:</span></a>
+<a class="sourceLine" id="cb9-8" title="8">    <span class="fu">key:</span><span class="at"> cetQp0e7bdTNGrkrHpuF8gObMVl8vu</span></a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="fu">secret:</span><span class="at"> C6GHFa22mfliojqPyKP_5K0ml4TituWrOhYvLdTa7veIyEU3Q10R_-If-7Sh6Tc</span></a></code></pre></div>
+<hr>
+</div>
+<div id="rstudio-limitations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#rstudio-limitations" class="anchor"></a>RStudio limitations</h2>
+<p>Because RStudio is specialized in standard shiny apps, some features do not work as expected when using <code>auth0</code>. The main issues are:</p>
+<ol>
+<li>The “Run App” button does not appear in the right corner of the <code>app.R</code> script. That’s because RStudio searches for the “shinyApp” term in the code to identify a shiny app. A small hack to solve this is adding a comment containing “shinyApp” in the script:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># shinyApp</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(auth0)</a>
+<a class="sourceLine" id="cb10-4" title="4"></a>
+<a class="sourceLine" id="cb10-5" title="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(<span class="st">"hello"</span>)</a>
+<a class="sourceLine" id="cb10-6" title="6">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) { }</a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="kw"><a href="reference/auth0App.html">auth0App</a></span>(ui, server)</a></code></pre></div>
+<p>If you run using <code><a href="https://www.rdocumentation.org/packages/shiny/topics/runApp">runApp()</a></code> (or pressing the button) and the host has a port (like <code>localhost:8100</code>), you must fix the port before running the app:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">shiny.port =</span> <span class="dv">8100</span>)</a></code></pre></div>
+<ol>
+<li>You must run the app in a real browser, like Chrome or Firefox. If you use the RStudio Viewer or run the app in a RStudio window, the app will show a blank page and won’t work.</li>
+</ol>
+<hr>
+</div>
+<div id="alternative-configuration-options" class="section level2">
+<h2 class="hasAnchor">
+<a href="#alternative-configuration-options" class="anchor"></a>Alternative configuration options</h2>
+<p>The steps above show how to configure the <code>_auth0.yml</code> file setting <code>local_url</code> and <code>remote_url</code> fields under <code>shiny_config</code>. Actually, it is also possible to replace</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb12-1" title="1"><span class="fu">shiny_config:</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="fu">local_url:</span><span class="at"> http://localhost:8100</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="fu">remote_url:</span><span class="at"> http://example.com</span></a></code></pre></div>
+<p>by just</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb13-1" title="1"><span class="fu">shiny_config:</span><span class="at"> http://localhost:8100</span></a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb14-1" title="1"><span class="fu">shiny_config:</span><span class="at"> http://example.com</span></a></code></pre></div>
+<p>That will the case when you’re developing the app to use locally or you don’t want to set up the local url, for some reason.</p>
+<hr>
 </div>
 <div id="managing-users" class="section level2">
 <h2 class="hasAnchor">
 <a href="#managing-users" class="anchor"></a>Managing users</h2>
-<p>You can manage user access from the Users panel in Auth0. To create an user, simply click on “+ Create users”.</p>
-<p>You can also use many OAuth providers like Google, Facebook, Github etc. To configure them, go to Connections tab.</p>
+<p>You can manage user access from the Users panel in Auth0. To create a user, click on “+ Create users”.</p>
+<p>You can also use many different OAuth providers like Google, Facebook, Github etc. To configure them, go to the <em>Connections</em> tab.</p>
 <p>In the near future, our plan is to implement Auth0’s API in R so that you can manage your app using R.</p>
+<hr>
 </div>
-<div id="user-information" class="section level2">
+<div id="logged-information" class="section level2">
 <h2 class="hasAnchor">
-<a href="#user-information" class="anchor"></a>User information</h2>
-<p>When you are connected, it is possible to access user information inside the <code>session$userData$login_info</code> object. This object must be acessed in a reactive environment. There is a small example here:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(auth0)</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># simple UI with user info</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">  <span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/verbatimTextOutput">verbatimTextOutput</a></span>(<span class="st">"user_info"</span>)</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co"># server with one observer that logouts</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12">  <span class="co"># print user info</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">  output<span class="op">$</span>user_info &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/renderPrint">renderPrint</a></span>({</a>
-<a class="sourceLine" id="cb7-14" data-line-number="14">    session<span class="op">$</span>userData<span class="op">$</span>login_info</a>
-<a class="sourceLine" id="cb7-15" data-line-number="15">  })</a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17">}</a>
-<a class="sourceLine" id="cb7-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="kw"><a href="reference/shinyAuth0App.html">shinyAuth0App</a></span>(ui, server)</a></code></pre></div>
+<a href="#logged-information" class="anchor"></a>Logged information</h2>
+<p>After a user logs in, it’s possible to access the current user’s information using the <code>session$userData$auth0_info</code> reactive object. Here is a small example:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(auth0)</a>
+<a class="sourceLine" id="cb15-3" title="3"></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="co"># simple UI with user info</span></a>
+<a class="sourceLine" id="cb15-5" title="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</a>
+<a class="sourceLine" id="cb15-6" title="6">  <span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/verbatimTextOutput">verbatimTextOutput</a></span>(<span class="st">"user_info"</span>)</a>
+<a class="sourceLine" id="cb15-7" title="7">)</a>
+<a class="sourceLine" id="cb15-8" title="8"></a>
+<a class="sourceLine" id="cb15-9" title="9">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb15-10" title="10"></a>
+<a class="sourceLine" id="cb15-11" title="11">  <span class="co"># print user info</span></a>
+<a class="sourceLine" id="cb15-12" title="12">  output<span class="op">$</span>user_info &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/renderPrint">renderPrint</a></span>({</a>
+<a class="sourceLine" id="cb15-13" title="13">    session<span class="op">$</span>userData<span class="op">$</span>auth0_info</a>
+<a class="sourceLine" id="cb15-14" title="14">  })</a>
+<a class="sourceLine" id="cb15-15" title="15"></a>
+<a class="sourceLine" id="cb15-16" title="16">}</a>
+<a class="sourceLine" id="cb15-17" title="17"></a>
+<a class="sourceLine" id="cb15-18" title="18"><span class="kw"><a href="reference/auth0App.html">auth0App</a></span>(ui, server)</a></code></pre></div>
 <p>You should see an object like this:</p>
 <pre><code>$sub
 [1] "auth0|5c06a3aa119c392e85234f"
@@ -217,29 +293,21 @@ $picture
 
 $updated_at
 [1] "2019-02-13T10:33:06.141Z"</code></pre>
+<p>Note that the <code>sub</code> field is unique and can be used for many purposes, like creating customized apps for different users.</p>
+<hr>
 </div>
 <div id="logout" class="section level2">
 <h2 class="hasAnchor">
 <a href="#logout" class="anchor"></a>Logout</h2>
-<p>You can also add a logout button to your app using <a href="https://github.com/daattali/shinyjs"><code>shinyjs</code></a> package. There is a small example here:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(auth0)</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shinyjs)</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># simple UI with action button</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co"># note that you must include shinyjs::useShinyjs() for this to work</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(shinyjs<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/shinyjs/topics/useShinyjs">useShinyjs</a></span>(), <span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/actionButton">actionButton</a></span>(<span class="st">"logout_auth0"</span>, <span class="st">"Logout"</span>))</a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co"># server with one observer that logouts</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
-<a class="sourceLine" id="cb9-11" data-line-number="11">  <span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/observeEvent">observeEvent</a></span>(input<span class="op">$</span>logout_auth0, {</a>
-<a class="sourceLine" id="cb9-12" data-line-number="12">    <span class="co"># javascript code redirecting to correct url</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13">    js &lt;-<span class="st"> </span>auth0<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/auth0/topics/auth0_logout_url">auth0_logout_url</a></span>()</a>
-<a class="sourceLine" id="cb9-14" data-line-number="14">    shinyjs<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/shinyjs/topics/runjs">runjs</a></span>(js)</a>
-<a class="sourceLine" id="cb9-15" data-line-number="15">  })</a>
-<a class="sourceLine" id="cb9-16" data-line-number="16">}</a>
-<a class="sourceLine" id="cb9-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="kw"><a href="reference/shinyAuth0App.html">shinyAuth0App</a></span>(ui, server)</a></code></pre></div>
+<p>You can add a logout button to your app using <code><a href="reference/logoutButton.html">logoutButton()</a></code>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(auth0)</a>
+<a class="sourceLine" id="cb17-3" title="3"></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="co"># simple UI with logout button</span></a>
+<a class="sourceLine" id="cb17-5" title="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(<span class="kw"><a href="reference/logoutButton.html">logoutButton</a></span>())</a>
+<a class="sourceLine" id="cb17-6" title="6">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {}</a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="kw"><a href="reference/auth0App.html">auth0App</a></span>(ui, server)</a></code></pre></div>
+<hr>
 </div>
 <div id="costs" class="section level2">
 <h2 class="hasAnchor">
@@ -249,7 +317,56 @@ $updated_at
 <div id="disclaimer" class="section level2">
 <h2 class="hasAnchor">
 <a href="#disclaimer" class="anchor"></a>Disclaimer</h2>
-<p>This package is not provided nor endorsed by Auth0 Inc. Use it on your own risk.</p>
+<p>This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.</p>
+<hr>
+</div>
+<div id="roadmap" class="section level2">
+<h2 class="hasAnchor">
+<a href="#roadmap" class="anchor"></a>Roadmap</h2>
+<ul>
+<li>Auth0 0.1.2: Changes thanks to @daattali’s review
+<ul>
+<li>
+<input type="checkbox" disabled checked>
+(breaking change) change <code>login_info</code> to <code>auth0_info</code> in the user session data (Issue #19).</li>
+<li>
+<input type="checkbox" disabled checked>
+Option to ignore auth0 and work as a normal shiny app, to save developing time (Issue #26).</li>
+<li>
+<input type="checkbox" disabled checked>
+Examples for different login types (google/facebook, database etc, Issue #23).</li>
+<li>
+<input type="checkbox" disabled checked>
+Improved logout button (Issue #24)</li>
+<li>
+<input type="checkbox" disabled checked>
+Use <code><a href="reference/auth0App.html">auth0App()</a></code> instead of <code><a href="reference/shinyAuth0App.html">shinyAuth0App()</a></code> and soft-deprecate <code><a href="reference/shinyAuth0App.html">shinyAuth0App()</a></code> (Issue #18).</li>
+<li>Better documentation - [x] Handle multiple shiny apps and multiple auth0 apps (Issue #17). - [x] Explain some RStudio details(Issues #15 and #16). - [x] Explain environment variables (Issue #14). - [x] Explain yml file config (Issue #13).</li>
+<li>
+<input type="checkbox" disabled checked>
+test whitelisting with auth0 (Issue #10).</li>
+<li>
+<input type="checkbox" disabled><code>auth0AppDir()</code> function to work as <code><a href="https://www.rdocumentation.org/packages/shiny/topics/shinyApp">shiny::shinyAppDir()</a></code> (Issue #21).</li>
+<li>
+<input type="checkbox" disabled>
+Solve bookmarking and URL parameters issue (Issue #22).</li>
+<li>
+<input type="checkbox" disabled>
+Improve handling and documentation of the <code>config_file</code> option (Issue #25).</li>
+</ul>
+</li>
+<li>Auth0 0.2.0
+<ul>
+<li>
+<input type="checkbox" disabled>
+Implement auth0 API functions to manage users and login options through R.</li>
+<li>
+<input type="checkbox" disabled>
+Support to <code>ui.R</code>/<code>server.R</code> apps.</li>
+</ul>
+</li>
+</ul>
+<hr>
 </div>
 <div id="licence" class="section level2">
 <h2 class="hasAnchor">

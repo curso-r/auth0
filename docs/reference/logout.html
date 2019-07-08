@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Shiny app object with Auth0 Authentication — shinyAuth0App • auth0</title>
+<title>Log out of an auth0 app — logout • auth0</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,9 @@
 
 
 
-<meta property="og:title" content="Create a Shiny app object with Auth0 Authentication — shinyAuth0App" />
+<meta property="og:title" content="Log out of an auth0 app — logout" />
 
-<meta property="og:description" content="As of auth0 0.1.2, shinAuth0App() has
-been renamed to auth0App() for consistency." />
+<meta property="og:description" content="Log the current user out of an auth0 shiny app." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -98,44 +97,40 @@ been renamed to auth0App() for consistency." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a Shiny app object with Auth0 Authentication</h1>
+    <h1>Log out of an auth0 app</h1>
     
-    <div class="hidden name"><code>shinyAuth0App.Rd</code></div>
+    <div class="hidden name"><code>logout.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>As of auth0 0.1.2, <code>shinAuth0App()</code> has
-been renamed to <code><a href='auth0App.html'>auth0App()</a></code> for consistency.</p>
+    <p>Log the current user out of an auth0 shiny app.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>shinyAuth0App</span>(<span class='no'>ui</span>, <span class='no'>server</span>, <span class='kw'>config_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>logout</span>()</pre>
+        
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>You can also use a diferent configuration file by setting the
+<code>auth0_config_file</code> option with:
+<code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options(auth0_config_file = "path/to/file.yaml")</a></code>.</p>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>ui</th>
-      <td><p>an ordinary UI object to create shiny apps.</p></td>
-    </tr>
-    <tr>
-      <th>server</th>
-      <td><p>an ordinary server object to create shiny apps.</p></td>
-    </tr>
-    <tr>
-      <th>config_file</th>
-      <td><p>path to YAML configuration file.</p></td>
-    </tr>
-    </table>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='logoutButton.html'>logoutButton</a></code>,
+<code><a href='logout_url.html'>logout_url</a></code></p></div>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

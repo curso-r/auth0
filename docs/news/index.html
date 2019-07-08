@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auth0</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -98,9 +98,26 @@
       
     </div>
 
-    <div id="auth0-0-1-1" class="section level1">
+    <div id="auth0-012" class="section level1">
 <h1 class="page-header">
-<a href="#auth0-0-1-1" class="anchor"></a>auth0 0.1.1<small> Unreleased </small>
+<a href="#auth0-012" class="anchor"></a>auth0 0.1.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>(breaking change) change <code>login_info</code> to <code>auth0_info</code> in the user session data (Issue #19).</li>
+<li>Option to ignore auth0 and work as a normal shiny app, to save developing time (Issue #26).</li>
+<li>Examples for different login types (google/facebook, database etc, Issue #23).</li>
+<li>Solve bookmarking and URL parameters issue (Issue #22).</li>
+<li>Improved logout button (Issue #24) (thanks to Dean Attali)</li>
+<li>Improve handling and documentation of the config_file option (Issue #25).</li>
+<li>Use <code><a href="../reference/auth0App.html">auth0App()</a></code> instead of <code><a href="../reference/shinyAuth0App.html">shinyAuth0App()</a></code> and soft-deprecate <code><a href="../reference/shinyAuth0App.html">shinyAuth0App()</a></code> (Issue #18).</li>
+<li>Better documentation - Handle multiple shiny apps and multiple auth0 apps (Issue #17). - Explain some RStudio details(Issues #15 and #16). - Explain environment variables (Issue #14). - Explain yml file config (Issue #13).</li>
+<li>Add Dean Attali as contributor to the package.</li>
+<li>test whitelisting with auth0 (Issue #10)</li>
+</ul>
+</div>
+    <div id="auth0-011" class="section level1">
+<h1 class="page-header">
+<a href="#auth0-011" class="anchor"></a>auth0 0.1.1<small> 2019-02-13 </small>
 </h1>
 <ul>
 <li>added user info support with <code>session$userData</code>
@@ -117,7 +134,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#auth0-0-1-1">0.1.1</a></li>
+        <li><a href="#auth0-012">0.1.2</a></li>
+        <li><a href="#auth0-011">0.1.1</a></li>
       </ul>
     </div>
   </div>

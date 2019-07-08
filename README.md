@@ -318,10 +318,10 @@ This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
           - [x] Explain environment variables (Issue #14).
           - [x] Explain yml file config (Issue #13).
     - [x] test whitelisting with auth0 (Issue #10).
-    - [ ] `auth0AppDir()` function to work as `shiny::shinyAppDir()` (Issue #21).
-    - [ ] Solve bookmarking and URL parameters issue (Issue #22).
-    - [ ] Improve handling and documentation of the `config_file` option (Issue #25).
+    - [x] Improve handling and documentation of the `config_file` option (Issue #25).
 - Auth0 0.2.0
+    - [ ] Solve bookmarking and URL parameters issue (Issue #22).
+    - [ ] `auth0AppDir()` function to work as `shiny::shinyAppDir()` (Issue #21).
     - [ ] Implement auth0 API functions to manage users and login options through R.
     - [ ] Support to `ui.R`/`server.R` apps.
 

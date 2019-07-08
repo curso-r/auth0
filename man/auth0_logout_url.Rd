@@ -11,26 +11,30 @@ auth0_logout_url(config_file = NULL, redirect_js = TRUE)
 
 \item{redirect_js}{include javascript code to redirect page? Defaults to \code{TRUE}.}
 }
-\value{
-url string to logout, collapsed or not by javascript code.
-}
 \description{
-Generates logout URL from configuration file. This can be used inside a
-shiny app button to logout from the app.
-}
-\details{
-To use this function successfully inside a shiny app, you may
-want to install \code{shinyjs} package. See example
-
-If you want to use a diferent configuration file you can set the \code{auth0_config_file}
-option with: \code{options(auth0_config_file = "path/to-file")}.
+\code{auth0_logout_url()} is defunct as of auth0 0.1.2 in order to simplifly the
+user experience with the \code{\link[=logoutButton]{logoutButton()}} function.
 }
 \examples{
 \donttest{
+
+# simple UI with action button
+# AFTER auth0 0.1.2
+
+library(shiny)
+library(auth0)
+
+ui <- fluidPage(logoutButton())
+server <- function(input, output, session) {}
+auth0App(ui, server, config_file)
+
+# simple UI with action button
+# BEFORE auth0 0.1.2
+
 library(shiny)
 library(auth0)
 library(shinyjs)
-# simple UI with action button
+
 # note that you must include shinyjs::useShinyjs() for this to work
 ui <- fluidPage(shinyjs::useShinyjs(), actionButton("logout_auth0", "Logout"))
 
@@ -45,5 +49,6 @@ server <- function(input, output, session) {
 
 shinyAuth0App(ui, server, config_file = config_file)
 }
+
 
 }

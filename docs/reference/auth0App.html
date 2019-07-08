@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Shiny app object with Auth0 Authentication — shinyAuth0App • auth0</title>
+<title>Create a Shiny app object with Auth0 Authentication — auth0App • auth0</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,10 @@
 
 
 
-<meta property="og:title" content="Create a Shiny app object with Auth0 Authentication — shinyAuth0App" />
+<meta property="og:title" content="Create a Shiny app object with Auth0 Authentication — auth0App" />
 
-<meta property="og:description" content="As of auth0 0.1.2, shinAuth0App() has
-been renamed to auth0App() for consistency." />
+<meta property="og:description" content="This function modifies ui and server objects to run using Auth0
+authentication." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,17 +100,17 @@ been renamed to auth0App() for consistency." />
     <div class="page-header">
     <h1>Create a Shiny app object with Auth0 Authentication</h1>
     
-    <div class="hidden name"><code>shinyAuth0App.Rd</code></div>
+    <div class="hidden name"><code>auth0App.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>As of auth0 0.1.2, <code>shinAuth0App()</code> has
-been renamed to <code><a href='auth0App.html'>auth0App()</a></code> for consistency.</p>
+    <p>This function modifies ui and server objects to run using Auth0
+authentication.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>shinyAuth0App</span>(<span class='no'>ui</span>, <span class='no'>server</span>, <span class='kw'>config_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>auth0App</span>(<span class='no'>ui</span>, <span class='no'>server</span>, <span class='kw'>config_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -129,13 +129,31 @@ been renamed to <code><a href='auth0App.html'>auth0App()</a></code> for consiste
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>You can also use a diferent configuration file by setting the
+<code>auth0_config_file</code> option with:
+<code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options(auth0_config_file = "path/to/file.yaml")</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="disable-auth-while-developing-apps"><a class="anchor" href="#disable-auth-while-developing-apps"></a>Disable auth0 while developing apps</h2>
+
+    
+    <p>Sometimes, using auth0 to develop and test apps can be frustrating,
+because every time the app is started, auth0 requires the user to log-in.
+To avoid this problem, one can run <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options(auth0_disable = TRUE)</a></code> to
+disable auth0 temporarily.</p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#disable-auth-while-developing-apps">Disable auth0 while developing apps</a></li>
+          </ul>
 
   </div>
 </div>

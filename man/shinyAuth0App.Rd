@@ -11,13 +11,9 @@ shinyAuth0App(ui, server, config_file = NULL)
 
 \item{server}{an ordinary server object to create shiny apps.}
 
-\item{config_file}{Path to YAML configuration file.}
+\item{config_file}{path to YAML configuration file.}
 }
 \description{
-This function modifies ui and server objects to run using Auth0
-authentication.
-}
-\details{
-If you want to use a diferent configuration file you can also set the \code{auth0_config_file}
-option with: \code{options(auth0_config_file = "path/to/file.yaml")}.
+As of auth0 0.1.2, \code{shinAuth0App()} has
+been renamed to \code{\link[=auth0App]{auth0App()}} for consistency.
 }

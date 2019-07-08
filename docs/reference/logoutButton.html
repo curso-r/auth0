@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Shiny app object with Auth0 Authentication — shinyAuth0App • auth0</title>
+<title>Create a button to log out — logoutButton • auth0</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,10 @@
 
 
 
-<meta property="og:title" content="Create a Shiny app object with Auth0 Authentication — shinyAuth0App" />
+<meta property="og:title" content="Create a button to log out — logoutButton" />
 
-<meta property="og:description" content="As of auth0 0.1.2, shinAuth0App() has
-been renamed to auth0App() for consistency." />
+<meta property="og:description" content="A logoutButton is an actionButton that is meant
+to be used to log out of an auth0 Shiny app." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -98,44 +98,71 @@ been renamed to auth0App() for consistency." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a Shiny app object with Auth0 Authentication</h1>
+    <h1>Create a button to log out</h1>
     
-    <div class="hidden name"><code>shinyAuth0App.Rd</code></div>
+    <div class="hidden name"><code>logoutButton.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>As of auth0 0.1.2, <code>shinAuth0App()</code> has
-been renamed to <code><a href='auth0App.html'>auth0App()</a></code> for consistency.</p>
+    <p>A <code>logoutButton</code> is an <code><a href='https://www.rdocumentation.org/packages/shiny/topics/actionButton'>actionButton</a></code> that is meant
+to be used to log out of an auth0 Shiny app.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>shinyAuth0App</span>(<span class='no'>ui</span>, <span class='no'>server</span>, <span class='kw'>config_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>logoutButton</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"Log out"</span>, <span class='no'>...</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"._auth0logout_"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ui</th>
-      <td><p>an ordinary UI object to create shiny apps.</p></td>
+      <th>label</th>
+      <td><p>The label on the button.</p></td>
     </tr>
     <tr>
-      <th>server</th>
-      <td><p>an ordinary server object to create shiny apps.</p></td>
+      <th>...</th>
+      <td><p>Named attributes to apply to the button.</p></td>
     </tr>
     <tr>
-      <th>config_file</th>
-      <td><p>path to YAML configuration file.</p></td>
+      <th>id</th>
+      <td><p>An ID for the button. If you only have one logout button in
+your app, you do not need to explicitly provide an ID. If you have more than
+one logout button, you need to provide a unique ID to each button. When you
+create a button with a non-default ID, you must create an observer that
+listens to a click on this button and logs out of the app with a call to
+<code><a href='logout.html'>logout</a></code>.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><code><a href='logout.html'>logout</a></code>,
+<code><a href='logout_url.html'>logout_url</a></code></p></div>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span>()) {
+  <span class='no'>ui</span> <span class='kw'>&lt;-</span> <span class='fu'>fluidPage</span>(
+    <span class='fu'>logoutButton</span>(),
+    <span class='fu'>logoutButton</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"Another logout button"</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"logout2"</span>)
+  )
+  <span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {
+    <span class='fu'>observeEvent</span>(<span class='no'>input</span>$<span class='no'>logout2</span>, {
+      <span class='fu'><a href='logout.html'>logout</a></span>()
+    })
+  }
+  <span class='fu'><a href='shinyAuth0App.html'>shinyAuth0App</a></span>(<span class='no'>ui</span>, <span class='no'>server</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

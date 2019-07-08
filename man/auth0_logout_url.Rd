@@ -26,7 +26,7 @@ library(auth0)
 
 ui <- fluidPage(logoutButton())
 server <- function(input, output, session) {}
-auth0App(ui, server, config_file)
+shinyAuth0App(ui, server, config_file)
 
 # simple UI with action button
 # BEFORE auth0 0.1.2
@@ -47,7 +47,7 @@ server <- function(input, output, session) {
   })
 }
 
-shinyAuth0App(ui, server, config_file = config_file)
+shinyAppAuth0(ui, server, config_file = config_file)
 }
 
 

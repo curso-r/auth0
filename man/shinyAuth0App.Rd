@@ -14,6 +14,6 @@ shinyAuth0App(ui, server, config_file = NULL)
 \item{config_file}{path to YAML configuration file.}
 }
 \description{
-As of auth0 0.1.2, \code{shinAuth0App()} has
-been renamed to \code{\link[=auth0App]{auth0App()}} for consistency.
+As of auth0 0.1.2, \code{shinyAuth0App()} has
+been renamed to \code{\link[=shinyAppAuth0]{shinyAppAuth0()}} for consistency.
 }

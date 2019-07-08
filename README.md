@@ -111,11 +111,11 @@ server <- function(input, output, session) {
 }
 
 # note that here we're using a different version of shinyApp!
-auth0::auth0App(ui, server)
+auth0::shinyAppAuth0(ui, server)
 ```
 
 **Note**: If you want to use a different path to the `auth0` configuration file, you can
-either pass it to `auth0App()` or
+either pass it to `shinyAuth0App()` or
 set the `auth0_config_file` option by running `options(auth0_config_file = "path/to/file")`.
 
 Also note that currently Shiny apps that use the 2-file approach (`ui.R` and `server.R`) are not supported. Your app must be inside a single `app.R` file.
@@ -181,7 +181,7 @@ library(auth0)
 
 ui <- fluidPage("hello")
 server <- function(input, output, session) { }
-auth0App(ui, server)
+shinyAppAuth0(ui, server)
 ```
 
 If you run using `runApp()` (or pressing the button) and the host has a port (like `localhost:8100`), you must fix the port before running the app:
@@ -252,7 +252,7 @@ server <- function(input, output, session) {
 
 }
 
-auth0App(ui, server)
+shinyAppAuth0(ui, server)
 ```
 
 You should see an object like this:
@@ -289,7 +289,7 @@ library(auth0)
 # simple UI with logout button
 ui <- fluidPage(logoutButton())
 server <- function(input, output, session) {}
-auth0App(ui, server)
+shinyAppAuth0(ui, server)
 ```
 
 --------------------------------------------------------------------------------
@@ -311,14 +311,14 @@ This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
     - [x] Option to ignore auth0 and work as a normal shiny app, to save developing time (Issue #26).
     - [x] Examples for different login types (google/facebook, database etc, Issue #23).
     - [x] Improved logout button (Issue #24)
-    - [x] Use `auth0App()` instead of `shinyAuth0App()` and soft-deprecate `shinyAuth0App()` (Issue #18).
+    - [x] Use `shinyAppAuth0()` instead of `shinyAuth0App()` and soft-deprecate `shinyAuth0App()` (Issue #18).
     - Better documentation
           - [x] Handle multiple shiny apps and multiple auth0 apps (Issue #17).
           - [x] Explain some RStudio details(Issues #15 and #16).
           - [x] Explain environment variables (Issue #14).
           - [x] Explain yml file config (Issue #13).
     - [x] test whitelisting with auth0 (Issue #10).
-    - [ ] `auth0AppDir()` function to work as `shiny::shinyAppDir()` (Issue #21).
+    - [ ] `shinyAppDirAuth0()` function to work as `shiny::shinyAppDir()` (Issue #21).
     - [ ] Solve bookmarking and URL parameters issue (Issue #22).
     - [ ] Improve handling and documentation of the `config_file` option (Issue #25).
 - Auth0 0.2.0

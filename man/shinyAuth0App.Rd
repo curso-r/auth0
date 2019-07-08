@@ -15,5 +15,5 @@ shinyAuth0App(ui, server, config_file = NULL)
 }
 \description{
 As of auth0 0.1.2, \code{shinAuth0App()} has
-been renamed to \code{\link[=auth0App]{auth0App()}} for consistency.
+been renamed to \code{\link[=shinyAppAuth0]{shinyAppAuth0()}} for consistency.
 }

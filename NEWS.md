@@ -6,7 +6,7 @@
 - Solve bookmarking and URL parameters issue (Issue #22).
 - Improved logout button (Issue #24) (thanks to Dean Attali)
 - Improve handling and documentation of the config_file option (Issue #25).
-- Use `auth0App()` instead of `shinyAuth0App()` and soft-deprecate `shinyAuth0App()` (Issue #18).
+- Use `shinyAppAuth0()` instead of `shinyAuth0App()` and soft-deprecate `shinyAuth0App()` (Issue #18).
 - Better documentation
       - Handle multiple shiny apps and multiple auth0 apps (Issue #17).
       - Explain some RStudio details(Issues #15 and #16).

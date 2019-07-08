@@ -58,7 +58,7 @@ find_config_file <- function() {
 #'   disable auth0 temporarily.
 #'
 #' @export
-auth0App <- function(ui, server, config_file = NULL) {
+shinyAppAuth0 <- function(ui, server, config_file = NULL) {
 
   disable <- getOption("auth0_disable")
   if (!is.null(disable) && disable) {
@@ -92,15 +92,15 @@ auth0App <- function(ui, server, config_file = NULL) {
 #' @description
 #'
 #' As of auth0 0.1.2, `shinAuth0App()` has
-#' been renamed to [auth0App()] for consistency.
+#' been renamed to [shinyAppAuth0()] for consistency.
 #'
-#' @inheritParams auth0App
+#' @inheritParams shinyAppAuth0
 #'
 #' @export
 shinyAuth0App <- function(ui, server, config_file = NULL) {
   warning("`shinyAuth0App()` is soft-deprecated as of auth0 0.1.2.",
-          "Please use `auth0App()` instead.")
-  auth0App(ui, server, config_file)
+          "Please use `shinyAppAuth0()` instead.")
+  shinyAppAuth0(ui, server, config_file)
 }
 
 #' Generate logout URL
@@ -122,7 +122,7 @@ shinyAuth0App <- function(ui, server, config_file = NULL) {
 #'
 #' ui <- fluidPage(logoutButton())
 #' server <- function(input, output, session) {}
-#' auth0App(ui, server, config_file)
+#' shinyAppAuth0(ui, server, config_file)
 #'
 #' # simple UI with action button
 #' # BEFORE auth0 0.1.2

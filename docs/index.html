@@ -174,8 +174,8 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <a class="sourceLine" id="cb6-11" data-line-number="11">}</a>
 <a class="sourceLine" id="cb6-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co"># note that here we're using a different version of shinyApp!</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14">auth0<span class="op">::</span><span class="kw">auth0App</span>(ui, server)</a></code></pre></div>
-<p><strong>Note</strong>: If you want to use a different path to the <code>auth0</code> configuration file, you can either pass it to <code><a href="reference/auth0App.html">auth0App()</a></code> or set the <code>auth0_config_file</code> option by running <code><a href="https://rdrr.io/r/base/options.html">options(auth0_config_file = "path/to/file")</a></code>.</p>
+<a class="sourceLine" id="cb6-14" data-line-number="14">auth0<span class="op">::</span><span class="kw">shinyAppAuth0</span>(ui, server)</a></code></pre></div>
+<p><strong>Note</strong>: If you want to use a different path to the <code>auth0</code> configuration file, you can either pass it to <code><a href="reference/shinyAppAuth0.html">shinyAppAuth0()</a></code> or set the <code>auth0_config_file</code> option by running <code><a href="https://rdrr.io/r/base/options.html">options(auth0_config_file = "path/to/file")</a></code>.</p>
 <p>Also note that currently Shiny apps that use the 2-file approach (<code>ui.R</code> and <code>server.R</code>) are not supported. Your app must be inside a single <code>app.R</code> file.</p>
 </div>
 <div id="step-5-run" class="section level3">
@@ -227,7 +227,7 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <a class="sourceLine" id="cb10-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span>(<span class="st">"hello"</span>)</a>
 <a class="sourceLine" id="cb10-6" data-line-number="6">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) { }</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="kw"><a href="reference/auth0App.html">auth0App</a></span>(ui, server)</a></code></pre></div>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
 <p>If you run using <code><a href="https://rdrr.io/pkg/shiny/man/runApp.html">runApp()</a></code> (or pressing the button) and the host has a port (like <code>localhost:8100</code>), you must fix the port before running the app:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="dt">shiny.port =</span> <span class="dv">8100</span>)</a></code></pre></div>
 <ol>
@@ -278,7 +278,7 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <a class="sourceLine" id="cb15-15" data-line-number="15"></a>
 <a class="sourceLine" id="cb15-16" data-line-number="16">}</a>
 <a class="sourceLine" id="cb15-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb15-18" data-line-number="18"><span class="kw"><a href="reference/auth0App.html">auth0App</a></span>(ui, server)</a></code></pre></div>
+<a class="sourceLine" id="cb15-18" data-line-number="18"><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
 <p>You should see an object like this:</p>
 <pre><code>$sub
 [1] "auth0|5c06a3aa119c392e85234f"
@@ -307,7 +307,7 @@ $updated_at
 <a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co"># simple UI with logout button</span></a>
 <a class="sourceLine" id="cb17-5" data-line-number="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span>(<span class="kw"><a href="reference/logoutButton.html">logoutButton</a></span>())</a>
 <a class="sourceLine" id="cb17-6" data-line-number="6">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {}</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="kw"><a href="reference/auth0App.html">auth0App</a></span>(ui, server)</a></code></pre></div>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
 <hr>
 </div>
 <div id="costs" class="section level2">
@@ -331,7 +331,7 @@ $updated_at
 <li>[x] Option to ignore auth0 and work as a normal shiny app, to save developing time (Issue #26).</li>
 <li>[x] Examples for different login types (google/facebook, database etc, Issue #23).</li>
 <li>[x] Improved logout button (Issue #24)</li>
-<li>[x] Use <code><a href="reference/auth0App.html">auth0App()</a></code> instead of <code><a href="reference/shinyAuth0App.html">shinyAuth0App()</a></code> and soft-deprecate <code><a href="reference/shinyAuth0App.html">shinyAuth0App()</a></code> (Issue #18).</li>
+<li>[x] Use <code><a href="reference/shinyAppAuth0.html">shinyAppAuth0()</a></code> instead of <code><a href="reference/shinyAuth0App.html">shinyAuth0App()</a></code> and soft-deprecate <code><a href="reference/shinyAuth0App.html">shinyAuth0App()</a></code> (Issue #18).</li>
 <li>Better documentation - [x] Handle multiple shiny apps and multiple auth0 apps (Issue #17). - [x] Explain some RStudio details(Issues #15 and #16). - [x] Explain environment variables (Issue #14). - [x] Explain yml file config (Issue #13).</li>
 <li>[x] test whitelisting with auth0 (Issue #10).</li>
 <li>[x] Improve handling and documentation of the <code>config_file</code> option (Issue #25).</li>
@@ -340,7 +340,7 @@ $updated_at
 <li>Auth0 0.2.0
 <ul>
 <li>[ ] Solve bookmarking and URL parameters issue (Issue #22).</li>
-<li>[ ] <code>auth0AppDir()</code> function to work as <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shiny::shinyAppDir()</a></code> (Issue #21).</li>
+<li>[ ] <code>shinyAppDirAuth0()</code> function to work as <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shiny::shinyAppDir()</a></code> (Issue #21).</li>
 <li>[ ] Implement auth0 API functions to manage users and login options through R.</li>
 <li>[ ] Support to <code>ui.R</code>/<code>server.R</code> apps.</li>
 </ul>

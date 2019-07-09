@@ -174,7 +174,7 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <a class="sourceLine" id="cb6-11" data-line-number="11">}</a>
 <a class="sourceLine" id="cb6-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co"># note that here we're using a different version of shinyApp!</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14">auth0<span class="op">::</span><span class="kw">shinyAppAuth0</span>(ui, server)</a></code></pre></div>
+<a class="sourceLine" id="cb6-14" data-line-number="14">auth0<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/auth0/man/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
 <p><strong>Note</strong>: If you want to use a different path to the <code>auth0</code> configuration file, you can either pass it to <code><a href="reference/shinyAppAuth0.html">shinyAppAuth0()</a></code> or set the <code>auth0_config_file</code> option by running <code><a href="https://rdrr.io/r/base/options.html">options(auth0_config_file = "path/to/file")</a></code>.</p>
 <p>Also note that currently Shiny apps that use the 2-file approach (<code>ui.R</code> and <code>server.R</code>) are not supported. Your app must be inside a single <code>app.R</code> file.</p>
 </div>
@@ -238,7 +238,10 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <div id="alternative-configuration-options" class="section level2">
 <h2 class="hasAnchor">
 <a href="#alternative-configuration-options" class="anchor"></a>Alternative configuration options</h2>
-<p>The steps above show how to configure the <code>_auth0.yml</code> file setting <code>local_url</code> and <code>remote_url</code> fields under <code>shiny_config</code>. Actually, it is also possible to replace</p>
+<p>The steps above show how to configure the <code>_auth0.yml</code> file setting <code>local_url</code> and <code>remote_url</code> fields under <code>shiny_config</code>.</p>
+<p>The <code>local_url</code> is used when you are developing your app locally, so it will probably be something like <code>http://localhost</code> or <code>http://127.0.0.1</code>. You will also need to set a default port, adding something like <code>:8888</code> after the <code>local_url</code>, so that when you run the app it is accessible by your browser. Some of these ports are reserved and you should <strong>not</strong> use them. The default port in auth0 package is <code>:8100</code>, so if you want to change it, make sure that you also added it to the callback/web origin/logout URLs in Auth0.</p>
+<p>The <code>remote_url</code> is used when you use your app in production. For example, if you set up your shiny-server to run through <code>http://example.com/myapp</code>, or <code>https://johndoe.shinyapps.io/myapp</code>, that is what you are going to put in <code>remote_url</code>. Please make sure that you wrote the <code>http</code> or <code>https</code> correctly, unless it won’t work.</p>
+<p>Actually, it is also possible to replace</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="fu">shiny_config:</span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2">  <span class="fu">local_url:</span><span class="at"> http://localhost:8100</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">  <span class="fu">remote_url:</span><span class="at"> http://example.com</span></a></code></pre></div>
@@ -246,7 +249,7 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="fu">shiny_config:</span><span class="at"> http://localhost:8100</span></a></code></pre></div>
 <p>or</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="fu">shiny_config:</span><span class="at"> http://example.com</span></a></code></pre></div>
-<p>That will the case when you’re developing the app to use locally or you don’t want to set up the local url, for some reason.</p>
+<p>That will the case when you are developing the app to use locally or if you are developing directly inside a shiny-server folder.</p>
 <hr>
 </div>
 <div id="managing-users" class="section level2">

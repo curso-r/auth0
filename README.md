@@ -196,7 +196,13 @@ options(shiny.port = 8100)
 
 ## Alternative configuration options
 
-The steps above show how to configure the `_auth0.yml` file setting `local_url` and `remote_url` fields under `shiny_config`. Actually, it is also possible to replace
+The steps above show how to configure the `_auth0.yml` file setting `local_url` and `remote_url` fields under `shiny_config`. 
+
+The `local_url` is used when you are developing your app locally, so it will probably be something like `http://localhost` or `http://127.0.0.1`. You will also need to set a default port, adding something like `:8888` after the `local_url`, so that when you run the app it is accessible by your browser. Some of these ports are reserved and you should __not__ use them. The default port in auth0 package is `:8100`, so if you want to change it, make sure that you also added it to the callback/web origin/logout URLs in Auth0.
+
+The `remote_url` is used when you use your app in production. For example, if you set up your shiny-server to run through `http://example.com/myapp`, or `https://johndoe.shinyapps.io/myapp`, that is what you are going to put in `remote_url`. Please make sure that you wrote the `http` or `https` correctly, unless it won't work.
+
+Actually, it is also possible to replace
 
 ```yml
 shiny_config:
@@ -216,7 +222,7 @@ or
 shiny_config: http://example.com
 ```
 
-That will the case when you're developing the app to use locally or you don't want to set up the local url, for some reason. 
+That will the case when you are developing the app to use locally or if you are developing directly inside a shiny-server folder. 
 
 --------------------------------------------------------------------------------
 

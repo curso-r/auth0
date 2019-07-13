@@ -88,7 +88,7 @@ There's how you identify each of them (see the image below):
 
 - `AUTH0_USER` is your username, which can be found on the top corner of the site.
 - `AUTH0_KEY` is your Client ID, which can be copied from inside the app page.
-- `AUTH0_KEY` is your Client Secret, which can be copied from the app page.
+- `AUTH0_SECRET` is your Client Secret, which can be copied from the app page.
 
 <img src="man/figures/README-myapp-vars.png">
 

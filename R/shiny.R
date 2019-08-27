@@ -6,8 +6,15 @@ auth0_ui <- function(ui, info) {
         redirect <- sprintf("location.replace(\"%s\");", logout_url())
         htmltools::tags$script(htmltools::HTML(redirect))
       } else {
+
+        if (grepl("127.0.0.1", req$HTTP_HOST)) {
+          redirect_uri <<- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST))
+        } else {
+          redirect_uri <<- paste0("http://", req$HTTP_HOST)
+        }
+
         url <- httr::oauth2.0_authorize_url(
-          info$api, info$app, scope = info$scope, state = info$state
+          info$api, info$app(redirect_uri), scope = info$scope, state = info$state
         )
         redirect <- sprintf("location.replace(\"%s\");", url)
         htmltools::tags$script(htmltools::HTML(redirect))
@@ -154,4 +161,3 @@ auth0_logout_url <- function(config_file = NULL, redirect_js = TRUE) {
        "See `?logoutButton()` to add a logout button in auth0 apps.")
 
 }
-

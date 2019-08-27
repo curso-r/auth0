@@ -50,8 +50,7 @@ logout_url <- function() {
 
   config <- auth0_config()
 
-  app_url <- auth0_app_url(config)
-  app_url_enc <- utils::URLencode(app_url, reserved = TRUE)
+  app_url_enc <- utils::URLencode(redirect_uri, reserved = TRUE)
   logout_url <- sprintf("%s/v2/logout?client_id=%s&returnTo=%s",
                         config$auth0_config$api_url,
                         config$auth0_config$credentials$key,

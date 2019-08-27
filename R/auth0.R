@@ -1,14 +1,7 @@
-auth0_app_url <- function(config) {
-  if (interactive()) {
-    config$shiny_config$local_url
-  } else {
-    config$shiny_config$remote_url
-  }
-}
-
 auth0_app <- function(app_url, app_name, key, secret) {
-  httr::oauth_app(appname = app_name, key = key, secret = secret,
-                  redirect_uri = app_url)
+  function(app_url) {
+    httr::oauth_app(appname = app_name, key = key, secret = secret, redirect_uri = app_url)
+  }
 }
 
 auth0_api <- function(auth0_url, request, access) {
@@ -24,27 +17,25 @@ auth0_server_verify <- function(session, app, api, state) {
   u_search <- session[["clientData"]]$url_search
   params <- shiny::parseQueryString(u_search)
   if (has_auth_code(params, state)) {
-    cred <- httr::oauth2.0_access_token(api, app, params$code)
+    cred <- httr::oauth2.0_access_token(api, app(redirect_uri), params$code)
     token <- httr::oauth2.0_token(
-      app = app, endpoint = api, cache = FALSE, credentials = cred,
+      app = app(redirect_uri), endpoint = api, cache = FALSE, credentials = cred,
       user_params = list(grant_type = "authorization_code"))
     userinfo_url <- sub("authorize", "userinfo", api$authorize)
     resp <- httr::GET(userinfo_url, httr::config(token = token))
-    shiny::includeScript(system.file("js/remove_url_parms.js", package = "auth0"))
     assign("auth0_info", httr::content(resp, "parsed"), envir = session$userData)
   }
 }
 
 auth0_state <- function(server) {
-  paste(sample(c(letters, 0:9), 10, replace = TRUE), collapse = "")
+  paste(sample(c(letters, LETTERS, 0:9), 10, replace = TRUE), collapse = "")
 }
 
 auth0_info <- function(config) {
   scope <- config$auth0_config$scope
   state <- auth0_state()
   conf <- config$auth0_config
-  app_url <- auth0_app_url(config)
-  app <- auth0_app(app_url, config$name, conf$credentials$key, conf$credentials$secret)
+  app <- auth0_app(app_name = config$name, key = conf$credentials$key, secret = conf$credentials$secret)
   api <- auth0_api(conf$api_url, conf$request, conf$access)
   list(scope = scope, state = state, app = app, api = api)
 }
@@ -56,17 +47,6 @@ auth0_config <- function() {
   # standardise and validate shiny_config
   if (is.null(config$auth0_config)) {
     stop("Missing 'auth0_config' tag in YAML file.")
-  }
-  if (is.null(config$shiny_config)) {
-    default_url <- "http://localhost:8100"
-    config$shiny_config <- list(local_url = default_url, remote_url = default_url)
-  } else if (!is.list(config$shiny_config)) {
-    default_url <- config$shiny_config
-    config$shiny_config <- list(local_url = default_url, remote_url = default_url)
-  } else if (is.null(config$shiny_config$local_url)) {
-    config$shiny_config$local_url <- config$shiny_config$remote_url
-  } else if (is.null(config$shiny_config$remote_url)) {
-    config$shiny_config$remote_url <- config$shiny_config$local_url
   }
 
   # standardise and validate auth0_config
@@ -133,8 +113,6 @@ use_auth0 <- function(path = ".", file = "_auth0.yml", overwrite = FALSE) {
   attr(api_url, "tag") <- "!expr"
   yaml_list <- list(
     name = "myApp",
-    shiny_config = list(local_url = "http://localhost:8100", remote_url = ""),
     auth0_config = list(api_url = api_url, credentials = ks))
   yaml::write_yaml(yaml_list, f)
 }
-

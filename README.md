@@ -187,6 +187,19 @@ options(shiny.port = 8100)
 
 --------------------------------------------------------------------------------
 
+## Bookmarking
+
+Since v0.2.0, `auth0` supports shiny's state bookmarking, but because of URL parsing issues, bookmarking only works with server storage. To activate this feature, you must call the app with the following lines in your `app.R` file:
+
+```r
+enableBookmarking(store = "server")
+shinyAppAuth0(ui, server)
+```
+
+Also note that Auth0 adds `code` and `state` to the URL query parameters.
+
+--------------------------------------------------------------------------------
+
 ## Managing users
 
 You can manage user access from the Users panel in Auth0. To create a user, click on "+ Create users".
@@ -288,7 +301,7 @@ This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
     - [x] Improve handling and documentation of the `config_file` option (Issue #25).
 - Auth0 0.2.0
     - [X] Remove the need for local and remote URLs in the `config_file`.
-    - [ ] Solve bookmarking and URL parameters issue (Issue #22).
+    - [X] Solve bookmarking and URL parameters issue (Issue #22).
     - [ ] `shinyAppDirAuth0()` function to work as `shiny::shinyAppDir()` (Issue #21).
     - [ ] Implement auth0 API functions to manage users and login options through R.
     - [ ] Support to `ui.R`/`server.R` apps.

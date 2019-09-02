@@ -49,11 +49,6 @@ auth0_config <- function() {
   config_file <- find_config_file()
   config <- yaml::read_yaml(config_file, eval.expr = TRUE)
 
-  # standardise and validate shiny_config
-  if (is.null(config$auth0_config)) {
-    stop("Missing 'auth0_config' tag in YAML file.")
-  }
-
   # standardise and validate auth0_config
   if (is.null(config$auth0_config)) {
     stop("Missing 'auth0_config' tag in YAML file.")

@@ -230,6 +230,15 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 </ol>
 <hr>
 </div>
+<div id="bookmarking" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bookmarking" class="anchor"></a>Bookmarking</h2>
+<p>Since v0.2.0, <code>auth0</code> supports shiny’s state bookmarking, but because of URL parsing issues, bookmarking only works with server storage. To activate this feature, you must call the app with the following lines in your <code>app.R</code> file:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/enableBookmarking">enableBookmarking</a></span>(<span class="dt">store =</span> <span class="st">"server"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</span></code></pre></div>
+<p>Also note that Auth0 adds <code>code</code> and <code>state</code> to the URL query parameters.</p>
+<hr>
+</div>
 <div id="managing-users" class="section level2">
 <h2 class="hasAnchor">
 <a href="#managing-users" class="anchor"></a>Managing users</h2>
@@ -242,24 +251,24 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <h2 class="hasAnchor">
 <a href="#logged-information" class="anchor"></a>Logged information</h2>
 <p>After a user logs in, it’s possible to access the current user’s information using the <code>session$userData$auth0_info</code> reactive object. Here is a small example:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(auth0)</span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># simple UI with user info</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</span>
-<span id="cb12-6"><a href="#cb12-6"></a>  <span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/verbatimTextOutput">verbatimTextOutput</a></span>(<span class="st">"user_info"</span>)</span>
-<span id="cb12-7"><a href="#cb12-7"></a>)</span>
-<span id="cb12-8"><a href="#cb12-8"></a></span>
-<span id="cb12-9"><a href="#cb12-9"></a>server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</span>
-<span id="cb12-10"><a href="#cb12-10"></a></span>
-<span id="cb12-11"><a href="#cb12-11"></a>  <span class="co"># print user info</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a>  output<span class="op">$</span>user_info &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/renderPrint">renderPrint</a></span>({</span>
-<span id="cb12-13"><a href="#cb12-13"></a>    session<span class="op">$</span>userData<span class="op">$</span>auth0_info</span>
-<span id="cb12-14"><a href="#cb12-14"></a>  })</span>
-<span id="cb12-15"><a href="#cb12-15"></a></span>
-<span id="cb12-16"><a href="#cb12-16"></a>}</span>
-<span id="cb12-17"><a href="#cb12-17"></a></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(auth0)</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># simple UI with user info</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/verbatimTextOutput">verbatimTextOutput</a></span>(<span class="st">"user_info"</span>)</span>
+<span id="cb13-7"><a href="#cb13-7"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a>server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a>  <span class="co"># print user info</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>  output<span class="op">$</span>user_info &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/renderPrint">renderPrint</a></span>({</span>
+<span id="cb13-13"><a href="#cb13-13"></a>    session<span class="op">$</span>userData<span class="op">$</span>auth0_info</span>
+<span id="cb13-14"><a href="#cb13-14"></a>  })</span>
+<span id="cb13-15"><a href="#cb13-15"></a></span>
+<span id="cb13-16"><a href="#cb13-16"></a>}</span>
+<span id="cb13-17"><a href="#cb13-17"></a></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</span></code></pre></div>
 <p>You should see an object like this:</p>
 <pre><code>$sub
 [1] "auth0|5c06a3aa119c392e85234f"
@@ -282,13 +291,13 @@ $updated_at
 <h2 class="hasAnchor">
 <a href="#logout" class="anchor"></a>Logout</h2>
 <p>You can add a logout button to your app using <code><a href="reference/logoutButton.html">logoutButton()</a></code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(auth0)</span>
-<span id="cb14-3"><a href="#cb14-3"></a></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># simple UI with logout button</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(<span class="kw"><a href="reference/logoutButton.html">logoutButton</a></span>())</span>
-<span id="cb14-6"><a href="#cb14-6"></a>server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {}</span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(auth0)</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># simple UI with logout button</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>ui &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(<span class="kw"><a href="reference/logoutButton.html">logoutButton</a></span>())</span>
+<span id="cb15-6"><a href="#cb15-6"></a>server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {}</span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</span></code></pre></div>
 <hr>
 </div>
 <div id="costs" class="section level2">
@@ -338,7 +347,7 @@ Improve handling and documentation of the <code>config_file</code> option (Issue
 <input type="checkbox" disabled checked>
 Remove the need for local and remote URLs in the <code>config_file</code>.</li>
 <li>
-<input type="checkbox" disabled>
+<input type="checkbox" disabled checked>
 Solve bookmarking and URL parameters issue (Issue #22).</li>
 <li>
 <input type="checkbox" disabled><code>shinyAppDirAuth0()</code> function to work as <code><a href="https://www.rdocumentation.org/packages/shiny/topics/shinyApp">shiny::shinyAppDir()</a></code> (Issue #21).</li>

@@ -7,11 +7,20 @@ auth0_ui <- function(ui, info) {
         htmltools::tags$script(htmltools::HTML(redirect))
       } else {
 
+        params <- shiny::parseQueryString(req$QUERY_STRING)
+        params$code <- NULL
+        params$state <- NULL
+
+        query <- paste0("/?", paste(
+          mapply(paste, names(params), params, MoreArgs = list(sep = "=")),
+          collapse = "&"))
+
         if (grepl("127.0.0.1", req$HTTP_HOST)) {
-          redirect_uri <<- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST))
+          redirect_uri <- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST, query))
         } else {
-          redirect_uri <<- paste0("http://", req$HTTP_HOST)
+          redirect_uri <- paste0("http://", req$HTTP_HOST, query)
         }
+        redirect_uri <<- redirect_uri
 
         url <- httr::oauth2.0_authorize_url(
           info$api, info$app(redirect_uri), scope = info$scope, state = info$state
@@ -20,7 +29,12 @@ auth0_ui <- function(ui, info) {
         htmltools::tags$script(htmltools::HTML(redirect))
       }
     } else {
-      ui
+      if (is.function(ui)) {
+        ui()
+      } else {
+        ui
+      }
+
     }
   }
 }

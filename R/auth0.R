@@ -14,17 +14,22 @@ has_auth_code <- function(params, state) {
 }
 
 auth0_server_verify <- function(session, app, api, state) {
+
   u_search <- session[["clientData"]]$url_search
   params <- shiny::parseQueryString(u_search)
+
   if (has_auth_code(params, state)) {
     cred <- httr::oauth2.0_access_token(api, app(redirect_uri), params$code)
     token <- httr::oauth2.0_token(
       app = app(redirect_uri), endpoint = api, cache = FALSE, credentials = cred,
       user_params = list(grant_type = "authorization_code"))
+
     userinfo_url <- sub("authorize", "userinfo", api$authorize)
     resp <- httr::GET(userinfo_url, httr::config(token = token))
+
     assign("auth0_info", httr::content(resp, "parsed"), envir = session$userData)
   }
+
 }
 
 auth0_state <- function(server) {
@@ -116,3 +121,6 @@ use_auth0 <- function(path = ".", file = "_auth0.yml", overwrite = FALSE) {
     auth0_config = list(api_url = api_url, credentials = ks))
   yaml::write_yaml(yaml_list, f)
 }
+
+# Get rid of NOTE
+globalVariables(c("redirect_uri"))

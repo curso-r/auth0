@@ -65,6 +65,7 @@ find_config_file <- function() {
 #' @param ui an ordinary UI object to create shiny apps.
 #' @param server an ordinary server object to create shiny apps.
 #' @param config_file path to YAML configuration file.
+#' @param ... Other arguments passed on to [shiny::shinyApp()].
 #'
 #' @details
 #' You can also use a diferent configuration file by setting the
@@ -79,7 +80,7 @@ find_config_file <- function() {
 #'   disable auth0 temporarily.
 #'
 #' @export
-shinyAppAuth0 <- function(ui, server, config_file = NULL) {
+shinyAppAuth0 <- function(ui, server, config_file = NULL, ...) {
 
   disable <- getOption("auth0_disable")
   if (!is.null(disable) && disable) {
@@ -94,17 +95,7 @@ shinyAppAuth0 <- function(ui, server, config_file = NULL) {
 
     config <- auth0_config()
     info <- auth0_info(config)
-    if (interactive()) {
-      p <- config$shiny_config$local_url
-      re <- regexpr("(?<=:)([0-9]+)", p, perl = TRUE)
-      port <- as.numeric(regmatches(p, re))
-      shiny::shinyApp(auth0_ui(ui, info),
-                      auth0_server(server, info),
-                      options = list(port = port))
-    } else {
-      shiny::shinyApp(auth0_ui(ui, info),
-                      auth0_server(server, info))
-    }
+    shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info), ...)
   }
 }
 

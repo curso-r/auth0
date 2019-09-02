@@ -89,9 +89,6 @@ auth0_config <- function() {
 #' parameters.
 #'
 #' The required parameters are:
-#' - `shiny_config`: an URL to access the app or a list containing `local_url`
-#' (e.g. http://localhost:8100) and `remote_url`
-#' (e.g. https://johndoe.shinyapps.io/app) tags.
 #' - `auth0_config` is a list contaning at least:
 #'   - `api_url`: Your account at Auth0 (e.g. https://jonhdoe.auth0.com).
 #'   It is the "Domain" in Auth0 application settings.

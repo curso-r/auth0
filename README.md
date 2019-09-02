@@ -47,7 +47,9 @@ After logging into Auth0, you will see a page like this:
 <img src="man/figures/README-myapp.png">
 
 - Add `http://localhost:8100` to the "Allowed Callback URLs", "Allowed Web Origins" and "Allowed Logout URLs".
-    - You can change `http://localhost:8100` to another port or the remote server you are going to deploy your shiny app. Just make sure that these addresses are correct. If you are placing your app inside a folder (e.g. https://johndoe.shinyapps.io/fooBar), don't include the folder (`fooBar`) in "Allowed Web Origins".
+    - You can change `http://localhost:8100` to another port.
+- Add the remote server where you are going to deploy your shiny app to the same boxes.
+    - Just make sure that these addresses are correct. If you are placing your app inside a folder (e.g. https://johndoe.shinyapps.io/fooBar), don't include the folder (`fooBar`) in "Allowed Web Origins".
 - Click "Save"
 
 Now let's go to R!
@@ -66,9 +68,6 @@ auth0::use_auth0()
 
 ```yml
 name: myApp
-shiny_config:
-  local_url: http://localhost:8100
-  remote_url: ''
 auth0_config:
   api_url: !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')
   credentials:
@@ -142,9 +141,6 @@ The best option in this case is to simply add the Client ID and Secret directly 
 
 ```yml
 name: myApp
-shiny_config:
-  local_url: http://localhost:8100
-  remote_url: ''
 auth0_config:
   api_url: https://<USERNAME>.auth0.com
   credentials:
@@ -156,9 +152,6 @@ Example:
 
 ```yml
 name: myApp
-shiny_config:
-  local_url: http://localhost:8100
-  remote_url: ''
 auth0_config:
   api_url: https://johndoe.auth0.com
   credentials:
@@ -191,38 +184,6 @@ options(shiny.port = 8100)
 ```
 
 2. You must run the app in a real browser, like Chrome or Firefox. If you use the RStudio Viewer or run the app in a RStudio window, the app will show a blank page and won't work.
-
---------------------------------------------------------------------------------
-
-## Alternative configuration options
-
-The steps above show how to configure the `_auth0.yml` file setting `local_url` and `remote_url` fields under `shiny_config`. 
-
-The `local_url` is used when you are developing your app locally, so it will probably be something like `http://localhost` or `http://127.0.0.1`. You will also need to set a default port, adding something like `:8888` after the `local_url`, so that when you run the app it is accessible by your browser. Some of these ports are reserved and you should __not__ use them. The default port in auth0 package is `:8100`, so if you want to change it, make sure that you also added it to the callback/web origin/logout URLs in Auth0.
-
-The `remote_url` is used when you use your app in production. For example, if you set up your shiny-server to run through `http://example.com/myapp`, or `https://johndoe.shinyapps.io/myapp`, that is what you are going to put in `remote_url`. Please make sure that you wrote the `http` or `https` correctly, unless it won't work.
-
-Actually, it is also possible to replace
-
-```yml
-shiny_config:
-  local_url: http://localhost:8100
-  remote_url: http://example.com
-```
-
-by just
-
-```yml
-shiny_config: http://localhost:8100
-```
-
-or
-
-```yml
-shiny_config: http://example.com
-```
-
-That will the case when you are developing the app to use locally or if you are developing directly inside a shiny-server folder. 
 
 --------------------------------------------------------------------------------
 
@@ -326,6 +287,7 @@ This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
     - [x] test whitelisting with auth0 (Issue #10).
     - [x] Improve handling and documentation of the `config_file` option (Issue #25).
 - Auth0 0.2.0
+    - [X] Remove the need for local and remote URLs in the `config_file`.
     - [ ] Solve bookmarking and URL parameters issue (Issue #22).
     - [ ] `shinyAppDirAuth0()` function to work as `shiny::shinyAppDir()` (Issue #21).
     - [ ] Implement auth0 API functions to manage users and login options through R.

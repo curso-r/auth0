@@ -4,7 +4,7 @@
 \alias{shinyAppAuth0}
 \title{Create a Shiny app object with Auth0 Authentication}
 \usage{
-shinyAppAuth0(ui, server, config_file = NULL)
+shinyAppAuth0(ui, server, config_file = NULL, ...)
 }
 \arguments{
 \item{ui}{an ordinary UI object to create shiny apps.}
@@ -12,6 +12,8 @@ shinyAppAuth0(ui, server, config_file = NULL)
 \item{server}{an ordinary server object to create shiny apps.}
 
 \item{config_file}{path to YAML configuration file.}
+
+\item{...}{Other arguments passed on to \code{\link[shiny:shinyApp]{shiny::shinyApp()}}.}
 }
 \description{
 This function modifies ui and server objects to run using Auth0

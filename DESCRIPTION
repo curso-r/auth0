@@ -6,7 +6,8 @@ Authors@R: c(
     person("Julio", "Trecenti", email = "julio.trecenti@gmail.com", role = "cre"),
     person("Daniel", "Falbel", email = "dfalbel@gmail.com", role = "aut"),
     person("José", "Jesus", email = "jjesusfilho@gmail.com", role = "ctb"),
-    person("Dean", "Attali", email = "daattali@gmail.com", role = "ctb"))
+    person("Dean", "Attali", email = "daattali@gmail.com", role = "ctb"),
+    person("C", "Lente", email = "c@lente.dev", role = "ctb"))
 Description: Uses Auth0 API (see <https://auth0.com> for more 
     information) to use a simple and secure authentication system. It provides 
     tools to log in and out a shiny application using social networks or a list

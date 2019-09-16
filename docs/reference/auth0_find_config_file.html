@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Auth0 configuration file — use_auth0 • auth0</title>
+<title>Find the configuration file. — auth0_find_config_file • auth0</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Auth0 configuration file — use_auth0" />
-<meta property="og:description" content="Create an YAML containing information to connect with Auth0." />
+<meta property="og:title" content="Find the configuration file. — auth0_find_config_file" />
+<meta property="og:description" content="Tries to find the path to the _auth0.yml file. First, it tries to get
+this info from options(auth0_config_file = &quot;&quot;). If this option is NULL
+(the default) it tries to find the _auth0.yml within the working
+directory. If the file does not exist, it raises an error." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,62 +104,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Auth0 configuration file</h1>
+    <h1>Find the configuration file.</h1>
     
-    <div class="hidden name"><code>use_auth0.Rd</code></div>
+    <div class="hidden name"><code>auth0_find_config_file.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create an YAML containing information to connect with Auth0.</p>
+    <p>Tries to find the path to the <code>_auth0.yml</code> file. First, it tries to get
+this info from <code><a href='https://rdrr.io/r/base/options.html'>options(auth0_config_file = "")</a></code>. If this option is <code>NULL</code>
+(the default) it tries to find the <code>_auth0.yml</code> within the working
+directory. If the file does not exist, it raises an error.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>use_auth0</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"_auth0.yml"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>auth0_find_config_file</span>()</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p>Directory name. Should be the root of the shiny app
-you want to add this functionality</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p>File name. Defaults to <code>_auth0.yml</code>.</p></td>
-    </tr>
-    <tr>
-      <th>overwrite</th>
-      <td><p>Will only overwrite existing path if <code>TRUE</code>.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The YAML configuration file has required parameters and extra
-parameters.</p>
-<p>The required parameters are:</p><ul>
-<li><p><code>auth0_config</code> is a list contaning at least:</p><ul>
-<li><p><code>api_url</code>: Your account at Auth0 (e.g. https://jonhdoe.auth0.com).
-It is the "Domain" in Auth0 application settings.</p></li>
-<li><p><code>credentials</code>: Your credentials to access Auth0 API, including</p><ul>
-<li><p><code>key</code>: the Client ID in Auth0 application settings.</p></li>
-<li><p><code>secret</code>: the Client Secret in Auth0 application settings.</p></li>
-</ul></li>
-</ul></li>
-</ul>
-    <p>The extra parameters are:</p><ul>
-<li><p><code>scope</code>: The information that Auth0 app will access.
-Defaults to "openid profile".</p></li>
-<li><p><code>request</code>: Endpoit to request a token. Defaults to "oauth/token"</p></li>
-<li><p><code>access</code>: Endpoit to access. Defaults to "oauth/token"</p></li>
-</ul>
+    <p>Character vector of length one contaning the path of the
+<code>_auth0.yml</code> file.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='use_auth0.html'>use_auth0</a></code>.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
 
   </div>

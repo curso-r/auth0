@@ -37,7 +37,23 @@ auth0_state <- function(server) {
   paste(sample(c(letters, LETTERS, 0:9), 10, replace = TRUE), collapse = "")
 }
 
+#' Information used to connect to Auth0.
+#'
+#' Creates a list containing all the important information to connect to Auth0
+#'   service's API.
+#'
+#' @param config path to the `_auth0.yml` file or the object returned by
+#'   [auth0_config]. If not informed, will try to find the file using
+#'   [auth0_find_config_file].
+#'
+#' @seealso [use_auth0] to create an `_auth0.yml` template.
+#'
+#' @return A list contaning scope, state, keys, OAuth2.0 app and endpoints.
+#'
+#' @export
 auth0_info <- function(config) {
+  if (missing(config)) config <- auth0_config()
+  if (!is.list(config) && is.character(config)) config <- auth0_config(config)
   scope <- config$auth0_config$scope
   state <- auth0_state()
   conf <- config$auth0_config
@@ -46,8 +62,19 @@ auth0_info <- function(config) {
   list(scope = scope, state = state, app = app, api = api)
 }
 
-auth0_config <- function() {
-  config_file <- find_config_file()
+#' Parse `_auth0.yml` file.
+#'
+#' Validates and creates a list of useful information from
+#'   the `_auth0.yml` file.
+#'
+#' @param config_file path to the `_auth0.yml` file. If not informed,
+#'   will try to find the file using [auth0_find_config_file].
+#'
+#' @return List containing all the information from the `_auth0.yml` file.
+#'
+#' @export
+auth0_config <- function(config_file) {
+  if (missing(config_file)) config_file <- auth0_find_config_file()
   config <- yaml::read_yaml(config_file, eval.expr = TRUE)
 
   # standardise and validate auth0_config
@@ -115,5 +142,4 @@ use_auth0 <- function(path = ".", file = "_auth0.yml", overwrite = FALSE) {
   yaml::write_yaml(yaml_list, f)
 }
 
-# Get rid of NOTE
-globalVariables(c("redirect_uri"))
+

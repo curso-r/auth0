@@ -1,4 +1,35 @@
+#' Modifies ui/server objects to authenticate using Auth0.
+#'
+#' These functions can be used in a ui.R/server.R framework, modifying the
+#'   shiny objects to authenticate using Auth0 service with no pain.
+#'
+#' @param ui `shiny.tag.list` object to generate the user interface.
+#'
+#' @name ui-server
+#'
+#' @seealso [auth0_info].
+#'
+#' @examples
+#' \donttest{
+#' # first, create the yml file using use_auth0() function
+#'
+#' # ui.R file
+#' library(shiny)
+#' library(auth0)
+#' auth0_ui(fluidPage(logoutButton()))
+#'
+#' # server.R file
+#' library(auth0)
+#' auth0_server(function(input, output, session) {})
+#'
+#' # console
+#' options(shiny.port = 8080)
+#' shiny::runApp()
+#'
+#' }
+#' @export
 auth0_ui <- function(ui, info) {
+  if (missing(info)) info <- auth0_info()
   function(req) {
     verify <- has_auth_code(shiny::parseQueryString(req$QUERY_STRING), info$state)
     if (!verify) {
@@ -30,31 +61,28 @@ auth0_ui <- function(ui, info) {
       }
     } else {
       if (is.function(ui)) {
-        ui()
+        ui(req)
       } else {
         ui
       }
-
     }
   }
 }
 
+#' @rdname ui-server
+#'
+#' @param server the shiny server function.
+#' @param info object returned from [auth0_info]. If not informed,
+#'   will try to find the `_auth0.yml` and create it automatically.
+#'
+#' @export
 auth0_server <- function(server, info) {
+  if (missing(info)) info <- auth0_info()
   function(input, output, session) {
     shiny::isolate(auth0_server_verify(session, info$app, info$api, info$state))
     shiny::observeEvent(input[["._auth0logout_"]], logout())
     server(input, output, session)
   }
-}
-
-find_config_file <- function() {
-  config_file <- getOption("auth0_config_file")
-
-  if (is.null(config_file)) {
-    config_file <- "./_auth0.yml"
-  }
-
-  config_file
 }
 
 #' Create a Shiny app object with Auth0 Authentication
@@ -87,13 +115,9 @@ shinyAppAuth0 <- function(ui, server, config_file = NULL, ...) {
     shiny::shinyApp(ui, server)
   } else {
     if (is.null(config_file)) {
-      config_file <- find_config_file()
+      config_file <- auth0_find_config_file()
     }
-    else {
-      options(auth0_config_file = config_file)
-    }
-
-    config <- auth0_config()
+    config <- auth0_config(config_file)
     info <- auth0_info(config)
     shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info), ...)
   }

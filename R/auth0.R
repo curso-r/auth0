@@ -89,7 +89,10 @@ auth0_config <- function(config_file) {
     msg <- sprintf("Missing '%s' tag%s in YAML file", paste(missing_args, collapse = "','"), s)
     stop(msg)
   }
-  defaults <- list(scope = "openid profile", request = "oauth/token", access = "oauth/token")
+  # scope
+  scp <- config$auth0_config$scope
+  if (is.null(scp)) scp <- "openid profile"
+  defaults <- list(scope = scp, request = "oauth/token", access = "oauth/token")
 
   for (nm in names(defaults)) {
     if (!nm %in% config_names) {

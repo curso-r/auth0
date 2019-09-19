@@ -25,11 +25,13 @@ auth0_find_config_file <- function() {
       "There are two possible explanations:\n",
       "1. You didn't create an _auth0.yml file. Solution: Run `use_auth0()`\n",
       "2. You created an _auth0.yml file, but it was not found.\n",
+      "You have two options:\n",
       "  Solution 2a): set the path for the _auth0.yml ",
       "file running `options(auth0_config_file = \"/path/to/_auth0.yml\")`. ",
       "Always use absolute path, because shiny::runApp() modifies ",
       "the working directory.\n",
-      "  Solution 2b): set the working directory to the folder ",
+      "  Solution 2b): If your app.R file is in the same directory as the ",
+      "_auth0.yml file, set the working directory to the folder ",
       "where _auth0.yml file is located."
     )
   }

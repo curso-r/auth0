@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Shiny app object with Auth0 Authentication — shinyAuth0App • auth0</title>
+<title>Modifies ui/server objects to authenticate using Auth0. — ui-server • auth0</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,9 @@
 
 
 
-<meta property="og:title" content="Create a Shiny app object with Auth0 Authentication — shinyAuth0App" />
-<meta property="og:description" content="As of auth0 0.1.2, shinAuth0App() has
-been renamed to shinyAppAuth0() for consistency." />
+<meta property="og:title" content="Modifies ui/server objects to authenticate using Auth0. — ui-server" />
+<meta property="og:description" content="These functions can be used in a ui.R/server.R framework, modifying the
+shiny objects to authenticate using Auth0 service with no pain." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -134,41 +134,75 @@ been renamed to shinyAppAuth0() for consistency." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a Shiny app object with Auth0 Authentication</h1>
+    <h1>Modifies ui/server objects to authenticate using Auth0.</h1>
     
-    <div class="hidden name"><code>shinyAuth0App.Rd</code></div>
+    <div class="hidden name"><code>ui-server.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>As of auth0 0.1.2, <code>shinAuth0App()</code> has
-been renamed to <code><a href='shinyAppAuth0.html'>shinyAppAuth0()</a></code> for consistency.</p>
+    <p>These functions can be used in a ui.R/server.R framework, modifying the
+shiny objects to authenticate using Auth0 service with no pain.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>shinyAuth0App</span>(<span class='no'>ui</span>, <span class='no'>server</span>, <span class='kw'>config_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>auth0_ui</span>(<span class='no'>ui</span>, <span class='no'>info</span>)
+
+<span class='fu'>auth0_server</span>(<span class='no'>server</span>, <span class='no'>info</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ui</th>
-      <td><p>an ordinary UI object to create shiny apps.</p></td>
+      <td><p><code>shiny.tag.list</code> object to generate the user interface.</p></td>
+    </tr>
+    <tr>
+      <th>info</th>
+      <td><p>object returned from <a href='auth0_info.html'>auth0_info</a>. If not informed,
+will try to find the <code>_auth0.yml</code> and create it automatically.</p></td>
     </tr>
     <tr>
       <th>server</th>
-      <td><p>an ordinary server object to create shiny apps.</p></td>
-    </tr>
-    <tr>
-      <th>config_file</th>
-      <td><p>path to YAML configuration file.</p></td>
+      <td><p>the shiny server function.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><a href='auth0_info.html'>auth0_info</a>.</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'># first, create the yml file using use_auth0() function</span>
+
+<span class='co'># ui.R file</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>shiny</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>auth0</span>)
+<span class='fu'>auth0_ui</span>(<span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span>(<span class='fu'><a href='logoutButton.html'>logoutButton</a></span>()))</div><div class='output co'>#&gt; <span class='error'>Error in auth0_find_config_file(): Didn't find any YML configuration file. There are two possible explanations:</span>
+#&gt; <span class='error'>1. You didn't create an _auth0.yml file. Solution: Run `use_auth0()`</span>
+#&gt; <span class='error'>2. You created an _auth0.yml file, but it was not found.</span>
+#&gt; <span class='error'>You have two options:</span>
+#&gt; <span class='error'>  Solution 2a): set the path for the _auth0.yml file running `options(auth0_config_file = "/path/to/_auth0.yml")`. Always use absolute path, because shiny::runApp() modifies the working directory.</span>
+#&gt; <span class='error'>  Solution 2b): If your app.R file is in the same directory as the _auth0.yml file, set the working directory to the folder where _auth0.yml file is located.</span></div><div class='input'>
+<span class='co'># server.R file</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>auth0</span>)
+<span class='fu'>auth0_server</span>(<span class='kw'>function</span>(<span class='no'>input</span>, <span class='no'>output</span>, <span class='no'>session</span>) {})</div><div class='output co'>#&gt; <span class='error'>Error in auth0_find_config_file(): Didn't find any YML configuration file. There are two possible explanations:</span>
+#&gt; <span class='error'>1. You didn't create an _auth0.yml file. Solution: Run `use_auth0()`</span>
+#&gt; <span class='error'>2. You created an _auth0.yml file, but it was not found.</span>
+#&gt; <span class='error'>You have two options:</span>
+#&gt; <span class='error'>  Solution 2a): set the path for the _auth0.yml file running `options(auth0_config_file = "/path/to/_auth0.yml")`. Always use absolute path, because shiny::runApp() modifies the working directory.</span>
+#&gt; <span class='error'>  Solution 2b): If your app.R file is in the same directory as the _auth0.yml file, set the working directory to the folder where _auth0.yml file is located.</span></div><div class='input'>
+<span class='co'># console</span>
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>shiny.port</span> <span class='kw'>=</span> <span class='fl'>8080</span>)
+<span class='kw pkg'>shiny</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/runApp.html'>runApp</a></span>()</div><div class='output co'>#&gt; <span class='error'>Error in shinyAppDir(x): App dir must contain either app.R or server.R.</span></div><div class='input'>
+# }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

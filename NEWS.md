@@ -1,3 +1,9 @@
+# auth0 0.2.0
+
+- Support bookmarking (server side) (PR #38).
+- Export `auth0_ui()` and `auth0_server()` functions to enable `ui.R`/`server.R` support (Issue #5).
+- Export `auth0_find_config_file()`, `auth0_config()` and `auth0_info()` functions to ease debugging.
+
 # auth0 0.1.2
 
 - Add `auth0_credentials` to user session data (Issue #39).

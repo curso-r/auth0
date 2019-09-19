@@ -1,7 +1,6 @@
 name: myApp
 auth0_config:
-  scope: "openid email profile"
-  api_url: !expr paste0('https://', Sys.getenv('AUTH0_USER'), '.auth0.com')
+  api_url: !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')
   credentials:
     key: !expr Sys.getenv("AUTH0_KEY")
     secret: !expr Sys.getenv("AUTH0_SECRET")

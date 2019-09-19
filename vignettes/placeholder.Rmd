@@ -1,0 +1,10 @@
+---
+title: "placeholder"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{placeholder}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This is a placeholder vignette.

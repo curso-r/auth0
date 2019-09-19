@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • auth0</title>
+<title>Parse <code>_auth0.yml</code> file. — auth0_config • auth0</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,10 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Parse <code>_auth0.yml</code> file. — auth0_config" />
+<meta property="og:description" content="Validates and creates a list of useful information from
+the _auth0.yml file." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +57,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -131,64 +134,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      
+    <h1>Parse <code>_auth0.yml</code> file.</h1>
+    
+    <div class="hidden name"><code>auth0_config.Rd</code></div>
     </div>
 
-    <div id="auth0-0-2-0" class="section level1">
-<h1 class="page-header">
-<a href="#auth0-0-2-0" class="anchor"></a>auth0 0.2.0<small> Unreleased </small>
-</h1>
-<ul>
-<li>Support bookmarking (server side) (PR #38).</li>
-<li>Export <code><a href="../reference/ui-server.html">auth0_ui()</a></code> and <code><a href="../reference/ui-server.html">auth0_server()</a></code> functions to enable <code>ui.R</code>/<code>server.R</code> support (Issue #5).</li>
-<li>Export <code><a href="../reference/auth0_find_config_file.html">auth0_find_config_file()</a></code>, <code><a href="../reference/auth0_config.html">auth0_config()</a></code> and <code><a href="../reference/auth0_info.html">auth0_info()</a></code> functions to ease debugging.</li>
-</ul>
-</div>
-    <div id="auth0-0-1-2" class="section level1">
-<h1 class="page-header">
-<a href="#auth0-0-1-2" class="anchor"></a>auth0 0.1.2<small> Unreleased </small>
-</h1>
-<ul>
-<li>Add <code>auth0_credentials</code> to user session data (Issue #39).</li>
-<li>(breaking change) change <code>login_info</code> to <code>auth0_info</code> in the user session data (Issue #19).</li>
-<li>Option to ignore auth0 and work as a normal shiny app, to save developing time (Issue #26).</li>
-<li>Examples for different login types (google/facebook, database etc, Issue #23).</li>
-<li>Solve bookmarking and URL parameters issue (Issue #22).</li>
-<li>Improved logout button (Issue #24) (thanks to Dean Attali)</li>
-<li>Improve handling and documentation of the config_file option (Issue #25).</li>
-<li>Use <code><a href="../reference/shinyAppAuth0.html">shinyAppAuth0()</a></code> instead of <code><a href="../reference/shinyAuth0App.html">shinyAuth0App()</a></code> and soft-deprecate <code><a href="../reference/shinyAuth0App.html">shinyAuth0App()</a></code> (Issue #18).</li>
-<li>Better documentation - Handle multiple shiny apps and multiple auth0 apps (Issue #17). - Explain some RStudio details(Issues #15 and #16). - Explain environment variables (Issue #14). - Explain yml file config (Issue #13).</li>
-<li>Add Dean Attali as contributor to the package.</li>
-<li>test whitelisting with auth0 (Issue #10)</li>
-</ul>
-</div>
-    <div id="auth0-0-1-1" class="section level1">
-<h1 class="page-header">
-<a href="#auth0-0-1-1" class="anchor"></a>auth0 0.1.1<small> 2019-02-13 </small>
-</h1>
-<ul>
-<li>added user info support with <code>session$userData</code>
-</li>
-<li>added option to set configuration YAML file path in <code><a href="https://rdrr.io/r/base/options.html">options(auth0_config_file=)</a></code>
-</li>
-<li>update <code>use_auth0</code> function to also use <code>AUTH0_USER</code> environment variable to fill the <code>api_url</code> parameter automatically in the <code>_auth0.yml</code> file.</li>
-<li>minor errors and bug fixes.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Validates and creates a list of useful information from
+the <code>_auth0.yml</code> file.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>auth0_config</span>(<span class='no'>config_file</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>config_file</th>
+      <td><p>path to the <code>_auth0.yml</code> file. If not informed,
+will try to find the file using <a href='auth0_find_config_file.html'>auth0_find_config_file</a>.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>List containing all the information from the <code>_auth0.yml</code> file.</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#auth0-0-2-0">0.2.0</a></li>
-        <li><a href="#auth0-0-1-2">0.1.2</a></li>
-        <li><a href="#auth0-0-1-1">0.1.1</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+    </ul>
 
+  </div>
 </div>
 
 

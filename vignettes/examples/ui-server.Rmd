@@ -4,7 +4,7 @@ type: docs
 repo: https://github.com/curso-r/auth0
 menu:
   main:
-    parent: keras-examples
+    parent: examples
 ---
 
 <div class="source-ref">
@@ -18,25 +18,22 @@ Also, set the port, running something like `options(shiny.port = 8080)`.
 ## ui.R
 
 ```{r, echo = FALSE}
-knitr::opts_chunk$set(eval = FALSE)
-
+knitr::opts_chunk$set(eval=FALSE)
 f <- system.file(sprintf("%s/ui.R", rmarkdown::metadata$title), package = "auth0")
 knitr::spin_child(f)
 ```
 
 ## server.R
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(eval = FALSE)
-
+```{r, echo = FALSE, eval=TRUE}
 f <- system.file(sprintf("%s/server.R", rmarkdown::metadata$title), package = "auth0")
 knitr::spin_child(f)
 ```
 
 ## _auth0.yml
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval=TRUE, comment=NA}
 f <- system.file(sprintf("%s/_auth0.yml", rmarkdown::metadata$title), package = "auth0")
-knitr::spin_child(f)
+cat(readLines(f), sep = "\n")
 ```
 

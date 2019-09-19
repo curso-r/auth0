@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">auth0</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -70,6 +70,9 @@
     </li>
     <li>
       <a href="../../articles/examples/userinfo.html">userinfo</a>
+    </li>
+    <li>
+      <a href="../../articles/placeholder.html">placeholder</a>
     </li>
   </ul>
 </li>
@@ -131,6 +134,13 @@
 <div id="auth0-yml" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auth0-yml" class="anchor"></a>_auth0.yml</h2>
+<pre><code>name: myApp
+auth0_config:
+  scope: "openid email profile"
+  api_url: !expr paste0('https://', Sys.getenv('AUTH0_USER'), '.auth0.com')
+  credentials:
+    key: !expr Sys.getenv("AUTH0_KEY")
+    secret: !expr Sys.getenv("AUTH0_SECRET")</code></pre>
 </div>
   </div>
 

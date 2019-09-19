@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">auth0</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -73,6 +73,9 @@
     </li>
     <li>
       <a href="articles/examples/userinfo.html">userinfo</a>
+    </li>
+    <li>
+      <a href="articles/placeholder.html">placeholder</a>
     </li>
   </ul>
 </li>
@@ -290,26 +293,32 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <div id="logged-information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#logged-information" class="anchor"></a>Logged information</h2>
-<p>After a user logs in, it’s possible to access the current user’s information using the <code>session$userData$auth0_info</code> reactive object. Here is a small example:</p>
+<p>After a user logs in, it’s possible to access the current user’s information using the <code>session$userData$auth0_info</code> reactive object. The Auth0 token can be accessed using <code>session$userData$auth0_credentials</code>. Here is a small example:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shiny)</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co"># simple UI with user info</span></a>
 <a class="sourceLine" id="cb13-5" data-line-number="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span>(</a>
 <a class="sourceLine" id="cb13-6" data-line-number="6">  <span class="kw"><a href="https://rdrr.io/pkg/shiny/man/verbatimTextOutput.html">verbatimTextOutput</a></span>(<span class="st">"user_info"</span>)</a>
-<a class="sourceLine" id="cb13-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11">  <span class="co"># print user info</span></a>
-<a class="sourceLine" id="cb13-12" data-line-number="12">  output<span class="op">$</span>user_info &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html">renderPrint</a></span>({</a>
-<a class="sourceLine" id="cb13-13" data-line-number="13">    session<span class="op">$</span>userData<span class="op">$</span>auth0_info</a>
-<a class="sourceLine" id="cb13-14" data-line-number="14">  })</a>
-<a class="sourceLine" id="cb13-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb13-16" data-line-number="16">}</a>
-<a class="sourceLine" id="cb13-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb13-18" data-line-number="18"><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
-<p>You should see an object like this:</p>
+<a class="sourceLine" id="cb13-7" data-line-number="7">  <span class="kw"><a href="https://rdrr.io/pkg/shiny/man/verbatimTextOutput.html">verbatimTextOutput</a></span>(<span class="st">"credential_info"</span>)</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">)</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">  <span class="co"># print user info</span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13">  output<span class="op">$</span>user_info &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html">renderPrint</a></span>({</a>
+<a class="sourceLine" id="cb13-14" data-line-number="14">    session<span class="op">$</span>userData<span class="op">$</span>auth0_info</a>
+<a class="sourceLine" id="cb13-15" data-line-number="15">  })</a>
+<a class="sourceLine" id="cb13-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb13-17" data-line-number="17">  output<span class="op">$</span>credential_info &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html">renderPrint</a></span>({</a>
+<a class="sourceLine" id="cb13-18" data-line-number="18">    session<span class="op">$</span>userData<span class="op">$</span>auth0_credentials</a>
+<a class="sourceLine" id="cb13-19" data-line-number="19">  })</a>
+<a class="sourceLine" id="cb13-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb13-21" data-line-number="21">}</a>
+<a class="sourceLine" id="cb13-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb13-23" data-line-number="23"><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
+<p>You should see objects containing the user and credential info.</p>
+<p><strong>User info</strong></p>
 <pre><code>$sub
 [1] "auth0|5c06a3aa119c392e85234f"
 
@@ -325,19 +334,35 @@ $picture
 $updated_at
 [1] "2019-02-13T10:33:06.141Z"</code></pre>
 <p>Note that the <code>sub</code> field is unique and can be used for many purposes, like creating customized apps for different users.</p>
+<p><strong>Credential info (abridged)</strong></p>
+<pre><code>$access_token
+[1] "y5Yv..."
+
+$id_token
+[1] "eyJ0..."
+
+$scope
+[1] "openid profile"
+
+$expires_in
+[1] 86400
+
+$token_type
+[1] "Bearer"</code></pre>
+<p>The <code>id_token</code> may be used with applications that require an <code>Authorization</code> header with each web request.</p>
 <hr>
 </div>
 <div id="logout" class="section level2">
 <h2 class="hasAnchor">
 <a href="#logout" class="anchor"></a>Logout</h2>
 <p>You can add a logout button to your app using <code><a href="reference/logoutButton.html">logoutButton()</a></code>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shiny)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co"># simple UI with logout button</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span>(<span class="kw"><a href="reference/logoutButton.html">logoutButton</a></span>())</a>
-<a class="sourceLine" id="cb15-6" data-line-number="6">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {}</a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shiny)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co"># simple UI with logout button</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span>(<span class="kw"><a href="reference/logoutButton.html">logoutButton</a></span>())</a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {}</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
 <hr>
 </div>
 <div id="costs" class="section level2">

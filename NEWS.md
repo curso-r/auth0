@@ -6,6 +6,7 @@
 
 # auth0 0.1.2
 
+- Add `auth0_credentials` to user session data (Issue #39).
 - (breaking change) change `login_info` to `auth0_info` in the user session data (Issue #19).
 - Option to ignore auth0 and work as a normal shiny app, to save developing time (Issue #26).
 - Examples for different login types (google/facebook, database etc, Issue #23).

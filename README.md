@@ -222,7 +222,9 @@ In the near future, our plan is to implement Auth0's API in R so that you can ma
 
 ## Logged information
 
-After a user logs in, it's possible to access the current user's information using the `session$userData$auth0_info` reactive object. Here is a small example:
+After a user logs in, it's possible to access the current user's information using the `session$userData$auth0_info` reactive object. The Auth0 token
+can be accessed using `session$userData$auth0_credentials`. 
+Here is a small example:
 
 ```r
 library(shiny)
@@ -231,6 +233,7 @@ library(auth0)
 # simple UI with user info
 ui <- fluidPage(
   verbatimTextOutput("user_info")
+  verbatimTextOutput("credential_info")
 )
 
 server <- function(input, output, session) {
@@ -239,13 +242,19 @@ server <- function(input, output, session) {
   output$user_info <- renderPrint({
     session$userData$auth0_info
   })
+  
+  output$credential_info <- renderPrint({
+    session$userData$auth0_credentials
+  })
 
 }
 
 shinyAppAuth0(ui, server)
 ```
 
-You should see an object like this:
+You should see objects containing the user and credential info.
+
+**User info**
 
 ```
 $sub
@@ -265,6 +274,28 @@ $updated_at
 ```
 
 Note that the `sub` field is unique and can be used for many purposes, like creating customized apps for different users.
+
+**Credential info (abridged)**
+
+```
+$access_token
+[1] "y5Yv..."
+
+$id_token
+[1] "eyJ0..."
+
+$scope
+[1] "openid profile"
+
+$expires_in
+[1] 86400
+
+$token_type
+[1] "Bearer"
+```
+
+The `id_token` may be used with applications that require an `Authorization`
+header with each web request.
 
 --------------------------------------------------------------------------------
 

@@ -24,3 +24,7 @@ Imports: httr,
     htmltools,
     yaml,
     utils
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

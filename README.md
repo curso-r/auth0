@@ -2,8 +2,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/curso-r/auth0.svg?branch=master)](https://travis-ci.org/curso-r/auth0) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/curso-r/auth0?branch=master&svg=true)](https://ci.appveyor.com/project/curso-r/auth0) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/auth0)](https://cran.r-project.org/package=auth0)
 
-The goal of `{auth0}` is to implement an authentication scheme to Shiny using 
-OAuth Apps through the freemium service [Auth0](https://auth0.com).
+The goal of `{auth0}` is to implement an authentication scheme to Shiny using OAuth Apps through the freemium service [Auth0](https://auth0.com).
 
 ## Installation
 
@@ -17,10 +16,10 @@ You can also install the development version from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("curso-r/auth0")
+remotes::install_github("curso-r/auth0")
 ```
 
-## Auth0 Configuration
+## Tutorial
 
 To create your authenticated shiny app, you need to follow the five steps below.
 
@@ -112,12 +111,7 @@ server <- function(input, output, session) {
 # note that here we're using a different version of shinyApp!
 auth0::shinyAppAuth0(ui, server)
 ```
-
-**Note**: If you want to use a different path to the `auth0` configuration file, you can
-either pass it to `shinyAppAuth0()` or
-set the `auth0_config_file` option by running `options(auth0_config_file = "path/to/file")`.
-
-Also note that currently Shiny apps that use the 2-file approach (`ui.R` and `server.R`) are not supported. Your app must be inside a single `app.R` file.
+**Note**: If you want to use a different path to the `auth0` configuration file, you can either pass it to `shinyAppAuth0()` or set the `auth0_config_file` option by running `options(auth0_config_file = "path/to/file")`.
 
 ### Step 5: Run!
 
@@ -182,7 +176,7 @@ library(auth0)
 auth0_server(function(input, output, session) {})
 ```
 
-`{auth0}` will try to find the `_auth0.yml` using the same strategy than the `app.R` framework: first from `options(auth0_config_file = "path/to/file")` and then fixing `"./_auth0.yml"`. Both `auth0_ui()` and `auth0_server()` have a `info=` parameter where you can pass either the path of the `_auth0.yml` file or the 
+`{auth0}` will try to find the `_auth0.yml` using the same strategy than the `app.R` framework: first from `options(auth0_config_file = "path/to/file")` and then fixing `"./_auth0.yml"`. Both `auth0_ui()` and `auth0_server()` have a `info=` parameter where you can pass either the path of the `_auth0.yml` file or the object returned by `auth0_info()` function.
 
 
 --------------------------------------------------------------------------------
@@ -317,7 +311,7 @@ shinyAppAuth0(ui, server)
 
 ## Costs
 
-Auth0 is a freemium service. The free account lets you have up to 1000 connections in one month and two types of social connections. You can check all the plans [here](https://auth0.com/pricing).
+Auth0 is a freemium service. The free account lets you have up to 7000 connections in one month and two types of social connections. You can check all the plans [here](https://auth0.com/pricing).
 
 ## Disclaimer
 
@@ -327,14 +321,17 @@ This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
 
 ## Roadmap
 
-- `{auth0}` 0.2.0
-    - [X] Remove the need for local and remote URLs in the `config_file`.
-    - [X] Solve bookmarking and URL parameters issue (Issue #22).
-    - [x] `shinyAppDirAuth0()` function to work as `shiny::shinyAppDir()` (Issue #21).
-    - [x] Support to `ui.R`/`server.R` apps.
-- `{auth0}` 0.3.0
-    - [ ] Implement `{auth0}` API functions to manage users and login options throusgh R.
-    - [ ] Hex sticker.
+### `{auth0}` 0.2.0
+
+- [✔] Remove the need for local and remote URLs in the `config_file`.
+- [✔] Solve bookmarking and URL parameters issue (Issue #22).
+- [✔] `shinyAppDirAuth0()` function to work as `shiny::shinyAppDir()` (Issue #21).
+- [✔] Support to `ui.R`/`server.R` apps.
+
+### `{auth0}` 0.3.0
+
+- [ ] Implement `{auth0}` API functions to manage users and login options throusgh R.
+- [ ] Hex sticker.
 
 --------------------------------------------------------------------------------
 

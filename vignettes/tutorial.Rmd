@@ -1,0 +1,107 @@
+---
+title: "auth0 Tutorial"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{simple}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The goal of `{auth0}` is to implement an authentication scheme to Shiny using OAuth Apps through the freemium service [Auth0](https://auth0.com).
+
+To create your authenticated shiny app, you need to follow the steps below. The full decription can be found in the `README` of the [package site](https://curso-r.github.com/auth0).
+
+### Create an Auth0 account and application
+
+- Go to [auth0.com](https://auth0.com)
+- Click "Sign Up"
+- You can create an account with a user name and password combination, or by signing up with your GitHub or Google accounts.
+- Click on "+ Create Application"
+- Give a name to your app
+- Select "Regular Web Applications" and click "Create"
+
+### Configure your application
+
+- Go to the Settings in your selected application. 
+- Add `http://localhost:8080` to the "Allowed Callback URLs", "Allowed Web Origins" and "Allowed Logout URLs".
+    - You can change `http://localhost:8080` to another port.
+- Add the remote server where you are going to deploy your shiny app to the same boxes.
+    - Just make sure that these addresses are correct. If you are placing your app inside a folder (e.g. https://johndoe.shinyapps.io/fooBar), don't include the folder (`fooBar`) in "Allowed Web Origins".
+- Click "Save"
+
+Now, let's go to R!
+
+### Fill the `_auth0.yml` file
+
+- Create a configuration file for your shiny app by calling `auth0::use_auth0()`:
+
+```r
+auth0::use_auth0()
+```
+
+You can set the directory where this file will be created using the `path=` parameter. See `?auth0::use_auth0` for details. Your `_auth0.yml` file should be like this:
+
+
+```yml
+name: myApp
+auth0_config:
+  api_url: !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')
+  credentials:
+    key: !expr Sys.getenv("AUTH0_KEY")
+    secret: !expr Sys.getenv("AUTH0_SECRET")
+```
+
+Run `usethis::edit_r_environ()` and add these three environment variables:
+
+```
+AUTH0_USER=johndoe
+AUTH0_KEY=5wugt0W...
+AUTH0_SECRET=rcaJ0p8...
+```
+
+There's how you identify each of them (see the image below):`AUTH0_USER` is your username, which can be found on the top corner of the site. `AUTH0_KEY` is your Client ID, which can be copied from inside the app page. `AUTH0_SECRET` is your Client Secret, which can be copied from the app page.
+
+You can find more information about environment variables [here](https://csgillespie.github.io/efficientR/set-up.html#renviron). You can also fill these information directly in the `_auth0.yml` file (see below). If you do so, don't forget to save the `_auth0.yml` file after editing it.
+
+- Save and **restart your session**.
+
+### Create your app
+
+Write a simple shiny app in a `app.R` file, like this:
+
+```r
+library(shiny)
+
+ui <- fluidPage(
+  fluidRow(plotOutput("plot"))
+)
+  
+server <- function(input, output, session) {
+  output$plot <- renderPlot({
+    plot(1:10)
+  })
+}
+
+# note that here we're using a different version of shinyApp!
+auth0::shinyAppAuth0(ui, server)
+```
+
+**Note**: If you want to use a different path to the `auth0` configuration file, you can either pass it to `shinyAppAuth0()` or set the `auth0_config_file` option by running `options(auth0_config_file = "path/to/file")`.
+
+### Run!
+
+You can try your app running
+
+```r
+options(shiny.port = 8080)
+shiny::runApp("app/directory/")
+```
+
+If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you'll be redirected to your app.

@@ -10,3 +10,4 @@
 ^appveyor\.yml$
 ^docs$
 ^cran-comments\.md$
+^vignette/examples$

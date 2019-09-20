@@ -8,5 +8,5 @@ articles:
   ui-server-bookmark: examples/ui-server-bookmark.html
   ui-server: examples/ui-server.html
   userinfo: examples/userinfo.html
-  placeholder: placeholder.html
+  tutorial: tutorial.html
 

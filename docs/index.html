@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Secure Authentication in Shiny with Auth0 • auth0</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -75,7 +75,7 @@
       <a href="articles/examples/userinfo.html">userinfo</a>
     </li>
     <li>
-      <a href="articles/placeholder.html">placeholder</a>
+      <a href="articles/tutorial.html">auth0 Tutorial</a>
     </li>
   </ul>
 </li>
@@ -107,11 +107,11 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"auth0"</span>)</a></code></pre></div>
 <p>You can also install the development version from github with:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"curso-r/auth0"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb2-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"curso-r/auth0"</span>)</a></code></pre></div>
 </div>
-<div id="auth0-configuration" class="section level2">
+<div id="tutorial" class="section level2">
 <h2 class="hasAnchor">
-<a href="#auth0-configuration" class="anchor"></a>Auth0 Configuration</h2>
+<a href="#tutorial" class="anchor"></a>Tutorial</h2>
 <p>To create your authenticated shiny app, you need to follow the five steps below.</p>
 <div id="step-1-create-an-auth0-account" class="section level3">
 <h3 class="hasAnchor">
@@ -209,7 +209,6 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co"># note that here we're using a different version of shinyApp!</span></a>
 <a class="sourceLine" id="cb6-14" data-line-number="14">auth0<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/auth0/man/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
 <p><strong>Note</strong>: If you want to use a different path to the <code>auth0</code> configuration file, you can either pass it to <code><a href="reference/shinyAppAuth0.html">shinyAppAuth0()</a></code> or set the <code>auth0_config_file</code> option by running <code><a href="https://rdrr.io/r/base/options.html">options(auth0_config_file = "path/to/file")</a></code>.</p>
-<p>Also note that currently Shiny apps that use the 2-file approach (<code>ui.R</code> and <code>server.R</code>) are not supported. Your app must be inside a single <code>app.R</code> file.</p>
 </div>
 <div id="step-5-run" class="section level3">
 <h3 class="hasAnchor">
@@ -261,7 +260,7 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw"><a href="reference/ui-server.html">auth0_server</a></span>(<span class="cf">function</span>(input, output, session) {})</a></code></pre></div>
-<p><code>{auth0}</code> will try to find the <code>_auth0.yml</code> using the same strategy than the <code>app.R</code> framework: first from <code><a href="https://rdrr.io/r/base/options.html">options(auth0_config_file = "path/to/file")</a></code> and then fixing <code>"./_auth0.yml"</code>. Both <code><a href="reference/ui-server.html">auth0_ui()</a></code> and <code><a href="reference/ui-server.html">auth0_server()</a></code> have a <code>info=</code> parameter where you can pass either the path of the <code>_auth0.yml</code> file or the</p>
+<p><code>{auth0}</code> will try to find the <code>_auth0.yml</code> using the same strategy than the <code>app.R</code> framework: first from <code><a href="https://rdrr.io/r/base/options.html">options(auth0_config_file = "path/to/file")</a></code> and then fixing <code>"./_auth0.yml"</code>. Both <code><a href="reference/ui-server.html">auth0_ui()</a></code> and <code><a href="reference/ui-server.html">auth0_server()</a></code> have a <code>info=</code> parameter where you can pass either the path of the <code>_auth0.yml</code> file or the object returned by <code><a href="reference/auth0_info.html">auth0_info()</a></code> function.</p>
 <hr>
 </div>
 </div>
@@ -368,7 +367,7 @@ $token_type
 <div id="costs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#costs" class="anchor"></a>Costs</h2>
-<p>Auth0 is a freemium service. The free account lets you have up to 1000 connections in one month and two types of social connections. You can check all the plans <a href="https://auth0.com/pricing">here</a>.</p>
+<p>Auth0 is a freemium service. The free account lets you have up to 7000 connections in one month and two types of social connections. You can check all the plans <a href="https://auth0.com/pricing">here</a>.</p>
 </div>
 <div id="disclaimer" class="section level2">
 <h2 class="hasAnchor">
@@ -379,25 +378,25 @@ $token_type
 <div id="roadmap" class="section level2">
 <h2 class="hasAnchor">
 <a href="#roadmap" class="anchor"></a>Roadmap</h2>
+<div id="auth0-0-2-0" class="section level3">
+<h3 class="hasAnchor">
+<a href="#auth0-0-2-0" class="anchor"></a><code>{auth0}</code> 0.2.0</h3>
 <ul>
-<li>
-<code>{auth0}</code> 0.2.0
-<ul>
-<li>[X] Remove the need for local and remote URLs in the <code>config_file</code>.</li>
-<li>[X] Solve bookmarking and URL parameters issue (Issue #22).</li>
-<li>[x] <code>shinyAppDirAuth0()</code> function to work as <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shiny::shinyAppDir()</a></code> (Issue #21).</li>
-<li>[x] Support to <code>ui.R</code>/<code>server.R</code> apps.</li>
+<li>[✔] Remove the need for local and remote URLs in the <code>config_file</code>.</li>
+<li>[✔] Solve bookmarking and URL parameters issue (Issue #22).</li>
+<li>[✔] <code>shinyAppDirAuth0()</code> function to work as <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shiny::shinyAppDir()</a></code> (Issue #21).</li>
+<li>[✔] Support to <code>ui.R</code>/<code>server.R</code> apps.</li>
 </ul>
-</li>
-<li>
-<code>{auth0}</code> 0.3.0
+</div>
+<div id="auth0-0-3-0" class="section level3">
+<h3 class="hasAnchor">
+<a href="#auth0-0-3-0" class="anchor"></a><code>{auth0}</code> 0.3.0</h3>
 <ul>
 <li>[ ] Implement <code>{auth0}</code> API functions to manage users and login options throusgh R.</li>
 <li>[ ] Hex sticker.</li>
 </ul>
-</li>
-</ul>
 <hr>
+</div>
 </div>
 <div id="licence" class="section level2">
 <h2 class="hasAnchor">

@@ -57,11 +57,7 @@ auth0_info <- function(config) {
   scope <- config$auth0_config$scope
   state <- auth0_state()
   conf <- config$auth0_config
-  if (!is.null(config$remote_url)) {
-    app <- auth0_app(app_url = config$remote_url, app_name = config$name, key = conf$credentials$key, secret = conf$credentials$secret)
-  } else {
-    app <- auth0_app(app_name = config$name, key = conf$credentials$key, secret = conf$credentials$secret)
-  }
+  app <- auth0_app(app_name = config$name, key = conf$credentials$key, secret = conf$credentials$secret)
   api <- auth0_api(conf$api_url, conf$request, conf$access)
   list(scope = scope, state = state, app = app, api = api)
 }

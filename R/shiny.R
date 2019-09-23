@@ -28,8 +28,9 @@
 #'
 #' }
 #' @export
-auth0_ui <- function(ui, info) {
-  if (missing(info)) info <- auth0_info()
+auth0_ui <- function(ui, config) {
+  if (missing(config)) config <- auth0_config()
+  info <- auth0_info(config)
   function(req) {
     verify <- has_auth_code(shiny::parseQueryString(req$QUERY_STRING), info$state)
     if (!verify) {
@@ -46,10 +47,14 @@ auth0_ui <- function(ui, info) {
           mapply(paste, names(params), params, MoreArgs = list(sep = "=")),
           collapse = "&"))
 
-        if (grepl("127.0.0.1", req$HTTP_HOST)) {
-          redirect_uri <- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST, query))
+        if (!is.null(config$remote_url)) {
+          redirect_uri <- config$remote_url
         } else {
-          redirect_uri <- paste0("http://", req$HTTP_HOST, query)
+          if (grepl("127.0.0.1", req$HTTP_HOST)) {
+            redirect_uri <- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST, query))
+          } else {
+            redirect_uri <- paste0("http://", req$HTTP_HOST, query)
+          }
         }
         redirect_uri <<- redirect_uri
 
@@ -72,12 +77,13 @@ auth0_ui <- function(ui, info) {
 #' @rdname ui-server
 #'
 #' @param server the shiny server function.
-#' @param info object returned from [auth0_info]. If not informed,
+#' @param config object returned from [auth0_config]. If not informed,
 #'   will try to find the `_auth0.yml` and create it automatically.
 #'
 #' @export
-auth0_server <- function(server, info) {
-  if (missing(info)) info <- auth0_info()
+auth0_server <- function(server, config) {
+  if (missing(config)) config <- auth0_config()
+  info <- auth0_info(config)
   function(input, output, session) {
     shiny::isolate(auth0_server_verify(session, info$app, info$api, info$state))
     shiny::observeEvent(input[["._auth0logout_"]], logout())

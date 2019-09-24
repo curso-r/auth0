@@ -1,7 +1,19 @@
+.onLoad <- function(libname, pkgname) {
+  op <- options()
+  op.auth0 <- list(
+    auth0_config_file = NULL,
+    auth0_disable = NULL,
+    auth0_local = interactive()
+  )
+  toset <- !(names(op.auth0) %in% names(op))
+  if(any(toset)) options(op.auth0[toset])
+  invisible()
+}
+
 #' Find the configuration file.
 #'
 #' Tries to find the path to the `_auth0.yml` file. First, it tries to get
-#'   this info from `options(auth0_config_file = "")`. If this option is `NULL`
+#'   this info from `options(auth0_config_file = )`. If this option is `NULL`
 #'   (the default) it tries to find the `_auth0.yml` within the working
 #'   directory. If the file does not exist, it raises an error.
 #'

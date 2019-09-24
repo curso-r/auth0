@@ -12,7 +12,7 @@ Character vector of length one contaning the path of the
 }
 \description{
 Tries to find the path to the \code{_auth0.yml} file. First, it tries to get
-this info from \code{options(auth0_config_file = "")}. If this option is \code{NULL}
+this info from \code{options(auth0_config_file = )}. If this option is \code{NULL}
 (the default) it tries to find the \code{_auth0.yml} within the working
 directory. If the file does not exist, it raises an error.
 }

@@ -120,7 +120,7 @@ shinyAppAuth0 <- function(ui, server, config_file = NULL, ...) {
     if (is.null(config_file)) {
       config_file <- auth0_find_config_file()
     }
-    config <- auth0_config(config_file)
+    info <- auth0_info(config_file)
     shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info), ...)
   }
 }

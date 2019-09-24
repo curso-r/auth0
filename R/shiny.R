@@ -28,9 +28,8 @@
 #'
 #' }
 #' @export
-auth0_ui <- function(ui, config) {
-  if (missing(config)) config <- auth0_config()
-  info <- auth0_info(config)
+auth0_ui <- function(ui, info) {
+  if (missing(info)) info <- auth0_info()
   function(req) {
     verify <- has_auth_code(shiny::parseQueryString(req$QUERY_STRING), info$state)
     if (!verify) {
@@ -47,8 +46,8 @@ auth0_ui <- function(ui, config) {
           mapply(paste, names(params), params, MoreArgs = list(sep = "=")),
           collapse = "&"))
 
-        if (!is.null(config$remote_url)) {
-          redirect_uri <- config$remote_url
+        if (!is.null(info$remote_url) && info$remote_url != "" && !getOption("auth0_local")) {
+          redirect_uri <- info$remote_url
         } else {
           if (grepl("127.0.0.1", req$HTTP_HOST)) {
             redirect_uri <- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST, query))
@@ -81,9 +80,8 @@ auth0_ui <- function(ui, config) {
 #'   will try to find the `_auth0.yml` and create it automatically.
 #'
 #' @export
-auth0_server <- function(server, config) {
-  if (missing(config)) config <- auth0_config()
-  info <- auth0_info(config)
+auth0_server <- function(server, info) {
+  if (missing(info)) info <- auth0_info()
   function(input, output, session) {
     shiny::isolate(auth0_server_verify(session, info$app, info$api, info$state))
     shiny::observeEvent(input[["._auth0logout_"]], logout())

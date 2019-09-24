@@ -48,7 +48,8 @@ auth0_state <- function(server) {
 #'
 #' @seealso [use_auth0] to create an `_auth0.yml` template.
 #'
-#' @return A list contaning scope, state, keys, OAuth2.0 app and endpoints.
+#' @return A list contaning scope, state, keys, OAuth2.0 app, endpoints and
+#'   remote URL.
 #'
 #' @export
 auth0_info <- function(config) {
@@ -59,7 +60,7 @@ auth0_info <- function(config) {
   conf <- config$auth0_config
   app <- auth0_app(app_name = config$name, key = conf$credentials$key, secret = conf$credentials$secret)
   api <- auth0_api(conf$api_url, conf$request, conf$access)
-  list(scope = scope, state = state, app = app, api = api)
+  list(scope = scope, state = state, app = app, api = api, remote_url = config$remote_url)
 }
 
 #' Parse `_auth0.yml` file.
@@ -141,6 +142,7 @@ use_auth0 <- function(path = ".", file = "_auth0.yml", overwrite = FALSE) {
   attr(api_url, "tag") <- "!expr"
   yaml_list <- list(
     name = "myApp",
+    remote_url = "",
     auth0_config = list(api_url = api_url, credentials = ks))
   yaml::write_yaml(yaml_list, f)
 }

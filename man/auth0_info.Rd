@@ -12,7 +12,8 @@ auth0_info(config)
 \link{auth0_find_config_file}.}
 }
 \value{
-A list contaning scope, state, keys, OAuth2.0 app and endpoints.
+A list contaning scope, state, keys, OAuth2.0 app, endpoints and
+remote URL.
 }
 \description{
 Creates a list containing all the important information to connect to Auth0

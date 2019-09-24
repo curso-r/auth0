@@ -66,6 +66,9 @@
       <a href="../../articles/examples/ui-server-bookmark.html">ui-server-bookmark</a>
     </li>
     <li>
+      <a href="../../articles/examples/ui-server-userinfo.html">ui-server-userinfo</a>
+    </li>
+    <li>
       <a href="../../articles/examples/ui-server.html">ui-server</a>
     </li>
     <li>
@@ -130,6 +133,7 @@
 <h2 class="hasAnchor">
 <a href="#auth0-yml" class="anchor"></a>_auth0.yml</h2>
 <pre><code>name: myApp
+remote_url: ''
 auth0_config:
   api_url: !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')
   credentials:

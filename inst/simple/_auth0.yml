@@ -1,4 +1,5 @@
 name: myApp
+remote_url: ''
 auth0_config:
   api_url: !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')
   credentials:

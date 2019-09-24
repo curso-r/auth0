@@ -69,6 +69,9 @@
       <a href="articles/examples/ui-server-bookmark.html">ui-server-bookmark</a>
     </li>
     <li>
+      <a href="articles/examples/ui-server-userinfo.html">ui-server-userinfo</a>
+    </li>
+    <li>
       <a href="articles/examples/ui-server.html">ui-server</a>
     </li>
     <li>
@@ -168,11 +171,12 @@
 <li>Your <code>_auth0.yml</code> file should be like this:</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">name:</span><span class="at"> myApp</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="fu">auth0_config:</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="fu">api_url:</span><span class="at"> !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="fu">credentials:</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">    <span class="fu">key:</span><span class="at"> !expr Sys.getenv("AUTH0_KEY")</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="fu">secret:</span><span class="at"> !expr Sys.getenv("AUTH0_SECRET")</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="fu">remote_url:</span><span class="at"> </span><span class="st">''</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="fu">auth0_config:</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="fu">api_url:</span><span class="at"> !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="fu">credentials:</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="fu">key:</span><span class="at"> !expr Sys.getenv("AUTH0_KEY")</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">    <span class="fu">secret:</span><span class="at"> !expr Sys.getenv("AUTH0_SECRET")</span></a></code></pre></div>
 <ul>
 <li>Run <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code> and add these three environment variables:</li>
 </ul>
@@ -217,6 +221,8 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="dt">shiny.port =</span> <span class="dv">8080</span>)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">shiny<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/runApp.html">runApp</a></span>(<span class="st">"app/directory/"</span>)</a></code></pre></div>
 <p>If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you’ll be redirected to your app.</p>
+<p>If you are running your app in a remote server like shinyapps.io or your own server, and if your app is in a subfolder of the host (like <a href="https://johndoe.shinyapps.io/fooBar" class="uri">https://johndoe.shinyapps.io/fooBar</a>), you must include your remote URL in the <code>remote_url</code> parameter.</p>
+<p>You can also force <code>{auth0}</code> to use the local URL setting <code><a href="https://rdrr.io/r/base/options.html">options(auth0_local = TRUE)</a></code>. This can useful if you’re running an app inside a Docker container.</p>
 <hr>
 </div>
 </div>
@@ -227,18 +233,20 @@ AUTH0_SECRET=rcaJ0p8...</code></pre>
 <p>However, if you are running many shiny apps and want to use different login settings, you must create many Auth0 apps. Hence, you’ll have many Cliend IDs and Client Secrets to use. In this case, environment variables will be unproductive because you’ll need to change them every time you change the app you are developing.</p>
 <p>The best option in this case is to simply add the Client ID and Secret directly in the <code>_auth0.yml</code> file:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">name:</span><span class="at"> myApp</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="fu">auth0_config:</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="fu">api_url:</span><span class="at"> https://&lt;USERNAME&gt;.auth0.com</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="fu">credentials:</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">    <span class="fu">key:</span><span class="at"> &lt;CLIENT_ID&gt;</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">    <span class="fu">secret:</span><span class="at"> &lt;CLIENT_SECRET&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="fu">remote_url:</span><span class="at"> </span><span class="st">''</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="fu">auth0_config:</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="fu">api_url:</span><span class="at"> https://&lt;USERNAME&gt;.auth0.com</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">  <span class="fu">credentials:</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">    <span class="fu">key:</span><span class="at"> &lt;CLIENT_ID&gt;</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">    <span class="fu">secret:</span><span class="at"> &lt;CLIENT_SECRET&gt;</span></a></code></pre></div>
 <p>Example:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="fu">name:</span><span class="at"> myApp</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="fu">auth0_config:</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="fu">api_url:</span><span class="at"> https://johndoe.auth0.com</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="fu">credentials:</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">    <span class="fu">key:</span><span class="at"> cetQp0e7bdTNGrkrHpuF8gObMVl8vu</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">    <span class="fu">secret:</span><span class="at"> C6GHFa22mfliojqPyKP_5K0ml4TituWrOhYvLdTa7veIyEU3Q10R_-If-7Sh6Tc</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="fu">remote_url:</span><span class="at"> </span><span class="st">''</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="fu">auth0_config:</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="fu">api_url:</span><span class="at"> https://johndoe.auth0.com</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="fu">credentials:</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">    <span class="fu">key:</span><span class="at"> cetQp0e7bdTNGrkrHpuF8gObMVl8vu</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">    <span class="fu">secret:</span><span class="at"> C6GHFa22mfliojqPyKP_5K0ml4TituWrOhYvLdTa7veIyEU3Q10R_-If-7Sh6Tc</span></a></code></pre></div>
 <hr>
 </div>
 <div id="ui-rserver-r" class="section level2">
@@ -349,19 +357,51 @@ $expires_in
 $token_type
 [1] "Bearer"</code></pre>
 <p>The <code>id_token</code> may be used with applications that require an <code>Authorization</code> header with each web request.</p>
+<div id="logged-information-and-ui-rserver-r" class="section level3">
+<h3 class="hasAnchor">
+<a href="#logged-information-and-ui-rserver-r" class="anchor"></a>Logged information and ui.R/server.R</h3>
+<p>If you’re running <code>{auth0}</code> using <code>ui.R/server.R</code> framework and you want to access logged information, you’ll need to use the same object returned <code><a href="reference/auth0_info.html">auth0_info()</a></code> function in both <code><a href="reference/ui-server.html">auth0_ui()</a></code> and <code><a href="reference/ui-server.html">auth0_server()</a></code>.</p>
+<p>This is possible using the <code>global.R</code> file. For example:</p>
+<div id="global-r" class="section level4">
+<h4 class="hasAnchor">
+<a href="#global-r" class="anchor"></a>global.R</h4>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">a0_info &lt;-<span class="st"> </span>auth0<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/auth0/man/auth0_info.html">auth0_info</a></span>()</a></code></pre></div>
+</div>
+<div id="ui-r-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#ui-r-1" class="anchor"></a>ui.R</h4>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shiny)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw"><a href="reference/ui-server.html">auth0_ui</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span>(), <span class="dt">info =</span> a0_info)</a></code></pre></div>
+</div>
+<div id="server-r-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#server-r-1" class="anchor"></a>server.R</h4>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw"><a href="reference/ui-server.html">auth0_server</a></span>(<span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">  <span class="kw"><a href="https://rdrr.io/pkg/shiny/man/observe.html">observe</a></span>({ </a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">    <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(session<span class="op">$</span>userData<span class="op">$</span>auth0_info) </a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">  })</a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb18-9" data-line-number="9">}, <span class="dt">info =</span> a0_info)</a></code></pre></div>
 <hr>
+</div>
+</div>
 </div>
 <div id="logout" class="section level2">
 <h2 class="hasAnchor">
 <a href="#logout" class="anchor"></a>Logout</h2>
 <p>You can add a logout button to your app using <code><a href="reference/logoutButton.html">logoutButton()</a></code>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shiny)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co"># simple UI with logout button</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span>(<span class="kw"><a href="reference/logoutButton.html">logoutButton</a></span>())</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {}</a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shiny)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co"># simple UI with logout button</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">ui &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span>(<span class="kw"><a href="reference/logoutButton.html">logoutButton</a></span>())</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {}</a>
+<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="kw"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
 <hr>
 </div>
 <div id="costs" class="section level2">

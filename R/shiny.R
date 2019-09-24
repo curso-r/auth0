@@ -45,11 +45,14 @@ auth0_ui <- function(ui, info) {
         query <- paste0("/?", paste(
           mapply(paste, names(params), params, MoreArgs = list(sep = "=")),
           collapse = "&"))
-
-        if (grepl("127.0.0.1", req$HTTP_HOST)) {
-          redirect_uri <- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST, query))
+        if (!is.null(info$remote_url) && info$remote_url != "" && !getOption("auth0_local")) {
+          redirect_uri <- info$remote_url
         } else {
-          redirect_uri <- paste0("http://", req$HTTP_HOST, query)
+          if (grepl("127.0.0.1", req$HTTP_HOST)) {
+            redirect_uri <- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST, query))
+          } else {
+            redirect_uri <- paste0("http://", req$HTTP_HOST, query)
+          }
         }
         redirect_uri <<- redirect_uri
 
@@ -117,8 +120,7 @@ shinyAppAuth0 <- function(ui, server, config_file = NULL, ...) {
     if (is.null(config_file)) {
       config_file <- auth0_find_config_file()
     }
-    config <- auth0_config(config_file)
-    info <- auth0_info(config)
+    info <- auth0_info(config_file)
     shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info), ...)
   }
 }

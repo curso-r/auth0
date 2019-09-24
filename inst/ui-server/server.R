@@ -1,3 +1,9 @@
 library(auth0)
 
-auth0_server(function(input, output, session) {})
+auth0_server(function(input, output, session) {
+
+  observe({
+    print(session$userData$auth0_info)
+  })
+
+})

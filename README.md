@@ -67,6 +67,7 @@ auth0::use_auth0()
 
 ```yml
 name: myApp
+remote_url: ''
 auth0_config:
   api_url: !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')
   credentials:
@@ -111,6 +112,7 @@ server <- function(input, output, session) {
 # note that here we're using a different version of shinyApp!
 auth0::shinyAppAuth0(ui, server)
 ```
+
 **Note**: If you want to use a different path to the `auth0` configuration file, you can either pass it to `shinyAppAuth0()` or set the `auth0_config_file` option by running `options(auth0_config_file = "path/to/file")`.
 
 ### Step 5: Run!
@@ -124,6 +126,10 @@ shiny::runApp("app/directory/")
 
 If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you'll be redirected to your app.
 
+If you are running your app in a remote server like shinyapps.io or your own server, and if your app is in a subfolder of the host (like https://johndoe.shinyapps.io/fooBar), you must include your remote URL in the `remote_url` parameter. 
+
+You can also force `{auth0}` to use the local URL setting `options(auth0_local = TRUE)`. This can useful if you're running an app inside a Docker container. 
+
 --------------------------------------------------------------------------------
 
 ## Environment variables and multiple `{auth0}` apps
@@ -136,6 +142,7 @@ The best option in this case is to simply add the Client ID and Secret directly 
 
 ```yml
 name: myApp
+remote_url: ''
 auth0_config:
   api_url: https://<USERNAME>.auth0.com
   credentials:
@@ -147,6 +154,7 @@ Example:
 
 ```yml
 name: myApp
+remote_url: ''
 auth0_config:
   api_url: https://johndoe.auth0.com
   credentials:
@@ -290,6 +298,41 @@ $token_type
 
 The `id_token` may be used with applications that require an `Authorization`
 header with each web request.
+
+### Logged information and ui.R/server.R
+
+If you're running `{auth0}` using `ui.R/server.R` framework and you want to access logged information, you'll need to use the same object returned `auth0_info()` function in both `auth0_ui()` and `auth0_server()`.
+
+This is possible using the `global.R` file. For example:
+
+#### global.R
+
+```r
+a0_info <- auth0::auth0_info()
+```
+
+#### ui.R
+
+```r
+library(shiny)
+library(auth0)
+
+auth0_ui(fluidPage(), info = a0_info)
+```
+
+#### server.R
+
+```r
+library(auth0)
+
+auth0_server(function(input, output, session) {
+
+  observe({ 
+    print(session$userData$auth0_info) 
+  })
+  
+}, info = a0_info)
+```
 
 --------------------------------------------------------------------------------
 

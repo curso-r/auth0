@@ -1,5 +1,5 @@
 ---
-title: "ui-server"
+title: "ui-server-userinfo"
 type: docs
 repo: https://github.com/curso-r/auth0
 menu:
@@ -17,15 +17,15 @@ Also, set the port, running something like `options(shiny.port = 8080)`.
 
 ## global.R
 
-```{r, echo = FALSE, eval=TRUE}
+```{r, echo = FALSE}
+knitr::opts_chunk$set(eval=FALSE)
 f <- system.file(sprintf("%s/global.R", rmarkdown::metadata$title), package = "auth0")
 knitr::spin_child(f)
 ```
 
 ## ui.R
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(eval=FALSE)
+```{r, echo = FALSE, eval=TRUE}
 f <- system.file(sprintf("%s/ui.R", rmarkdown::metadata$title), package = "auth0")
 knitr::spin_child(f)
 ```

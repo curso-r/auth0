@@ -75,7 +75,7 @@ auth0_ui <- function(ui, info) {
 #' @rdname ui-server
 #'
 #' @param server the shiny server function.
-#' @param config object returned from [auth0_config]. If not informed,
+#' @param info object returned from [auth0_info]. If not informed,
 #'   will try to find the `_auth0.yml` and create it automatically.
 #'
 #' @export

@@ -360,6 +360,10 @@ Auth0 is a freemium service. The free account lets you have up to 7000 connectio
 
 This package is not provided nor endorsed by Auth0 Inc. Use it at your own risk.
 
+Also, I am NOT a security expert, and as [Bob Rudis pointed out](https://twitter.com/hrbrmstr/status/1175924379412307970), adding the word "secure" on something has broad implications of efficacy and completeness. So this package may be lying when it tells it's secure. 
+
+If you're a security expert and liked the idea of this package, please consider testing it. We'll be really, really grateful for any help.
+
 --------------------------------------------------------------------------------
 
 ## Roadmap

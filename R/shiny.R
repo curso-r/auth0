@@ -45,7 +45,6 @@ auth0_ui <- function(ui, info) {
         query <- paste0("/?", paste(
           mapply(paste, names(params), params, MoreArgs = list(sep = "=")),
           collapse = "&"))
-
         if (!is.null(info$remote_url) && info$remote_url != "" && !getOption("auth0_local")) {
           redirect_uri <- info$remote_url
         } else {
@@ -122,8 +121,7 @@ shinyAppAuth0 <- function(ui, server, config_file = NULL, ...) {
       config_file <- auth0_find_config_file()
     }
     config <- auth0_config(config_file)
-    info <- auth0_info(config)
-    shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info), ...)
+    shiny::shinyApp(auth0_ui(ui, config), auth0_server(server, config), ...)
   }
 }
 

@@ -6,6 +6,7 @@ articles:
   logout: examples/logout.html
   simple: examples/simple.html
   ui-server-bookmark: examples/ui-server-bookmark.html
+  ui-server-userinfo: examples/ui-server-userinfo.html
   ui-server: examples/ui-server.html
   userinfo: examples/userinfo.html
   tutorial: tutorial.html

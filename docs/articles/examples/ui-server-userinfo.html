@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bookmark • auth0</title>
+<title>ui-server-userinfo • auth0</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
-<script src="../../pkgdown.js"></script><meta property="og:title" content="bookmark">
+<script src="../../pkgdown.js"></script><meta property="og:title" content="ui-server-userinfo">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -96,46 +96,42 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>bookmark</h1>
+      <h1>ui-server-userinfo</h1>
             
       
       
-      <div class="hidden name"><code>bookmark.Rmd</code></div>
+      <div class="hidden name"><code>ui-server-userinfo.Rmd</code></div>
 
     </div>
 
     
     
 <div class="source-ref">
-<p><span class="caption">Source: </span><a href="https://github.com/curso-r/auth0/blob/master/inst/bookmark" class="uri">https://github.com/curso-r/auth0/blob/master/inst/bookmark</a></p>
+<p><span class="caption">Source: </span><a href="https://github.com/curso-r/auth0/blob/master/inst/ui-server-userinfo" class="uri">https://github.com/curso-r/auth0/blob/master/inst/ui-server-userinfo</a></p>
 </div>
 <p>Don’t forget to configure your environment variables.</p>
 <p>Also, set the port, running something like <code><a href="https://rdrr.io/r/base/options.html">options(shiny.port = 8080)</a></code>.</p>
-<div id="app-r" class="section level2">
+<div id="global-r" class="section level2">
 <h2 class="hasAnchor">
-<a href="#app-r" class="anchor"></a>app.R</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shiny)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="cf">function</span>(request) {</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="kw"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span>(</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="kw"><a href="https://rdrr.io/pkg/shiny/man/textInput.html">textInput</a></span>(<span class="st">"txt"</span>, <span class="st">"Enter text"</span>),</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="kw"><a href="https://rdrr.io/pkg/shiny/man/checkboxInput.html">checkboxInput</a></span>(<span class="st">"caps"</span>, <span class="st">"Capitalize"</span>),</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">    <span class="kw"><a href="https://rdrr.io/pkg/shiny/man/verbatimTextOutput.html">verbatimTextOutput</a></span>(<span class="st">"out"</span>),</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="kw"><a href="https://rdrr.io/pkg/shiny/man/bookmarkButton.html">bookmarkButton</a></span>()</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">  )</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">}</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">  output<span class="op">$</span>out &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/renderText.html">renderText</a></span>({</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">    <span class="cf">if</span> (input<span class="op">$</span>caps)</a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">      <span class="kw"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span>(input<span class="op">$</span>txt)</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">    <span class="cf">else</span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">      input<span class="op">$</span>txt</a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">  })</a>
-<a class="sourceLine" id="cb1-19" data-line-number="19">}</a>
-<a class="sourceLine" id="cb1-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/enableBookmarking.html">enableBookmarking</a></span>(<span class="dt">store =</span> <span class="st">"server"</span>)</a>
-<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="kw"><a href="../../reference/shinyAppAuth0.html">shinyAppAuth0</a></span>(ui, server)</a></code></pre></div>
+<a href="#global-r" class="anchor"></a>global.R</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">a0_info &lt;-<span class="st"> </span>auth0<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/auth0/man/auth0_info.html">auth0_info</a></span>()</a></code></pre></div>
+</div>
+<div id="ui-r" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ui-r" class="anchor"></a>ui.R</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shiny)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw"><a href="../../reference/ui-server.html">auth0_ui</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span>(<span class="kw"><a href="../../reference/logoutButton.html">logoutButton</a></span>()), <span class="dt">info =</span> a0_info)</a></code></pre></div>
+</div>
+<div id="server-r" class="section level2">
+<h2 class="hasAnchor">
+<a href="#server-r" class="anchor"></a>server.R</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(auth0)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="../../reference/ui-server.html">auth0_server</a></span>(<span class="cf">function</span>(input, output, session) {</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="kw"><a href="https://rdrr.io/pkg/shiny/man/observe.html">observe</a></span>({ <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(session<span class="op">$</span>userData<span class="op">$</span>auth0_info) })</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">}, <span class="dt">info =</span> a0_info)</a></code></pre></div>
 </div>
 <div id="auth0-yml" class="section level2">
 <h2 class="hasAnchor">
@@ -156,7 +152,9 @@ auth0_config:
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#app-r">app.R</a></li>
+<li><a href="#global-r">global.R</a></li>
+      <li><a href="#ui-r">ui.R</a></li>
+      <li><a href="#server-r">server.R</a></li>
       <li><a href="#auth0-yml">_auth0.yml</a></li>
       </ul>
 </div>

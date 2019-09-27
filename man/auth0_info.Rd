@@ -13,7 +13,8 @@ auth0_info(config)
 }
 \value{
 A list contaning scope, state, keys, OAuth2.0 app, endpoints and
-remote URL.
+remote URL. For compatibility reasons, \code{remote_url} can be either a parameter
+in the root yaml or inside a \code{shiny_config} parameter.
 }
 \description{
 Creates a list containing all the important information to connect to Auth0

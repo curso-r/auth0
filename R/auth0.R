@@ -49,7 +49,8 @@ auth0_state <- function(server) {
 #' @seealso [use_auth0] to create an `_auth0.yml` template.
 #'
 #' @return A list contaning scope, state, keys, OAuth2.0 app, endpoints and
-#'   remote URL.
+#'   remote URL. For compatibility reasons, `remote_url` can be either a parameter
+#'   in the root yaml or inside a `shiny_config` parameter.
 #'
 #' @export
 auth0_info <- function(config) {
@@ -60,7 +61,10 @@ auth0_info <- function(config) {
   conf <- config$auth0_config
   app <- auth0_app(app_name = config$name, key = conf$credentials$key, secret = conf$credentials$secret)
   api <- auth0_api(conf$api_url, conf$request, conf$access)
-  list(scope = scope, state = state, app = app, api = api, remote_url = config$remote_url)
+  rurl <- config$remote_url
+  # backward compatibility
+  if (is.null(rurl)) rurl <- config$shiny_config$remote_url
+  list(scope = scope, state = state, app = app, api = api, remote_url = rurl)
 }
 
 #' Parse `_auth0.yml` file.

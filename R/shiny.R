@@ -35,7 +35,7 @@ auth0_ui <- function(ui, info) {
     if (!verify) {
       if (grepl("error=unauthorized", req$QUERY_STRING)) {
         redirect <- sprintf("location.replace(\"%s\");", logout_url())
-        htmltools::tags$script(htmltools::HTML(redirect))
+        shiny::tags$script(shiny::HTML(redirect))
       } else {
 
         params <- shiny::parseQueryString(req$QUERY_STRING)
@@ -60,7 +60,7 @@ auth0_ui <- function(ui, info) {
           info$api, info$app(redirect_uri), scope = info$scope, state = info$state
         )
         redirect <- sprintf("location.replace(\"%s\");", url)
-        htmltools::tags$script(htmltools::HTML(redirect))
+        shiny::tags$script(shiny::HTML(redirect))
       }
     } else {
       if (is.function(ui)) {

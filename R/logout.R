@@ -71,6 +71,11 @@ logout_url <- function() {
 #'
 #' @export
 logout <- function() {
+
+  if (!requireNamespace("shinyjs", quietly = TRUE)) {
+    stop("Package \"shinyjs\" required.", call. = FALSE)
+  }
+
   shiny::insertUI(
     selector = "head", where = "beforeEnd", immediate = TRUE,
     ui = shinyjs::useShinyjs()

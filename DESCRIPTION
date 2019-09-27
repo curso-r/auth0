@@ -20,10 +20,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports: httr,
     shiny,
-    shinyjs,
     yaml,
     utils
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    shinyjs
 VignetteBuilder: knitr

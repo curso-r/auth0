@@ -128,6 +128,7 @@ auth0_config <- function(config_file) {
 #'     - `secret`: the Client Secret in Auth0 application settings.
 #'
 #' The extra parameters are:
+#' - `remote_url`: If you are using Shiny-Server or ShinyApps IO service.
 #' - `scope`: The information that Auth0 app will access.
 #' Defaults to "openid profile".
 #' - `request`: Endpoit to request a token. Defaults to "oauth/token"

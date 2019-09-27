@@ -1,3 +1,7 @@
+# auth0 0.2.1
+
+- Major Bugfix: Re-add `remote_url` option into `_auth0.yml` file and add a new `auth0_local` option (Issue #45, PR #47).
+
 # auth0 0.2.0
 
 - Support bookmarking (server side) (PR #38).

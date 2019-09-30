@@ -1,4 +1,4 @@
-# {auth0}
+# auth0 <a href='https:/curso-r.github.io/auth0'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![Travis-CI Build Status](https://travis-ci.org/curso-r/auth0.svg?branch=master)](https://travis-ci.org/curso-r/auth0) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/curso-r/auth0?branch=master&svg=true)](https://ci.appveyor.com/project/curso-r/auth0) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/auth0)](https://cran.r-project.org/package=auth0)
 
@@ -378,7 +378,7 @@ If you're a security expert and liked the idea of this package, please consider 
 ### `{auth0}` 0.3.0
 
 - [ ] Implement `{auth0}` API functions to manage users and login options throusgh R.
-- [ ] Hex sticker.
+- [✔] Hex sticker.
 
 --------------------------------------------------------------------------------
 

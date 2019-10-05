@@ -1,6 +1,6 @@
 Package: auth0
 Type: Package
-Title: Secure Authentication in Shiny with Auth0
+Title: Authentication in Shiny with Auth0
 Version: 0.2.1.9000
 Authors@R: c(
     person("Julio", "Trecenti", email = "julio.trecenti@gmail.com", role = "cre"),
@@ -9,7 +9,7 @@ Authors@R: c(
     person("Dean", "Attali", email = "daattali@gmail.com", role = "ctb"),
     person("C", "Lente", email = "c@lente.dev", role = "ctb"))
 Description: Uses Auth0 API (see <https://auth0.com> for more 
-    information) to use a simple and secure authentication system. It provides 
+    information) to use a simple authentication system. It provides 
     tools to log in and out a shiny application using social networks or a list
     of e-mails.
 BugReports: https://github.com/curso-r/auth0/issues

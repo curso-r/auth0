@@ -56,8 +56,10 @@ auth0_ui <- function(ui, info) {
         }
         redirect_uri <<- redirect_uri
 
+        query_extra <- if(is.null(info$audience)) list() else list(audience=info$audience)
         url <- httr::oauth2.0_authorize_url(
-          info$api, info$app(redirect_uri), scope = info$scope, state = info$state
+          info$api, info$app(redirect_uri), scope = info$scope, state = info$state,
+          query_extra=query_extra
         )
         redirect <- sprintf("location.replace(\"%s\");", url)
         shiny::tags$script(shiny::HTML(redirect))

@@ -187,6 +187,34 @@ auth0_server(function(input, output, session) {})
 `{auth0}` will try to find the `_auth0.yml` using the same strategy than the `app.R` framework: first from `options(auth0_config_file = "path/to/file")` and then fixing `"./_auth0.yml"`. Both `auth0_ui()` and `auth0_server()` have a `info=` parameter where you can pass either the path of the `_auth0.yml` file or the object returned by `auth0_info()` function.
 
 
+
+--------------------------------------------------------------------------------
+
+## Audience parameter
+
+To authorize a client to make API calls against a remote server, the authorization request should include an `audience` parameter 
+([Auth0 documentation](https://auth0.com/docs/flows/guides/auth-code/call-api-auth-code#example-authorization-url)).
+
+To do this with `{auth0}`, add an `audience` parameter to the `auth0_config`
+section of your `_auth0.yml` file. For example:
+
+```yml
+name: myApp
+remote_url: ''
+auth0_config:
+  api_url: !expr paste0('https://', Sys.getenv("AUTH0_USER"), '.auth0.com')
+  audience: https://example.com/api
+  credentials:
+    key: !expr Sys.getenv("AUTH0_KEY")
+    secret: !expr Sys.getenv("AUTH0_SECRET")
+```
+
+When an `audience` parameter is included in the request, the 
+[access token](https://auth0.com/docs/tokens)
+returned by Auth0 will be a JWT access token rather than an opaque access token.
+The client must include the access token with API requests to authenticate
+the requests.
+
 --------------------------------------------------------------------------------
 
 ## RStudio limitations

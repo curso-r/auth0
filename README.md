@@ -132,11 +132,16 @@ You can also force `{auth0}` to use the local URL setting `options(auth0_local =
 
 --------------------------------------------------------------------------------
 
-## Environment variables and multiple `{auth0}` apps
+## Environment variables and multiple Auth0 apps
 
 If you are using `{auth0}` for just one shiny app or you are running many apps for the same user database, the recommended workflow is using the environment variables `AUTH0_KEY` and `AUTH0_SECRET`.
 
-However, if you are running many shiny apps and want to use different login settings, you must create many Auth0 apps. Hence, you'll have many Cliend IDs and Client Secrets to use. In this case, environment variables will be unproductive because you'll need to change them every time you change the app you are developing.
+However, if you are running many shiny apps and want to use different login settings, you must create many Auth0 apps. Hence, you'll have many Cliend IDs and Client Secrets to use. n this case, global environment variables will be unproductive because you'll need to change them every time you change the app you are developing.
+
+There are two options in this case:
+
+- (Recommended) Add environment variables inside the repository of your application, using `usethis::edit_r_environ("project")`.
+- (Not recommended) Add the Client ID and Secret directly in the _auth0.yml file:
 
 The best option in this case is to simply add the Client ID and Secret directly in the `_auth0.yml` file:
 
@@ -161,6 +166,9 @@ auth0_config:
     key: cetQp0e7bdTNGrkrHpuF8gObMVl8vu
     secret: C6GHFa22mfliojqPyKP_5K0ml4TituWrOhYvLdTa7veIyEU3Q10R_-If-7Sh6Tc
 ```
+
+Although possible, the latter option is less secure and consequently not recommended because it's easy to forget passwords there and commit them in public repositories, for example.
+
 --------------------------------------------------------------------------------
 
 ## `ui.R`/`server.R`

@@ -126,7 +126,7 @@ shiny::runApp("app/directory/")
 
 If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you'll be redirected to your app.
 
-If you are running your app in a remote server like shinyapps.io or your own server, and if your app is in a subfolder of the host (like https://johndoe.shinyapps.io/fooBar), you must include your remote URL in the `remote_url` parameter. 
+If you are running your app in a remote server like shinyapps.io or your own server, and if your app is in a subfolder of the host (like https://johndoe.shinyapps.io/fooBar), you must include your remote URL in the `remote_url` parameter in the `_auth0.yml` file. 
 
 You can also force `{auth0}` to use the local URL setting `options(auth0_local = TRUE)`. This can useful if you're running an app inside a Docker container. 
 

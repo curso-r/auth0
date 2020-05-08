@@ -44,7 +44,12 @@ auth0_ui <- function(ui, info) {
 
         query <- paste0("/?", paste(
           mapply(paste, names(params), params, MoreArgs = list(sep = "=")),
-          collapse = "&"))
+          collapse = "&")
+        )
+
+        # this way auth0 doesnt crash
+        query <- URLencode(query)
+
         if (!is.null(info$remote_url) && info$remote_url != "" && !getOption("auth0_local")) {
           redirect_uri <- info$remote_url
         } else {
@@ -59,14 +64,14 @@ auth0_ui <- function(ui, info) {
         query_extra <- if(is.null(info$audience)) list() else list(audience=info$audience)
         url <- httr::oauth2.0_authorize_url(
           info$api, info$app(redirect_uri), scope = info$scope, state = info$state,
-          query_extra=query_extra
+          query_extra = query_extra
         )
         redirect <- sprintf("location.replace(\"%s\");", url)
         shiny::tags$script(shiny::HTML(redirect))
       }
     } else {
       if (is.function(ui)) {
-        ui(req)
+        ui()
       } else {
         ui
       }
@@ -84,6 +89,12 @@ auth0_ui <- function(ui, info) {
 auth0_server <- function(server, info) {
   if (missing(info)) info <- auth0_info()
   function(input, output, session) {
+    shiny::observe({
+      lista_nova <- shiny::parseQueryString(session$clientData$url_search)
+      lapply(seq_along(lista_nova), function(ii) {
+        session$sendInputMessage(names(lista_nova)[ii], list(value = lista_nova[[ii]]))
+      })
+    })
     shiny::isolate(auth0_server_verify(session, info$app, info$api, info$state))
     shiny::observeEvent(input[["._auth0logout_"]], logout())
     server(input, output, session)

@@ -39,10 +39,8 @@ auth0_ui <- function(ui, info) {
       } else {
 
         params <- shiny::parseQueryString(req$QUERY_STRING)
-        params$code <- NULL
-        params$state <- NULL
 
-        query <- paste0("/?", paste(
+        query <- paste0("/?code=&state=&", paste(
           mapply(paste, names(params), params, MoreArgs = list(sep = "=")),
           collapse = "&")
         )
@@ -89,12 +87,15 @@ auth0_ui <- function(ui, info) {
 auth0_server <- function(server, info) {
   if (missing(info)) info <- auth0_info()
   function(input, output, session) {
-    shiny::observe({
-      lista_nova <- shiny::parseQueryString(session$clientData$url_search)
-      lapply(seq_along(lista_nova), function(ii) {
-        session$sendInputMessage(names(lista_nova)[ii], list(value = lista_nova[[ii]]))
-      })
-    })
+
+    ## possible workaround without shiny PR
+    # shiny::observe({
+    #   lista_nova <- shiny::parseQueryString(session$clientData$url_search)
+    #   # lapply(seq_along(lista_nova), function(ii) {
+    #   #   session$sendInputMessage(names(lista_nova)[ii], list(value = lista_nova[[ii]]))
+    #   # })
+    # })
+
     shiny::isolate(auth0_server_verify(session, info$app, info$api, info$state))
     shiny::observeEvent(input[["._auth0logout_"]], logout())
     server(input, output, session)

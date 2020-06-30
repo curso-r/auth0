@@ -25,12 +25,13 @@ auth0_server_verify <- function(session, app, api, state) {
       user_params = list(grant_type = "authorization_code"))
 
     userinfo_url <- sub("authorize", "userinfo", api$authorize)
-    resp <- httr::RETRY(
-      verb = "GET"
-      , url = userinfo_url
-      , httr::config(token = token)
-      , times = 5
-    )
+    resp <- httr::GET(userinfo_url, httr::config(token = token))
+    # resp <- httr::RETRY(
+    #   verb = "GET"
+    #   , url = userinfo_url
+    #   , httr::config(token = token)
+    #   , times = 5
+    # )
 
     assign("auth0_credentials", token$credentials, envir = session$userData)
     assign("auth0_info", httr::content(resp, "parsed"), envir = session$userData)

@@ -12,10 +12,10 @@ You can install `{auth0}` from CRAN with:
 install.packages("auth0")
 ```
 
-You can also install the development version from github with:
+You can also install the development version from GitHub with:
 
 ``` r
-# install.packages("devtools")
+# install.packages("remotes")
 remotes::install_github("curso-r/auth0")
 ```
 
@@ -47,8 +47,8 @@ After logging into Auth0, you will see a page like this:
 
 - Add `http://localhost:8080` to the "Allowed Callback URLs", "Allowed Web Origins" and "Allowed Logout URLs".
     - You can change `http://localhost:8080` to another port.
-- Add the remote server where you are going to deploy your shiny app to the same boxes.
-    - Just make sure that these addresses are correct. If you are placing your app inside a folder (e.g. https://johndoe.shinyapps.io/fooBar), don't include the folder (`fooBar`) in "Allowed Web Origins".
+- Add the remote server URL (where you are going to deploy your shiny app to) to the same boxes.
+    - It's very important that these URLs are 100% correct, otherwise authentication will not work. Note that "Allowed Web Origins" should not contain a directory name. For example, if your app will be hosted at https://johndoe.shinyapps.io/fooBar, then that's the URL to use in "Allowed Callback URLs" and "Allowed Logout URLs", but you should use https://johndoe.shinyapps.io in "Allowed Web Origins".
 - Click "Save"
 
 Now let's go to R!
@@ -83,7 +83,7 @@ AUTH0_KEY=5wugt0W...
 AUTH0_SECRET=rcaJ0p8...
 ```
 
-There's how you identify each of them (see the image below):
+This is how you identify each of them (see the image below):
 
 - `AUTH0_USER` is your username, which can be found on the top corner of the site.
 - `AUTH0_KEY` is your Client ID, which can be copied from inside the app page.

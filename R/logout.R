@@ -15,6 +15,7 @@
 #' \code{\link[auth0]{logout_url}}
 #' @examples
 #' if (interactive()) {
+#'   use_auth0()
 #'   ui <- fluidPage(
 #'     logoutButton(),
 #'     logoutButton(label = "Another logout button", id = "logout2")
@@ -24,7 +25,7 @@
 #'       logout()
 #'     })
 #'   }
-#'   shinyAuth0App(ui, server)
+#'   shinyAppAuth0(ui, server)
 #' }
 #'
 #' @export
@@ -50,7 +51,7 @@ logout_url <- function() {
 
   config <- auth0_config()
 
-  app_url_enc <- utils::URLencode(redirect_uri, reserved = TRUE)
+  app_url_enc <- utils::URLencode(.globals$redirect_uri, reserved = TRUE)
   logout_url <- sprintf("%s/v2/logout?client_id=%s&returnTo=%s",
                         config$auth0_config$api_url,
                         config$auth0_config$credentials$key,

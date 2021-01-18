@@ -10,7 +10,7 @@
 #' @seealso [auth0_info].
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # first, create the yml file using use_auth0() function
 #'
 #' # ui.R file
@@ -54,7 +54,7 @@ auth0_ui <- function(ui, info) {
             redirect_uri <- paste0("http://", req$HTTP_HOST, query)
           }
         }
-        redirect_uri <<- redirect_uri
+        .globals$redirect_uri <- redirect_uri
 
         query_extra <- if(is.null(info$audience)) list() else list(audience=info$audience)
         url <- httr::oauth2.0_authorize_url(
@@ -152,7 +152,7 @@ shinyAuth0App <- function(ui, server, config_file = NULL) {
 #' @param redirect_js include javascript code to redirect page? Defaults to `TRUE`.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'
 #' # simple UI with action button
 #' # AFTER auth0 0.1.2
@@ -160,6 +160,7 @@ shinyAuth0App <- function(ui, server, config_file = NULL) {
 #' library(shiny)
 #' library(auth0)
 #'
+#' use_auth0()
 #' ui <- fluidPage(logoutButton())
 #' server <- function(input, output, session) {}
 #' shinyAppAuth0(ui, server, config_file)

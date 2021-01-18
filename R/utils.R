@@ -52,4 +52,4 @@ auth0_find_config_file <- function() {
 }
 
 # Get rid of NOTE
-globalVariables(c("redirect_uri"))
+# globalVariables(c("redirect_uri"))

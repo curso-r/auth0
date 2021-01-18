@@ -19,9 +19,9 @@ auth0_server_verify <- function(session, app, api, state) {
   params <- shiny::parseQueryString(u_search)
 
   if (has_auth_code(params, state)) {
-    cred <- httr::oauth2.0_access_token(api, app(redirect_uri), params$code)
+    cred <- httr::oauth2.0_access_token(api, app(.globals$redirect_uri), params$code)
     token <- httr::oauth2.0_token(
-      app = app(redirect_uri), endpoint = api, cache = FALSE, credentials = cred,
+      app = app(.globals$redirect_uri), endpoint = api, cache = FALSE, credentials = cred,
       user_params = list(grant_type = "authorization_code"))
 
     userinfo_url <- sub("authorize", "userinfo", api$authorize)

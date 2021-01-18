@@ -24,6 +24,7 @@ to be used to log out of an auth0 Shiny app.
 }
 \examples{
 if (interactive()) {
+  use_auth0()
   ui <- fluidPage(
     logoutButton(),
     logoutButton(label = "Another logout button", id = "logout2")
@@ -33,7 +34,7 @@ if (interactive()) {
       logout()
     })
   }
-  shinyAuth0App(ui, server)
+  shinyAppAuth0(ui, server)
 }
 
 }

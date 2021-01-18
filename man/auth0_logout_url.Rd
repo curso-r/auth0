@@ -16,7 +16,7 @@ auth0_logout_url(config_file = NULL, redirect_js = TRUE)
 user experience with the \code{\link[=logoutButton]{logoutButton()}} function.
 }
 \examples{
-\donttest{
+\dontrun{
 
 # simple UI with action button
 # AFTER auth0 0.1.2
@@ -24,6 +24,7 @@ user experience with the \code{\link[=logoutButton]{logoutButton()}} function.
 library(shiny)
 library(auth0)
 
+use_auth0()
 ui <- fluidPage(logoutButton())
 server <- function(input, output, session) {}
 shinyAppAuth0(ui, server, config_file)

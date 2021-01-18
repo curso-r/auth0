@@ -14,7 +14,7 @@ auth0_server(server, info)
 \item{ui}{\code{shiny.tag.list} object to generate the user interface.}
 
 \item{info}{object returned from \link{auth0_info}. If not informed,
-will try to find the \code{_auth0.yml} and create it automatically.}
+will try to find the \verb{_auth0.yml} and create it automatically.}
 
 \item{server}{the shiny server function.}
 }
@@ -23,7 +23,7 @@ These functions can be used in a ui.R/server.R framework, modifying the
 shiny objects to authenticate using Auth0 service with no pain.
 }
 \examples{
-\donttest{
+\dontrun{
 # first, create the yml file using use_auth0() function
 
 # ui.R file

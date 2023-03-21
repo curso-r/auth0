@@ -15,15 +15,14 @@ Description: Uses Auth0 API (see <https://auth0.com> for more
 BugReports: https://github.com/curso-r/auth0/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.3
 Imports: httr,
     shiny,
     yaml,
-    utils
+    utils,
+    shinyjs
 Suggests: 
     knitr,
-    rmarkdown,
-    shinyjs
+    rmarkdown
 VignetteBuilder: knitr

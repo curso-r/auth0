@@ -1,3 +1,10 @@
+# auth0 0.2.2
+
+- Remove `LazyData` from `DESCRIPTION` file
+- Add `shinyjs` package as Import, not Suggests
+- Update old functions and examples
+- Use github actions as CI instead of travis/appveyor
+
 # auth0 0.2.1
 
 - Major Bugfix: Re-add `remote_url` option into `_auth0.yml` file and add a new `auth0_local` option (Issue #45, PR #47).

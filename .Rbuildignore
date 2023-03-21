@@ -12,3 +12,5 @@
 ^cran-comments\.md$
 ^vignette/examples$
 ^pkgdown$
+^README\.Rmd$
+^\.github$

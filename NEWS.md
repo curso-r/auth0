@@ -1,5 +1,7 @@
 # auth0 0.2.3
 
+- fix documentation for CRAN
+
 # auth0 0.2.2
 
 - Remove `LazyData` from `DESCRIPTION` file

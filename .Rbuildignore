@@ -4,7 +4,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.md$
-^NEWS\.md$
 ^README-.*\.png$
 ^\.travis\.yml$
 ^appveyor\.yml$
@@ -14,3 +13,4 @@
 ^pkgdown$
 ^README\.Rmd$
 ^\.github$
+^CRAN-SUBMISSION$

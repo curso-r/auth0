@@ -10,7 +10,7 @@ use_auth0(path = ".", file = "_auth0.yml", overwrite = FALSE)
 \item{path}{Directory name. Should be the root of the shiny app
 you want to add this functionality}
 
-\item{file}{File name. Defaults to \code{_auth0.yml}.}
+\item{file}{File name. Defaults to \verb{_auth0.yml}.}
 
 \item{overwrite}{Will only overwrite existing path if \code{TRUE}.}
 }

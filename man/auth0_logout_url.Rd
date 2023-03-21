@@ -21,33 +21,36 @@ user experience with the \code{\link[=logoutButton]{logoutButton()}} function.
 # simple UI with action button
 # AFTER auth0 0.1.2
 
-library(shiny)
-library(auth0)
+if (interactive()) {
+  library(shiny)
+  library(auth0)
 
-ui <- fluidPage(logoutButton())
-server <- function(input, output, session) {}
-shinyAppAuth0(ui, server, config_file)
+  ui <- fluidPage(logoutButton())
+  server <- function(input, output, session) {}
+  config_file <- system.file("simple/_auth0.yml", package = "auth0")
+  shinyAppAuth0(ui, server, config_file)
 
-# simple UI with action button
-# BEFORE auth0 0.1.2
+  # simple UI with action button
+  # BEFORE auth0 0.1.2
 
-library(shiny)
-library(auth0)
-library(shinyjs)
+  library(shiny)
+  library(auth0)
+  library(shinyjs)
 
-# note that you must include shinyjs::useShinyjs() for this to work
-ui <- fluidPage(shinyjs::useShinyjs(), actionButton("logout_auth0", "Logout"))
+  # note that you must include shinyjs::useShinyjs() for this to work
+  ui <- fluidPage(shinyjs::useShinyjs(), actionButton("logout_auth0", "Logout"))
 
-# server with one observer that logouts
-server <- function(input, output, session) {
-  observeEvent(input$logout_auth0, {
-    # javascript code redirecting to correct url
-    js <- auth0_logout_url()
-    shinyjs::runjs(js)
-  })
+  # server with one observer that logouts
+  server <- function(input, output, session) {
+    observeEvent(input$logout_auth0, {
+      # javascript code redirecting to correct url
+      js <- auth0_logout_url()
+      shinyjs::runjs(js)
+    })
+  }
+  shinyAuth0App(ui, server, config_file)
 }
 
-shinyAuth0App(ui, server, config_file = config_file)
 }
 
 

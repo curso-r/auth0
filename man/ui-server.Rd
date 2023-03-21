@@ -14,7 +14,7 @@ auth0_server(server, info)
 \item{ui}{\code{shiny.tag.list} object to generate the user interface.}
 
 \item{info}{object returned from \link{auth0_info}. If not informed,
-will try to find the \code{_auth0.yml} and create it automatically.}
+will try to find the \verb{_auth0.yml} and create it automatically.}
 
 \item{server}{the shiny server function.}
 }
@@ -26,18 +26,21 @@ shiny objects to authenticate using Auth0 service with no pain.
 \donttest{
 # first, create the yml file using use_auth0() function
 
-# ui.R file
-library(shiny)
-library(auth0)
-auth0_ui(fluidPage(logoutButton()))
+if (interactive()) {
 
-# server.R file
-library(auth0)
-auth0_server(function(input, output, session) {})
+  # ui.R file
+  library(shiny)
+  library(auth0)
+  auth0_ui(fluidPage(logoutButton()))
 
-# console
-options(shiny.port = 8080)
-shiny::runApp()
+  # server.R file
+  library(auth0)
+  auth0_server(function(input, output, session) {})
+
+  # console
+  options(shiny.port = 8080)
+  shiny::runApp()
+}
 
 }
 }

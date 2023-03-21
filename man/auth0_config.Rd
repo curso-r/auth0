@@ -2,18 +2,18 @@
 % Please edit documentation in R/auth0.R
 \name{auth0_config}
 \alias{auth0_config}
-\title{Parse \code{_auth0.yml} file.}
+\title{Parse \verb{_auth0.yml} file.}
 \usage{
 auth0_config(config_file)
 }
 \arguments{
-\item{config_file}{path to the \code{_auth0.yml} file. If not informed,
+\item{config_file}{path to the \verb{_auth0.yml} file. If not informed,
 will try to find the file using \link{auth0_find_config_file}.}
 }
 \value{
-List containing all the information from the \code{_auth0.yml} file.
+List containing all the information from the \verb{_auth0.yml} file.
 }
 \description{
 Validates and creates a list of useful information from
-the \code{_auth0.yml} file.
+the \verb{_auth0.yml} file.
 }

@@ -7,12 +7,13 @@
 auth0_info(config)
 }
 \arguments{
-\item{config}{path to the \code{_auth0.yml} file or the object returned by
+\item{config}{path to the \verb{_auth0.yml} file or the object returned by
 \link{auth0_config}. If not informed, will try to find the file using
 \link{auth0_find_config_file}.}
 }
 \value{
-A list contaning scope, state, keys, OAuth2.0 app, endpoints and
+A list contaning scope, state, keys, OAuth2.0 app, endpoints,
+audience and
 remote URL. For compatibility reasons, \code{remote_url} can be either a parameter
 in the root yaml or inside a \code{shiny_config} parameter.
 }
@@ -21,5 +22,5 @@ Creates a list containing all the important information to connect to Auth0
 service's API.
 }
 \seealso{
-\link{use_auth0} to create an \code{_auth0.yml} template.
+\link{use_auth0} to create an \verb{_auth0.yml} template.
 }

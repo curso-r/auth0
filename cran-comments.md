@@ -1,27 +1,19 @@
 ## Test environments
 
-* local Ubuntu 18.04
-* Ubuntu 18.04 (on travis-ci), R-release
+* local Ubuntu 20.04
+* GitHub Actions (macOS, windows, ubuntu)
 * r-hub (check_for_cran)
 
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
 
-## Version 0.2.1
+## Version 0.2.3
 
-Fixed a major bug re-adding remote URL parameter and a new auth0 local 
-  option on startup.
+- Remove `LazyData` from `DESCRIPTION` file
+- Add `shinyjs` package as Import, not Suggests
+- Update old functions and examples
 
 ## Reverse dependencies
 
 There are no reverse dependencies.
-
----
-
-* FAILURE SUMMARY
-
-    * checking CRAN incoming feasibility ... NOTE
-    Maintainer: 'Julio Trecenti <julio.trecenti@gmail.com>'
-    
-    Days since last update: 5

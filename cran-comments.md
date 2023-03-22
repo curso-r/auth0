@@ -13,6 +13,7 @@
 - Remove `LazyData` from `DESCRIPTION` file
 - Add `shinyjs` package as Import, not Suggests
 - Update old functions and examples
+- Fixed links
 
 ## Reverse dependencies
 

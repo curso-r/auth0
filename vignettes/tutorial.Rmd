@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 The goal of `{auth0}` is to implement an authentication scheme to Shiny using OAuth Apps through the freemium service [Auth0](https://auth0.com).
 
-To create your authenticated shiny app, you need to follow the steps below. The full decription can be found in the `README` of the [package site](https://curso-r.github.io/auth0).
+To create your authenticated shiny app, you need to follow the steps below. The full decription can be found in the `README` of the [package site](https://curso-r.github.io/auth0/).
 
 ### Create an Auth0 account and application
 

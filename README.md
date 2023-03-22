@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# auth0 <a href='https:/curso-r.github.io/auth0'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# auth0 <a href='https:/curso-r.github.io/auth0/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 

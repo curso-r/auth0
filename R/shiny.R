@@ -49,7 +49,7 @@ auth0_ui <- function(ui, info) {
           mapply(paste, names(params), params, MoreArgs = list(sep = "=")),
           collapse = "&"))
         if (!is.null(info$remote_url) && info$remote_url != "" && !getOption("auth0_local")) {
-          redirect_uri <- info$remote_url
+          redirect_uri <- paste0(info$remote_url, query)
         } else {
           if (grepl("127.0.0.1", req$HTTP_HOST)) {
             redirect_uri <- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST, query))

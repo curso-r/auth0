@@ -57,7 +57,7 @@ auth0_ui <- function(ui, info) {
             redirect_uri <- paste0("http://", req$HTTP_HOST, query)
           }
         }
-        redirect_uri <<- utils::URLencode(redirect_uri)
+        redirect_uri <<- redirect_uri
 
         query_extra <- if(is.null(info$audience)) list() else list(audience=info$audience)
         url <- httr::oauth2.0_authorize_url(

@@ -214,14 +214,14 @@
 <li>Write a simple shiny app in a <code>app.R</code> file, like this:</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"plot"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"plot"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span>  </span>
 <span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">output</span><span class="op">$</span><span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -236,7 +236,7 @@
 <p>You can try your app running</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>shiny.port <span class="op">=</span> <span class="fl">8080</span><span class="op">)</span></span>
-<span><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/runApp.html" class="external-link">runApp</a></span><span class="op">(</span><span class="st">"app/directory/"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runApp.html" class="external-link">runApp</a></span><span class="op">(</span><span class="st">"app/directory/"</span><span class="op">)</span></span></code></pre></div>
 <p>If everything is OK, you should be forwarded to a login page and, after logging in or signing up, you’ll be redirected to your app.</p>
 <p>If you are running your app in a remote server like shinyapps.io or your own server, and if your app is in a subfolder of the host (like <a href="https://johndoe.shinyapps.io/fooBar" class="external-link uri">https://johndoe.shinyapps.io/fooBar</a>), you must include your remote URL in the <code>remote_url</code> parameter in the <code>_auth0.yml</code> file.</p>
 <p>You can also force <a href="https://curso-r.github.io/auth0/">auth0</a> to use the local URL setting <code>options(auth0_local = TRUE)</code>. This can useful if you’re running an app inside a Docker container.</p>
@@ -282,10 +282,10 @@
 <h3 id="uir">ui.R<a class="anchor" aria-label="anchor" href="#uir"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://curso-r.github.io/auth0/">auth0</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/ui-server.html">auth0_ui</a></span><span class="op">(</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span><span class="fu"><a href="reference/logoutButton.html">logoutButton</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/ui-server.html">auth0_ui</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span><span class="fu"><a href="reference/logoutButton.html">logoutButton</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="serverr">server.R<a class="anchor" aria-label="anchor" href="#serverr"></a>
@@ -326,7 +326,7 @@
 </h2>
 <p>Since v0.2.0, <code>auth0</code> supports shiny’s state bookmarking, but because of URL parsing issues, bookmarking only works with server storage. To activate this feature, you must call the app with the following lines in your <code>app.R</code> file:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/enableBookmarking.html" class="external-link">enableBookmarking</a></span><span class="op">(</span>store <span class="op">=</span> <span class="st">"server"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/enableBookmarking.html" class="external-link">enableBookmarking</a></span><span class="op">(</span>store <span class="op">=</span> <span class="st">"server"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
 <p>Also note that Auth0 adds <code>code</code> and <code>state</code> to the URL query parameters.</p>
 <p>This solution works normally in the <code>ui.R</code>/<code>server.R</code> framework.</p>
@@ -415,10 +415,10 @@
 <h4 id="uir-1">ui.R<a class="anchor" aria-label="anchor" href="#uir-1"></a>
 </h4>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://curso-r.github.io/auth0/">auth0</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/ui-server.html">auth0_ui</a></span><span class="op">(</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span><span class="op">)</span>, info <span class="op">=</span> <span class="va">a0_info</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/ui-server.html">auth0_ui</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span><span class="op">)</span>, info <span class="op">=</span> <span class="va">a0_info</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="serverr-1">server.R<a class="anchor" aria-label="anchor" href="#serverr-1"></a>
@@ -428,7 +428,7 @@
 <span></span>
 <span><span class="fu"><a href="reference/ui-server.html">auth0_server</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
-<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observe.html" class="external-link">observe</a></span><span class="op">(</span><span class="op">{</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observe.html" class="external-link">observe</a></span><span class="op">(</span><span class="op">{</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">session</span><span class="op">$</span><span class="va">userData</span><span class="op">$</span><span class="va">auth0_info</span><span class="op">)</span> </span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span>  </span>
@@ -442,11 +442,11 @@
 </h2>
 <p>You can add a logout button to your app using <code><a href="reference/logoutButton.html">logoutButton()</a></code>.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://curso-r.github.io/auth0/">auth0</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># simple UI with logout button</span></span>
-<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span><span class="fu"><a href="reference/logoutButton.html">logoutButton</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span><span class="fu"><a href="reference/logoutButton.html">logoutButton</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span><span class="op">}</span></span>
 <span><span class="fu"><a href="reference/shinyAppAuth0.html">shinyAppAuth0</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
 <hr>
@@ -474,7 +474,7 @@
 <ul>
 <li>[✔] Remove the need for local and remote URLs in the <code>config_file</code>.</li>
 <li>[✔] Solve bookmarking and URL parameters issue (Issue #22).</li>
-<li>[✔] <code>shinyAppDirAuth0()</code> function to work as <code><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shiny::shinyAppDir()</a></code> (Issue #21).</li>
+<li>[✔] <code>shinyAppDirAuth0()</code> function to work as <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shiny::shinyAppDir()</a></code> (Issue #21).</li>
 <li>[✔] Support to <code>ui.R</code>/<code>server.R</code> apps.</li>
 </ul>
 </div>

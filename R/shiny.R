@@ -120,7 +120,7 @@ shinyAppAuth0 <- function(ui, server, config_file = NULL, ...) {
 
   disable <- getOption("auth0_disable")
   if (!is.null(disable) && disable) {
-    shiny::shinyApp(ui, server)
+    shiny::shinyApp(ui, server, ...)
   } else {
     if (is.null(config_file)) {
       config_file <- auth0_find_config_file()

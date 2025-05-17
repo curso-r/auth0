@@ -56,7 +56,7 @@ auth0_ui <- function(ui, info) {
             redirect_uri <- info$remote_url
           } else {
             if (grepl("127.0.0.1", req$HTTP_HOST)) {
-              redirect_uri <- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST, query))
+              redirect_uri <- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST), query)
             } else {
               redirect_uri <- paste0("http://", req$HTTP_HOST, query)
             }

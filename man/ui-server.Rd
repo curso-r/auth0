@@ -27,7 +27,6 @@ shiny objects to authenticate using Auth0 service with no pain.
 # first, create the yml file using use_auth0() function
 
 if (interactive()) {
-
   # ui.R file
   library(shiny)
   library(auth0)
@@ -41,7 +40,6 @@ if (interactive()) {
   options(shiny.port = 8080)
   shiny::runApp()
 }
-
 }
 }
 \seealso{

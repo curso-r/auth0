@@ -48,9 +48,8 @@ logoutButton <- function(label = "Log out", ..., id = "._auth0logout_") {
 #' @export
 logout_url <- function() {
   config <- auth0_config()
-
-  # Use the base URL for the redirect_uri (without the current path)
-  base_url <- sprintf("http://%s", redirect_uri)
+  # Use the base URL from the redirect_uri (without the current path)
+  base_url <- sub("(https?://[^/]+).*", "\\1", redirect_uri)
   app_url_enc <- utils::URLencode(base_url, reserved = TRUE)
 
   logout_url <- sprintf(

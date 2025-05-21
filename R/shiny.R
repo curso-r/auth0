@@ -36,7 +36,10 @@ auth0_ui <- function(ui, info) {
   } else {
     if (missing(info)) info <- auth0_info()
     function(req) {
-      verify <- has_auth_code(shiny::parseQueryString(req$QUERY_STRING), info$state)
+      verify <- has_auth_code(
+        shiny::parseQueryString(req$QUERY_STRING),
+        info$state
+      )
       if (!verify) {
         if (grepl("error=unauthorized", req$QUERY_STRING)) {
           redirect <- sprintf("location.replace(\"%s\");", logout_url())
@@ -55,20 +58,30 @@ auth0_ui <- function(ui, info) {
 
           # Preserve the original path (req$PATH_INFO) in the redirect URI
           if (grepl("127.0.0.1", req$HTTP_HOST)) {
-            redirect_uri <- paste0("http://", gsub("127.0.0.1", "localhost", req$HTTP_HOST), req$PATH_INFO, query)
+            redirect_uri <- paste0(
+              "http://",
+              gsub("127.0.0.1", "localhost", req$HTTP_HOST),
+              req$PATH_INFO,
+              query
+            )
           } else {
-            redirect_uri <- paste0("http://", req$HTTP_HOST, req$PATH_INFO, query)
+            redirect_uri <- paste0(
+              "http://",
+              req$HTTP_HOST,
+              req$PATH_INFO,
+              query
+            )
           }
           redirect_uri <<- redirect_uri
 
-          message("Redirect URI: ", redirect_uri)
-          message("Query: ", query)
-
           # Generate the Auth0 authorization URL
-          query_extra <- if (is.null(info$audience)) list() else list(audience = info$audience)
+          query_extra <- if (is.null(info$audience)) list() else
+            list(audience = info$audience)
           url <- httr::oauth2.0_authorize_url(
-            info$api, info$app(redirect_uri),
-            scope = info$scope, state = info$state,
+            info$api,
+            info$app(redirect_uri),
+            scope = info$scope,
+            state = info$state,
             query_extra = query_extra
           )
           redirect <- sprintf("location.replace(\"%s\");", url)
@@ -99,7 +112,12 @@ auth0_server <- function(server, info) {
   } else {
     if (missing(info)) info <- auth0_info()
     function(input, output, session) {
-      shiny::isolate(auth0_server_verify(session, info$app, info$api, info$state))
+      shiny::isolate(auth0_server_verify(
+        session,
+        info$app,
+        info$api,
+        info$state
+      ))
       shiny::observeEvent(input[["._auth0logout_"]], logout())
       server(input, output, session)
     }

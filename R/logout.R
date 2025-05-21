@@ -47,14 +47,18 @@ logoutButton <- function(label = "Log out", ..., id = "._auth0logout_") {
 #'
 #' @export
 logout_url <- function() {
-
   config <- auth0_config()
 
-  app_url_enc <- utils::URLencode(redirect_uri, reserved = TRUE)
-  logout_url <- sprintf("%s/v2/logout?client_id=%s&returnTo=%s",
-                        config$auth0_config$api_url,
-                        config$auth0_config$credentials$key,
-                        app_url_enc)
+  # Use the base URL for the redirect_uri (without the current path)
+  base_url <- sprintf("http://%s", config$auth0_config$app_url)
+  app_url_enc <- utils::URLencode(base_url, reserved = TRUE)
+
+  logout_url <- sprintf(
+    "%s/v2/logout?client_id=%s&returnTo=%s",
+    config$auth0_config$api_url,
+    config$auth0_config$credentials$key,
+    app_url_enc
+  )
   logout_url
 }
 
@@ -71,13 +75,14 @@ logout_url <- function() {
 #'
 #' @export
 logout <- function() {
-
   if (!requireNamespace("shinyjs", quietly = TRUE)) {
     stop("Package \"shinyjs\" required.", call. = FALSE)
   }
 
   shiny::insertUI(
-    selector = "head", where = "beforeEnd", immediate = TRUE,
+    selector = "head",
+    where = "beforeEnd",
+    immediate = TRUE,
     ui = shinyjs::useShinyjs()
   )
   url <- logout_url()

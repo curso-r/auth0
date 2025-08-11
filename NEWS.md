@@ -1,3 +1,7 @@
+# auth0 0.2.4
+
+- fix issue #101, which was caused by incorrect parenthesis in `gsub()` function (Thanks to @teofiln for the PR #102)
+
 # auth0 0.2.3
 
 - fix documentation for CRAN

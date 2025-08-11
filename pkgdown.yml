@@ -10,7 +10,7 @@ articles:
   examples/ui-server-userinfo: examples/ui-server-userinfo.html
   examples/ui-server: examples/ui-server.html
   examples/userinfo: examples/userinfo.html
-last_built: 2025-08-11T00:34Z
+last_built: 2025-08-11T00:40Z
 urls:
   reference: https://curso-r.github.io/auth0/reference
   article: https://curso-r.github.io/auth0/articles

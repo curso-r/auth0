@@ -1,17 +1,16 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
-  bookmark: examples/bookmark.html
-  logout: examples/logout.html
-  simple: examples/simple.html
-  ui-server-bookmark: examples/ui-server-bookmark.html
-  ui-server-userinfo: examples/ui-server-userinfo.html
-  ui-server: examples/ui-server.html
-  userinfo: examples/userinfo.html
+  examples/bookmark: examples/bookmark.html
+  examples/logout: examples/logout.html
+  examples/simple: examples/simple.html
   tutorial: tutorial.html
-last_built: 2024-02-15T19:50Z
+  examples/ui-server-bookmark: examples/ui-server-bookmark.html
+  examples/ui-server-userinfo: examples/ui-server-userinfo.html
+  examples/ui-server: examples/ui-server.html
+  examples/userinfo: examples/userinfo.html
+last_built: 2025-08-11T00:34Z
 urls:
   reference: https://curso-r.github.io/auth0/reference
   article: https://curso-r.github.io/auth0/articles
-

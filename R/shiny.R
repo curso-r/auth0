@@ -63,8 +63,11 @@ auth0_ui <- function(ui, info) {
             }
           }
           redirect_uri <<- redirect_uri
-  
-          query_extra <- if(is.null(info$audience)) list() else list(audience=info$audience)
+          query_extra <- if(!is.null(info$audience) || !is.null(info$extra_params)) {
+            c(info$extra_params, list(audience = info$audience))
+          } else {
+            NULL
+          }
           url <- httr::oauth2.0_authorize_url(
             info$api, info$app(redirect_uri), scope = info$scope, state = info$state,
             query_extra=query_extra

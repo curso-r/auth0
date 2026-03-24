@@ -63,7 +63,7 @@ auth0_ui <- function(ui, info) {
             }
           }
           redirect_uri <<- redirect_uri
-
+  
           query_extra <- if(is.null(info$audience)) list() else list(audience=info$audience)
           url <- httr::oauth2.0_authorize_url(
             info$api, info$app(redirect_uri), scope = info$scope, state = info$state,
@@ -90,7 +90,7 @@ auth0_ui <- function(ui, info) {
 #'   will try to find the `_auth0.yml` and create it automatically.
 #'
 #' @export
-auth0_server <- function(server, info) {
+auth0_server <- function(server, info, remove_callback_params = TRUE) {
   disable <- getOption("auth0_disable")
   if (!is.null(disable) && disable) {
     server
@@ -98,6 +98,9 @@ auth0_server <- function(server, info) {
     if (missing(info)) info <- auth0_info()
     function(input, output, session) {
       shiny::isolate(auth0_server_verify(session, info$app, info$api, info$state))
+      if (remove_callback_params) {
+        auth0_remove_callback_params(session)
+      }
       shiny::observeEvent(input[["._auth0logout_"]], logout())
       server(input, output, session)
     }
@@ -112,6 +115,8 @@ auth0_server <- function(server, info) {
 #' @param ui an ordinary UI object to create shiny apps.
 #' @param server an ordinary server object to create shiny apps.
 #' @param config_file path to YAML configuration file.
+#' @param remove_callback_params whether to remove the `code` and `state` query 
+#' parameters from the URL after successful authentication. Defaults to `TRUE`.
 #' @param ... Other arguments passed on to [shiny::shinyApp()].
 #'
 #' @details
@@ -127,7 +132,7 @@ auth0_server <- function(server, info) {
 #'   disable auth0 temporarily.
 #'
 #' @export
-shinyAppAuth0 <- function(ui, server, config_file = NULL, ...) {
+shinyAppAuth0 <- function(ui, server, config_file = NULL, remove_callback_params = TRUE, ...) {
 
   disable <- getOption("auth0_disable")
   if (!is.null(disable) && disable) {
@@ -137,7 +142,11 @@ shinyAppAuth0 <- function(ui, server, config_file = NULL, ...) {
       config_file <- auth0_find_config_file()
     }
     info <- auth0_info(config_file)
-    shiny::shinyApp(auth0_ui(ui, info), auth0_server(server, info), ...)
+    shiny::shinyApp(
+      auth0_ui(ui, info), 
+      auth0_server(server, info, remove_callback_params), 
+      ...
+    )
   }
 }
 

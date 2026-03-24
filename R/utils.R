@@ -6,7 +6,7 @@
     auth0_local = interactive()
   )
   toset <- !(names(op.auth0) %in% names(op))
-  if(any(toset)) options(op.auth0[toset])
+  if (any(toset)) options(op.auth0[toset])
   invisible()
 }
 
@@ -24,7 +24,6 @@
 #'
 #' @export
 auth0_find_config_file <- function() {
-
   config_file <- getOption("auth0_config_file")
 
   if (is.null(config_file) || !file.exists(config_file)) {
@@ -49,6 +48,45 @@ auth0_find_config_file <- function() {
   }
 
   config_file
+}
+
+auth0_remove_callback_params <- function(session) {
+  shiny::observeEvent(session[["clientData"]]$url_search,
+    {
+      params <- shiny::parseQueryString(session[["clientData"]]$url_search)
+
+      # Remove only auth callback params and keep any other query params untouched.
+      if (!is.null(params$code) || !is.null(params$state)) {
+        params$code <- NULL
+        params$state <- NULL
+
+        path <- session[["clientData"]]$url_pathname
+        hash <- session[["clientData"]]$url_hash
+
+        query <- ""
+        if (length(params) > 0) {
+          encoded <- mapply(
+            function(nm, val) {
+              paste0(
+                utils::URLencode(nm, reserved = TRUE),
+                "=",
+                utils::URLencode(as.character(val), reserved = TRUE)
+              )
+            },
+            names(params),
+            params,
+            SIMPLIFY = TRUE,
+            USE.NAMES = FALSE
+          )
+          query <- paste0("?", paste(encoded, collapse = "&"))
+        }
+
+        shiny::updateQueryString(paste0(path, query, hash), mode = "replace", session = session)
+      }
+    },
+    once = TRUE,
+    ignoreInit = FALSE
+  )
 }
 
 # Get rid of NOTE

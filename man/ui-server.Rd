@@ -8,7 +8,7 @@
 \usage{
 auth0_ui(ui, info)
 
-auth0_server(server, info)
+auth0_server(server, info, remove_callback_params = TRUE)
 }
 \arguments{
 \item{ui}{\code{shiny.tag.list} object to generate the user interface.}

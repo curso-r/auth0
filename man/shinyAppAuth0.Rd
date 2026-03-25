@@ -4,7 +4,13 @@
 \alias{shinyAppAuth0}
 \title{Create a Shiny app object with Auth0 Authentication}
 \usage{
-shinyAppAuth0(ui, server, config_file = NULL, ...)
+shinyAppAuth0(
+  ui,
+  server,
+  config_file = NULL,
+  remove_callback_params = TRUE,
+  ...
+)
 }
 \arguments{
 \item{ui}{an ordinary UI object to create shiny apps.}
@@ -12,6 +18,9 @@ shinyAppAuth0(ui, server, config_file = NULL, ...)
 \item{server}{an ordinary server object to create shiny apps.}
 
 \item{config_file}{path to YAML configuration file.}
+
+\item{remove_callback_params}{whether to remove the \code{code} and \code{state} query
+parameters from the URL after successful authentication. Defaults to \code{TRUE}.}
 
 \item{...}{Other arguments passed on to \code{\link[shiny:shinyApp]{shiny::shinyApp()}}.}
 }

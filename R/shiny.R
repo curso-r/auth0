@@ -90,6 +90,7 @@ auth0_ui <- function(ui, info) {
 #' @param server the shiny server function.
 #' @param info object returned from [auth0_info]. If not informed,
 #'   will try to find the `_auth0.yml` and create it automatically.
+#' @param remove_callback_params whether to remove the `code` and `state` query.
 #'
 #' @export
 auth0_server <- function(server, info, remove_callback_params = TRUE) {

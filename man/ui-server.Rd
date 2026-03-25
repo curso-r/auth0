@@ -17,6 +17,8 @@ auth0_server(server, info, remove_callback_params = TRUE)
 will try to find the \verb{_auth0.yml} and create it automatically.}
 
 \item{server}{the shiny server function.}
+
+\item{remove_callback_params}{whether to remove the \code{code} and \code{state} query.}
 }
 \description{
 These functions can be used in a ui.R/server.R framework, modifying the

@@ -1,5 +1,6 @@
 # auth0 0.3.0
 
+- Fix issue #101, which was caused by incorrect parenthesis in `gsub()` function (Fixed by @teofiln)
 - Add `request_extra_params` option to `_auth0.yml` file, to allow passing extra parameters to the authorization endpoint (Issue #100).
 - Custom URL params will no longer be removed after successful authentication.
 - Add `remove_callback_params` param to `shinyAppAuth0()` function to remove `code` and `state` callback parameters after successful authentication.

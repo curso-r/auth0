@@ -50,6 +50,8 @@ if (interactive()) {
   }
   shinyAuth0App(ui, server, config_file)
 }
+
 }
+
 
 }

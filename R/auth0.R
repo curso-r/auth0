@@ -69,10 +69,11 @@ auth0_info <- function(config) {
   api <- auth0_api(conf$api_url, conf$request, conf$access)
   audience <- conf$audience
   rurl <- config$remote_url
+  extra_params <- config$request_extra_params
   # backward compatibility
   if (is.null(rurl)) rurl <- config$shiny_config$remote_url
-  list(scope = scope, state = state, app = app, api = api, audience=audience,
-       remote_url = rurl)
+  list(scope = scope, state = state, app = app, api = api, audience = audience,
+       remote_url = rurl, extra_params = extra_params)
 }
 
 #' Parse `_auth0.yml` file.

@@ -8,7 +8,7 @@
 \usage{
 auth0_ui(ui, info)
 
-auth0_server(server, info)
+auth0_server(server, info, remove_callback_params = TRUE)
 }
 \arguments{
 \item{ui}{\code{shiny.tag.list} object to generate the user interface.}
@@ -17,6 +17,8 @@ auth0_server(server, info)
 will try to find the \verb{_auth0.yml} and create it automatically.}
 
 \item{server}{the shiny server function.}
+
+\item{remove_callback_params}{whether to remove the \code{code} and \code{state} query.}
 }
 \description{
 These functions can be used in a ui.R/server.R framework, modifying the
@@ -27,6 +29,7 @@ shiny objects to authenticate using Auth0 service with no pain.
 # first, create the yml file using use_auth0() function
 
 if (interactive()) {
+
   # ui.R file
   library(shiny)
   library(auth0)
@@ -40,6 +43,7 @@ if (interactive()) {
   options(shiny.port = 8080)
   shiny::runApp()
 }
+
 }
 }
 \seealso{

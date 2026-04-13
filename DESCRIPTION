@@ -1,12 +1,13 @@
 Package: auth0
 Type: Package
 Title: Authentication in Shiny with Auth0
-Version: 0.2.4
+Version: 0.3.0
 Authors@R: c(
     person("Julio", "Trecenti", email = "julio.trecenti@gmail.com", role = "cre"),
     person("Daniel", "Falbel", email = "dfalbel@gmail.com", role = "aut"),
     person("José", "Jesus", email = "jjesusfilho@gmail.com", role = "ctb"),
     person("Dean", "Attali", email = "daattali@gmail.com", role = "ctb"),
+    person("William", "Amorim", email = "TheWilliam89@gmail.com", role = "ctb"),
     person("C", "Lente", email = "c@lente.dev", role = "ctb"))
 Description: Uses Auth0 API (see <https://auth0.com> for more 
     information) to use a simple authentication system. It provides 
@@ -16,7 +17,7 @@ BugReports: https://github.com/curso-r/auth0/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Imports: httr,
     shiny,
     yaml,

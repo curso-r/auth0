@@ -16,3 +16,8 @@
 ^CRAN-SUBMISSION$
 ^doc$
 ^Meta$
+^\.env$
+^\.claude$
+^\.playwright-mcp$
+^tmp_.*$
+^auth0_logged_in\.png$

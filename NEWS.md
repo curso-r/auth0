@@ -1,3 +1,5 @@
+# auth0 (development version)
+
 # auth0 0.3.0
 
 - Fix issue #101, which was caused by incorrect parenthesis in `gsub()` function (Fixed by @teofiln)

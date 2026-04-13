@@ -49,9 +49,10 @@ auth0_ui <- function(ui, info) {
           params$code <- NULL
           params$state <- NULL
 
-          query <- paste0("/?", paste(
+          query_params <- paste(
             mapply(paste, names(params), params, MoreArgs = list(sep = "=")),
-            collapse = "&"))
+            collapse = "&")
+          query <- if (query_params != "") paste0("/?", query_params) else "/"
           if (!is.null(info$remote_url) && info$remote_url != "" && !getOption("auth0_local")) {
             redirect_uri <- paste0(info$remote_url, query)
           } else {

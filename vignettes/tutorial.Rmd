@@ -33,7 +33,7 @@ To create your authenticated shiny app, you need to follow the steps below. The 
 - Add `http://localhost:8080` to the "Allowed Callback URLs", "Allowed Web Origins" and "Allowed Logout URLs".
     - You can change `http://localhost:8080` to another port.
 - Add the remote server where you are going to deploy your shiny app to the same boxes.
-    - Just make sure that these addresses are correct. If you are placing your app inside a folder (e.g. https://johndoe.shinyapps.io/fooBar), don't include the folder (`fooBar`) in "Allowed Web Origins".
+    - Just make sure that these addresses are correct. If you are placing your app inside a folder (e.g. `your_username.shinyapps.io/fooBar`), don't include the folder (`fooBar`) in "Allowed Web Origins".
 - Click "Save"
 
 Now, let's go to R!

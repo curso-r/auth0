@@ -18,7 +18,7 @@ authentication."><meta property="og:image" content="https://curso-r.github.io/au
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">auth0</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
@@ -76,7 +76,7 @@ authentication."><meta property="og:image" content="https://curso-r.github.io/au
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create a Shiny app object with Auth0 Authentication</h1>
-    <small class="dont-index">Source: <a href="https://github.com/curso-r/auth0/blob/v0.2.4/R/shiny.R" class="external-link"><code>R/shiny.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/curso-r/auth0/blob/master/R/shiny.R" class="external-link"><code>R/shiny.R</code></a></small>
     <div class="hidden name"><code>shinyAppAuth0.Rd</code></div>
     </div>
 
@@ -86,7 +86,13 @@ authentication.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">shinyAppAuth0</span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span>, config_file <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">shinyAppAuth0</span><span class="op">(</span></span>
+<span>  <span class="va">ui</span>,</span>
+<span>  <span class="va">server</span>,</span>
+<span>  config_file <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  remove_callback_params <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -103,6 +109,11 @@ authentication.</p>
 
 <dt id="arg-config-file">config_file<a class="anchor" aria-label="anchor" href="#arg-config-file"></a></dt>
 <dd><p>path to YAML configuration file.</p></dd>
+
+
+<dt id="arg-remove-callback-params">remove_callback_params<a class="anchor" aria-label="anchor" href="#arg-remove-callback-params"></a></dt>
+<dd><p>whether to remove the <code>code</code> and <code>state</code> query
+parameters from the URL after successful authentication. Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -138,7 +149,7 @@ disable auth0 temporarily.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

@@ -66,7 +66,7 @@ AUTH0_KEY=5wugt0W...
 AUTH0_SECRET=rcaJ0p8...
 ```
 
-There's how you identify each of them (see the image below):`AUTH0_USER` is your username, which can be found on the top corner of the site. `AUTH0_KEY` is your Client ID, which can be copied from inside the app page. `AUTH0_SECRET` is your Client Secret, which can be copied from the app page.
+There's how you identify each of them (see the image below):`AUTH0_USER` is the part of your application's Domain before `.auth0.com`, not your login username or email. Find Domain in the application's Settings. For example, if Domain is `my-tenant.eu.auth0.com`, use `AUTH0_USER=my-tenant.eu` so the template builds the correct URL. For a custom domain, set `api_url` to its full HTTPS URL instead. `AUTH0_KEY` is your Client ID, which can be copied from inside the app page. `AUTH0_SECRET` is your Client Secret, which can be copied from the app page.
 
 You can find more information about environment variables [here](https://csgillespie.github.io/efficientR/set-up.html#renviron). You can also fill these information directly in the `_auth0.yml` file (see below). If you do so, don't forget to save the `_auth0.yml` file after editing it.
 

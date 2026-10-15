@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# auth0 <a href='https:/curso-r.github.io/auth0/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# auth0 <a href='https://curso-r.github.io/auth0/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
@@ -106,8 +106,12 @@ auth0_config:
 
 There’s how you identify each of them (see the image below):
 
-- `AUTH0_USER` is your username, which can be found on the top corner of
-  the site.
+- `AUTH0_USER` is the part of your application’s Domain before
+  `.auth0.com`, not your login username or email. Find Domain in the
+  application’s Settings. For example, if Domain is
+  `my-tenant.eu.auth0.com`, use `AUTH0_USER=my-tenant.eu` so the
+  template builds the correct URL. For a custom domain, set `api_url`
+  to its full HTTPS URL instead.
 - `AUTH0_KEY` is your Client ID, which can be copied from inside the app
   page.
 - `AUTH0_SECRET` is your Client Secret, which can be copied from the app
@@ -245,9 +249,10 @@ auth0_server(function(input, output, session) {})
 `{auth0}` will try to find the `_auth0.yml` using the same strategy than
 the `app.R` framework: first from
 `options(auth0_config_file = "path/to/file")` and then fixing
-`"./_auth0.yml"`. Both `auth0_ui()` and `auth0_server()` have a `info=`
-parameter where you can pass either the path of the `_auth0.yml` file or
-the object returned by `auth0_info()` function.
+`"./_auth0.yml"`. Both `auth0_ui()` and `auth0_server()` have an `info=`
+parameter that accepts the object returned by `auth0_info()`. To use a
+specific `_auth0.yml` file, pass its path to `auth0_info()` and share
+the resulting object between the two wrappers.
 
 ------------------------------------------------------------------------
 
@@ -338,7 +343,7 @@ library(auth0)
 
 # simple UI with user info
 ui <- fluidPage(
-  verbatimTextOutput("user_info")
+  verbatimTextOutput("user_info"),
   verbatimTextOutput("credential_info")
 )
 

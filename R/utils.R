@@ -68,9 +68,9 @@ auth0_remove_callback_params <- function(session) {
           encoded <- mapply(
             function(nm, val) {
               paste0(
-                utils::URLencode(nm, reserved = TRUE),
+                utils::URLencode(nm, reserved = TRUE, repeated = TRUE),
                 "=",
-                utils::URLencode(as.character(val), reserved = TRUE)
+                utils::URLencode(as.character(val), reserved = TRUE, repeated = TRUE)
               )
             },
             names(params),

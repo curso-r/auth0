@@ -1,5 +1,7 @@
 # auth0 (development version)
 
+- Preserve encoded query parameter names and values in authorization redirects and callback cleanup.
+
 # auth0 0.3.0
 
 - Fix issue #101, which was caused by incorrect parenthesis in `gsub()` function (Fixed by @teofiln)
